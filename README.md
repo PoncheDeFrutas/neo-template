@@ -67,3 +67,22 @@ export default tseslint.config([
     },
 ]);
 ```
+
+## Estructura de carpetas
+
+Este proyecto usa una jerarquía inspirada en Feature-Sliced Design para organizar el código de forma escalable:
+
+- `src/app`: punto de entrada de la aplicación, configuración global (routing, providers, estilos globales), y composición raíz.
+- `src/pages`: páginas completas (rutas) compuestas por widgets/features. Sin lógica de negocio propia.
+- `src/widgets`: bloques UI de alto nivel que combinan varias features y entidades.
+- `src/features`: unidades funcionales independientes centradas en casos de uso del usuario (formularios, interacciones, etc.).
+- `src/entities`: modelos y UI asociados a entidades del dominio (User, Product, etc.). Reutilizables y sin conocimiento de casos de uso.
+- `src/shared`: utilidades y recursos compartidos (libs, ui básicos, hooks, api, config, assets).
+
+Atajos de importación:
+
+- Alias `@/*` apunta a `src/*` (ver `tsconfig.app.json`). Ejemplo: `import { Button } from '@/shared/ui/button'`.
+
+Reglas de importación por capas:
+
+- El linter (`eslint-plugin-boundaries`) restringe dependencias entre capas para mantener la arquitectura. Revisa `eslint.config.js` para ver qué capas pueden importar a cuáles.
