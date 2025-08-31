@@ -11,8 +11,6 @@
         "format:check": "prettier --check .",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "test": "vitest",
-        "test:ui": "vitest --ui",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
         "docs:api": "typedoc"
