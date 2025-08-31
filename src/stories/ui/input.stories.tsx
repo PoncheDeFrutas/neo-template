@@ -26,5 +26,5 @@ export type Story = StoryObj<typeof Input>;
 export const Default: Story = {
     args: {
         placeholder: 'Type here...',
-          },
+    },
 };

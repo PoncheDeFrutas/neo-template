@@ -162,7 +162,9 @@ Click the button to show a toast with the current configuration.
         };
 
         return (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
+            <div
+                style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}
+            >
                 <Button label={`Show ${type} toast`} onClick={handleClick} />
                 <Toaster position={position} {...toasterProps} />
             </div>

@@ -16,7 +16,7 @@ const variantClasses: Record<TypeOptions, string> = {
 
 export const showToast = (
     message: string,
-    options?: ToastOptions & { position?: ToastContainerProps['position'] }
+    options?: ToastOptions & { position?: ToastContainerProps['position'] },
 ) => {
     return toast(message, {
         position: options?.position ?? 'bottom-right',

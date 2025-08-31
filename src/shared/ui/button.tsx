@@ -38,21 +38,21 @@ function cn(...classes: Array<string | false | null | undefined>) {
 
 /** Primary UI component for user interaction */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-    { 
-        primary = false, 
-        size = 'medium', 
-        state = 'default', 
-        backgroundColor, 
-        label, 
+    {
+        primary = false,
+        size = 'medium',
+        state = 'default',
+        backgroundColor,
+        label,
         className,
-        ...props 
+        ...props
     },
     ref,
 ) {
-    const mode = primary 
-        ? 'bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-500' 
+    const mode = primary
+        ? 'bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-500'
         : 'bg-gray-100 text-gray-900 hover:bg-gray-200 focus-visible:ring-gray-500';
-    
+
     return (
         <button
             ref={ref}
