@@ -22,7 +22,6 @@ export default tseslint.config(
                 tseslint.configs.recommended,
                 reactHooks.configs['recommended-latest'],
                 reactRefresh.configs.vite,
-                'plugin:prettier/recommended',
             ],
             plugins: {
                 prettier,
@@ -54,15 +53,18 @@ export default tseslint.config(
                     {
                         default: 'disallow',
                         rules: [
-                            { from: 'shared', to: ['shared'] },
-                            { from: 'entities', to: ['shared', 'entities'] },
-                            { from: 'features', to: ['shared', 'entities', 'features'] },
-                            { from: 'widgets', to: ['shared', 'entities', 'features', 'widgets'] },
+                            { from: 'shared', allow: ['shared'] },
+                            { from: 'entities', allow: ['shared', 'entities'] },
+                            { from: 'features', allow: ['shared', 'entities', 'features'] },
+                            {
+                                from: 'widgets',
+                                allow: ['shared', 'entities', 'features', 'widgets'],
+                            },
                             {
                                 from: 'pages',
-                                to: ['shared', 'entities', 'features', 'widgets', 'pages'],
+                                allow: ['shared', 'entities', 'features', 'widgets', 'pages'],
                             },
-                            { from: 'app', to: ['*'] },
+                            { from: 'app', allow: ['*'] },
                         ],
                     },
                 ],
