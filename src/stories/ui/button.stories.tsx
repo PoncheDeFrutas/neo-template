@@ -10,19 +10,26 @@ const meta = {
     },
     tags: ['autodocs'],
     args: {
-        children: 'Button',
-        variant: 'primary',
-        size: 'md',
+        label: 'Button',
+        primary: false,
+        size: 'medium',
+        state: 'default',
         onClick: fn(),
     },
     argTypes: {
-        variant: {
-            control: { type: 'select' },
-            options: ['primary', 'secondary', 'outline'],
+        primary: {
+            control: { type: 'boolean' },
         },
         size: {
             control: { type: 'select' },
-            options: ['sm', 'md', 'lg'],
+            options: ['small', 'medium', 'large'],
+        },
+        state: {
+            control: { type: 'select' },
+            options: ['default', 'loading', 'disabled'],
+        },
+        backgroundColor: {
+            control: { type: 'color' },
         },
     },
 } satisfies Meta<typeof Button>;
@@ -33,42 +40,56 @@ export type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
     args: {
-        children: 'Primary',
-        variant: 'primary',
+        label: 'Primary',
+        primary: true,
     },
 };
 
 export const Secondary: Story = {
     args: {
-        children: 'Secondary',
-        variant: 'secondary',
-    },
-};
-
-export const Outline: Story = {
-    args: {
-        children: 'Outline',
-        variant: 'outline',
+        label: 'Secondary',
+        primary: false,
     },
 };
 
 export const Large: Story = {
     args: {
-        children: 'Large',
-        size: 'lg',
+        label: 'Large',
+        size: 'large',
     },
 };
 
 export const Medium: Story = {
     args: {
-        children: 'Medium',
-        size: 'md',
+        label: 'Medium',
+        size: 'medium',
     },
 };
 
 export const Small: Story = {
     args: {
-        children: 'Small',
-        size: 'sm',
+        label: 'Small',
+        size: 'small',
+    },
+};
+
+export const Loading: Story = {
+    args: {
+        label: 'Loading',
+        state: 'loading',
+    },
+};
+
+export const Disabled: Story = {
+    args: {
+        label: 'Disabled',
+        state: 'disabled',
+    },
+};
+
+export const Default: Story = {
+    args: {
+        label: 'Default',
+        state: 'default',
     },
 };
