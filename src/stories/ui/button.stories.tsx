@@ -54,6 +54,32 @@ export const GradientOutline: Story = {
     args: { variant: 'gradientOutline' },
 };
 
+export const GradientCustomColor: Story = {
+    name: 'Gradient (custom color)',
+    args: { variant: 'gradient', color: '#22c55e', label: 'Gradient Green' },
+    parameters: {
+        docs: {
+            description: {
+                story:
+                    'El gradiente ahora usa `color` como inicio y calcula el final automáticamente (ligeramente más claro/oscuro).',
+            },
+        },
+    },
+};
+
+export const GradientOutlineHover: Story = {
+    name: 'Gradient Outline (hover)',
+    args: { variant: 'gradientOutline', color: '#ef4444', label: 'Hover Me' },
+    parameters: {
+        docs: {
+            description: {
+                story:
+                    'En `gradientOutline`, el gradiente se aplica sólo al hacer hover; el borde usa `color`.',
+            },
+        },
+    },
+};
+
 export const Pill: Story = {
     args: { pill: true },
 };
