@@ -1,69 +1,129 @@
-import { type ButtonHTMLAttributes, forwardRef } from 'react';
+import {
+  type ButtonHTMLAttributes,
+  forwardRef,
+  type ReactNode,
+} from 'react';
 
-export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonState = 'default' | 'loading' | 'disabled';
+/* ----- Tipos y props ----- */
+export type ButtonVariant =
+  | 'default'
+  | 'outline'
+  | 'gradient'
+  | 'gradientOutline';
+
+export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    primary?: boolean;
-    backgroundColor?: string;
-    size?: ButtonSize;
-    state?: ButtonState;
-    label: string;
-    onClick?: () => void;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  pill?: boolean;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
+  icon?: ReactNode;
+  loading?: boolean;
+  label?: ReactNode;
 }
 
 const baseStyles =
-    'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
+  'inline-flex items-center justify-center font-medium focus:outline-none ' +
+  'focus:ring-2 focus:ring-offset-2 transition-colors disabled:opacity-50 ' +
+  'disabled:pointer-events-none';
 
 const sizeStyles: Record<ButtonSize, string> = {
-    small: 'h-8 px-3 text-sm',
-    medium: 'h-10 px-4',
-    large: 'h-12 px-6 text-lg',
+  xs: 'text-xs px-3 py-2',
+  sm: 'text-sm px-3 py-2',
+  md: 'text-sm px-5 py-2.5',
+  lg: 'text-base px-5 py-3',
+  xl: 'text-base px-6 py-3.5',
 };
 
-function getStateStyles(state: ButtonState) {
-    switch (state) {
-        case 'loading':
-            return 'opacity-75 cursor-wait animate-pulse';
-        case 'disabled':
-            return 'opacity-50 cursor-not-allowed';
-        default:
-            return '';
-    }
-}
+const variantStyles: Record<ButtonVariant, string> = {
+  default:
+    'text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-500',
+  outline:
+    'border border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white focus:ring-blue-500',
+  gradient:
+    'text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 focus:ring-cyan-300',
+  gradientOutline:
+    'text-blue-700 border-2 border-cyan-500 hover:text-white ' +
+    'hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 focus:ring-cyan-300',
+};
 
 function cn(...classes: Array<string | false | null | undefined>) {
-    return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(' ');
 }
 
-/** Primary UI component for user interaction */
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  function Button(
     {
-        primary = false,
-        size = 'medium',
-        state = 'default',
-        backgroundColor,
-        label,
-        className,
-        ...props
+      variant = 'default',
+      size = 'md',
+      pill = false,
+      leftIcon,
+      rightIcon,
+      icon,
+      loading = false,
+      disabled,
+      className,
+      children,
+      ...props
     },
     ref,
-) {
-    const mode = primary
-        ? 'bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-500'
-        : 'bg-gray-100 text-gray-900 hover:bg-gray-200 focus-visible:ring-gray-500';
+  ) {
+    const isDisabled = disabled || loading;
 
     return (
-        <button
-            ref={ref}
-            type="button"
-            className={cn(baseStyles, sizeStyles[size], mode, getStateStyles(state), className)}
-            style={{ backgroundColor }}
-            {...props}
-        >
-            {label}
-        </button>
+      <button
+        ref={ref}
+        disabled={isDisabled}
+        className={cn(
+          baseStyles,
+          sizeStyles[size],
+          variantStyles[variant],
+          pill ? 'rounded-full' : 'rounded-lg',
+          className,
+        )}
+        {...props}
+      >
+        {loading && (
+          <svg
+            className="mr-2 h-4 w-4 animate-spin"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+            />
+          </svg>
+        )}
+
+        {icon ? (
+          <span className="h-5 w-5">{icon}</span>
+        ) : (
+          <>
+            {leftIcon && (
+              <span className={children ? 'mr-2' : ''}>{leftIcon}</span>
+            )}
+            {children}
+            {rightIcon && (
+              <span className={children ? 'ml-2' : ''}>{rightIcon}</span>
+            )}
+          </>
+        )}
+      </button>
     );
-});
+  },
+);
 
 export default Button;
