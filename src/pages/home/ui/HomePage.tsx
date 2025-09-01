@@ -1,4 +1,5 @@
 import { ThemeToggle } from '@/features/theme-toogle';
+import { Input } from '@/shared/ui';
 import { CounterWidget } from '@widgets/counter';
 import type { FC } from 'react';
 
@@ -9,6 +10,7 @@ const HomePage: FC = () => {
             <div className="mt-8">
                 <CounterWidget />
                 <ThemeToggle />
+                <Input />
             </div>
         </div>
     );

@@ -12,7 +12,9 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
 }
 
 const baseStyles =
-    'w-full rounded-md border bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
+    'w-full rounded-md border bg-white dark:bg-gray-900 text-gray-900' +
+    ' dark:text-gray-100 transition-colors focus-visible:outline-none focus-visible:ring-2'+ 
+    'focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
 
 const validationStyles: Record<ValidationState, string> = {
     none: 'border-gray-300 focus-visible:ring-blue-500',
