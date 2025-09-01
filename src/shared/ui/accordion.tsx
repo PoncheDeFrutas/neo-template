@@ -2,7 +2,9 @@ import {
     createContext,
     type ReactNode,
     useContext,
+    useEffect,
     useId,
+    useRef,
     useState,
 } from 'react';
 
@@ -159,6 +161,38 @@ export function AccordionItem({
         </svg>
     );
 
+    // Smooth collapse/expand animation via max-height transition
+    const panelRef = useRef<HTMLDivElement>(null);
+    const [maxHeight, setMaxHeight] = useState<string>('0px');
+
+    useEffect(() => {
+        const el = panelRef.current;
+        if (!el) return;
+        if (isOpen) {
+            // Measure content for smooth expand
+            const content = el.firstElementChild as HTMLElement | null;
+            const h = content ? content.scrollHeight : el.scrollHeight;
+            setMaxHeight(`${h}px`);
+        } else {
+            setMaxHeight('0px');
+        }
+    }, [isOpen, children]);
+
+    // Keep height in sync on resize when open
+    useEffect(() => {
+        if (!isOpen) return;
+        const handle = () => {
+            const el = panelRef.current;
+            if (!el) return;
+            const content = el.firstElementChild as HTMLElement | null;
+            const h = content ? content.scrollHeight : el.scrollHeight;
+            setMaxHeight(`${h}px`);
+        };
+        window.addEventListener('resize', handle);
+        handle();
+        return () => window.removeEventListener('resize', handle);
+    }, [isOpen]);
+
     return (
         <div className={cn('border-t first:border-t-0', colorClass, className)}>
             <h2>
@@ -187,9 +221,14 @@ export function AccordionItem({
                 id={panelId}
                 role="region"
                 aria-labelledby={headerId}
-                className={cn(isOpen ? 'block' : 'hidden', 'px-4 pb-4')}
+                aria-hidden={!isOpen}
+                ref={panelRef}
+                style={{ maxHeight }}
+                className={cn(
+                    'overflow-hidden transition-[max-height] duration-300 ease-in-out',
+                )}
             >
-                {children}
+                <div className="px-4 pb-4">{children}</div>
             </div>
         </div>
     );
