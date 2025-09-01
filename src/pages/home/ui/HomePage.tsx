@@ -6,7 +6,7 @@ const HomePage: FC = () => {
     return (
         <div>
             <h1>Home Page</h1>
-           <div className="mt-8">
+            <div className="mt-8">
                 <CounterWidget />
                 <ThemeToggle />
             </div>

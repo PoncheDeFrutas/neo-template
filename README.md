@@ -69,8 +69,6 @@ export const fetchUsers = () => api.get('/users');
 
 Asegúrate de configurar `VITE_API_BASE_URL` en `.env` para que las consultas apunten al servidor correcto.
 
-
-
 ### Estructura y Organización del Proyecto
 
 Este template sigue la arquitectura **Feature-Sliced Design** para escalar proyectos de frontend de manera mantenible y predecible. A continuación se detalla el propósito de cada carpeta, cómo decidir dónde ubicar archivos y buenas prácticas para mantener la coherencia del proyecto.

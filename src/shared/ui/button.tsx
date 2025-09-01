@@ -13,6 +13,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     icon?: ReactNode;
     loading?: boolean;
     label?: ReactNode;
+    color?: string;
 }
 
 const baseStyles =
@@ -55,6 +56,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         disabled,
         className,
         label,
+        color,
+        style,
         children,
         ...props
     },
@@ -63,10 +66,18 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     const isDisabled = disabled || loading;
     const content = children ?? label;
 
+    const colorStyle =
+        color && (variant === 'outline' || variant === 'gradientOutline')
+            ? { color, borderColor: color }
+            : color
+              ? { backgroundColor: color }
+              : undefined;
+
     return (
         <button
             ref={ref}
             disabled={isDisabled}
+            style={{ ...colorStyle, ...style }}
             className={cn(
                 baseStyles,
                 sizeStyles[size],
@@ -108,7 +119,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
                     {rightIcon && <span className={content ? 'ml-2' : ''}>{rightIcon}</span>}
                 </>
             )}
-
         </button>
     );
 });
