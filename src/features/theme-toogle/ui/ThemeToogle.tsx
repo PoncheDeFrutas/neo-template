@@ -7,7 +7,7 @@ export const ThemeToggle: FC = () => {
         <button
             type="button"
             onClick={toggleTheme}
-            className="px-2 py-1 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+            className="px-2 py-1 rounded-md border border-border bg-bg text-text transition-colors"
         >
             {theme === 'light' ? 'Dark' : 'Light'}
         </button>

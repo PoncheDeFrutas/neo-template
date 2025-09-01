@@ -73,7 +73,7 @@ export function Modal({
     const containerClasses = `fixed inset-0 z-50 flex ${placementClasses[placement]} ${
         type === 'popup' ? 'pointer-events-none' : ''
     }`;
-    const modalClasses = `relative z-10 w-full ${sizeClasses[size]} rounded-md bg-white pointer-events-auto ${
+    const modalClasses = `relative z-10 w-full ${sizeClasses[size]} rounded-md bg-elevated text-text pointer-events-auto ${
         type === 'crud' ? '' : 'p-4'
     }`;
 
@@ -101,7 +101,7 @@ export function Modal({
     const overlay =
         type === 'popup' ? null : (
             <div
-                className="absolute inset-0 bg-black/50"
+                className="absolute inset-0 bg-overlay"
                 onClick={type === 'static' ? undefined : onClose}
             />
         );
@@ -116,7 +116,7 @@ export function Modal({
 }
 
 export function ModalHeader({ children }: { children: ReactNode }) {
-    return <div className="flex items-center justify-between border-b p-4">{children}</div>;
+    return <div className="flex items-center justify-between border-b border-border p-4">{children}</div>;
 }
 
 export function ModalBody({ children }: { children: ReactNode }) {
@@ -124,6 +124,6 @@ export function ModalBody({ children }: { children: ReactNode }) {
 }
 
 export function ModalFooter({ children }: { children: ReactNode }) {
-    return <div className="flex justify-end gap-2 border-t p-4">{children}</div>;
+    return <div className="flex justify-end gap-2 border-t border-border p-4">{children}</div>;
 }
 export default Modal;

@@ -57,12 +57,12 @@ export function TabList({ children, className, variant = 'default' }: TabListPro
     const containerBase = 'flex';
     const containerVariant =
         variant === 'pill'
-            ? 'border border-gray-200 bg-gray-50 rounded-lg p-1 gap-1'
+            ? 'border border-border bg-surface rounded-lg p-1 gap-1'
             : variant === 'vertical'
-              ? 'flex-col border-l border-gray-200 gap-1'
+              ? 'flex-col border-l border-border gap-1'
               : variant === 'fullWidth'
-                ? 'w-full border-b border-gray-200 gap-2'
-                : 'border-b border-gray-200 gap-2'; // default & underline
+                ? 'w-full border-b border-border gap-2'
+                : 'border-b border-border gap-2'; // default & underline
 
     return (
         <TabListContext.Provider value={{ variant }}>
@@ -121,11 +121,11 @@ export function Tab({
                 // active vs inactive
                 isActive
                     ? variant === 'pill'
-                        ? 'bg-blue-600 text-white border-blue-600'
-                        : 'border-blue-500 text-blue-600'
+                        ? 'bg-primary text-primary-foreground border-primary'
+                        : 'border-primary text-primary'
                     : variant === 'pill'
-                      ? 'text-gray-700 hover:bg-white'
-                      : 'border-transparent text-gray-600 hover:text-gray-800',
+                        ? 'text-muted-foreground hover:bg-bg'
+                        : 'border-transparent text-muted-foreground hover:text-text',
                 // user-provided classes for active/inactive states
                 isActive ? activeClassName : inactiveClassName,
                 // full width adjustments

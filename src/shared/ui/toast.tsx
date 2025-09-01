@@ -7,11 +7,11 @@ import {
 } from 'react-toastify';
 
 const variantClasses: Record<TypeOptions, string> = {
-    default: 'bg-gray-800 text-white',
-    success: 'bg-green-600 text-white',
-    info: 'bg-blue-600 text-white',
-    warning: 'bg-yellow-500 text-gray-900',
-    error: 'bg-red-600 text-white',
+    default: 'bg-elevated text-text',
+    success: 'bg-success text-success-foreground',
+    info: 'bg-accent text-accent-foreground',
+    warning: 'bg-warning text-warning-foreground',
+    error: 'bg-danger text-danger-foreground',
 };
 
 export const showToast = (

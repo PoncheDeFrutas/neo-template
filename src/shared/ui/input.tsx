@@ -12,14 +12,12 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
 }
 
 const baseStyles =
-    'w-full rounded-md border bg-white dark:bg-gray-900 text-gray-900' +
-    ' dark:text-gray-100 transition-colors focus-visible:outline-none focus-visible:ring-2'+ 
-    'focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
+    'w-full rounded-md border bg-surface text-text transition-colors focus-visible:outline-none focus-visible:ring-2 ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
 
 const validationStyles: Record<ValidationState, string> = {
-    none: 'border-gray-300 focus-visible:ring-blue-500',
-    success: 'border-green-500 focus-visible:ring-green-500',
-    error: 'border-red-500 focus-visible:ring-red-500',
+    none: 'border-border',
+    success: 'border-success ring-success',
+    error: 'border-danger ring-danger',
 };
 
 function cn(...classes: Array<string | false | null | undefined | number | bigint>) {
@@ -80,7 +78,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
                     {rightElement}
                 </span>
             )}
-            {helperText && <p className="mt-1 text-sm text-gray-500">{helperText}</p>}
+            {helperText && <p className="mt-1 text-sm text-muted-foreground">{helperText}</p>}
         </div>
     );
 });

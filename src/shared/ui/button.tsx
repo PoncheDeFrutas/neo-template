@@ -18,7 +18,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const baseStyles =
     'inline-flex items-center justify-center font-medium focus:outline-none ' +
-    'focus:ring-2 focus:ring-offset-2 transition-colors disabled:opacity-50 ' +
+    'focus:ring-2 ring-ring focus:ring-offset-2 transition-colors disabled:opacity-50 ' +
     'disabled:pointer-events-none';
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -30,13 +30,13 @@ const sizeStyles: Record<ButtonSize, string> = {
 };
 
 const variantStyles: Record<ButtonVariant, string> = {
-    default: 'text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-500',
+    default: 'text-white bg-blue-600 hover:bg-blue-700',
     outline:
-        'border border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white focus:ring-blue-500',
-    gradient: 'text-white bg-gradient-to-r hover:bg-gradient-to-r focus:ring-cyan-300',
+        'border border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white',
+    gradient: 'text-white bg-gradient-to-r hover:bg-gradient-to-r',
     gradientOutline:
         'text-blue-700 border-2 border-cyan-500 hover:text-white ' +
-        'hover:bg-gradient-to-r focus:ring-cyan-300',
+        'hover:bg-gradient-to-r',
 };
 
 function cn(...classes: Array<string | false | null | undefined>) {
