@@ -4,9 +4,14 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 /**
  * Storybook meta configuration for the Banner component.
  * 
+ *
  * Defines the story structure, component parameters, and control options
  * for testing different Banner variants and positions in Storybook.
  * 
+ *
+ * The `bgColor` and `textColor` controls accept Tailwind CSS classes to
+ * override the component's default background and text colors when needed.
+ *
  * @property title - The title displayed in Storybook sidebar under 'Shared/Banner'
  * @property component - References the Banner component to be documented
  * @property parameters - Configuration for layout and viewport settings
@@ -16,27 +21,53 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
  * @property argTypes - Control definitions for interactive props
  * @property argTypes.variant - Select control for banner style variants
  * @property argTypes.position - Select control for banner positioning options
+ * @property argTypes.bgColor - Text control for custom background classes
+ * @property argTypes.textColor - Text control for custom text color classes
  */
 const meta = {
     title: 'Shared/Banner',
     component: Banner,
-    parameters: { 
+    parameters: {
         layout: 'fullscreen',
         viewport: {
             defaultViewport: 'responsive',
         },
     },
     tags: ['autodocs'],
-    argTypes: {
-        variant: {
-            control: { type: 'select' },
-            options: ['default', 'bottom', 'marketing', 'cta', 'info'],
-        },
-        position: {
-            control: { type: 'select' },
-            options: ['top', 'bottom'],
-        },
+    // En el argTypes del meta
+argTypes: {
+    variant: {
+        control: { type: 'select' },
+        options: ['default', 'bottom', 'marketing', 'cta', 'info'],
     },
+    position: {
+        control: { type: 'select' },
+        options: ['top', 'bottom'],
+    },
+    bgColor: {
+        control: { type: 'select' },
+        options: [
+            'bg-blue-600',    // default/bottom
+            'bg-gray-100',    // marketing
+            'bg-indigo-600',  // cta
+            'bg-blue-50',     // info
+            'bg-red-600',     // alternative
+            'bg-green-600',   // alternative
+            'bg-yellow-100',  // alternative
+        ],
+    },
+    textColor: {
+        control: { type: 'select' },
+        options: [
+            'text-white',
+            'text-gray-900',
+            'text-blue-900',
+            'text-red-900',
+            'text-green-900',
+        ],
+    },
+},
+
 } satisfies Meta<typeof Banner>;
 
 export default meta;
@@ -50,6 +81,8 @@ export const Default: Story = {
     args: {
         variant: 'default',
         position: 'top',
+        bgColor: 'bg-blue-600',
+        textColor: 'text-white',
     },
     render: (args) => (
         <div className="min-h-screen bg-gray-50">
@@ -71,6 +104,8 @@ export const Default: Story = {
 export const Bottom: Story = {
     args: {
         variant: 'bottom',
+        bgColor: 'bg-blue-600',
+        textColor: 'text-white',
     },
     render: (args) => (
         <div className="min-h-screen bg-gray-50 relative">
@@ -91,6 +126,8 @@ export const Bottom: Story = {
 export const Marketing: Story = {
     args: {
         variant: 'marketing',
+        bgColor: 'bg-gray-100',
+        textColor: 'text-gray-900',
     },
     render: (args) => (
         <div className="min-h-screen bg-gray-50">
@@ -101,7 +138,9 @@ export const Marketing: Story = {
                     </div>
                     <div>
                         <h3 className="font-semibold text-lg">Nuevo lanzamiento disponible</h3>
-                        <p className="text-sm text-gray-600">Descubre las últimas funcionalidades</p>
+                        <p className="text-sm text-gray-600">
+                            Descubre las últimas funcionalidades
+                        </p>
                     </div>
                 </div>
                 <Button label="Descubrir ahora" variant="default" />
@@ -119,6 +158,8 @@ export const Marketing: Story = {
 export const Cta: Story = {
     args: {
         variant: 'cta',
+        bgColor: 'bg-indigo-600',
+        textColor: 'text-white',
     },
     render: (args) => (
         <div className="min-h-screen bg-gray-50">
@@ -146,6 +187,8 @@ export const Info: Story = {
     args: {
         variant: 'info',
         position: 'bottom',
+        bgColor: 'bg-blue-50',
+        textColor: 'text-blue-900',
     },
     render: (args) => (
         <div className="min-h-screen bg-gray-50 relative">

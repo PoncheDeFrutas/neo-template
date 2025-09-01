@@ -55,12 +55,20 @@ export function Banner({
     const base = 'w-full';
 
     const variantStyles: Record<BannerVariant, string> = {
-        default: 'bg-blue-600 text-white px-4 py-2 text-center',
-        bottom: 'bg-blue-600 text-white px-4 py-2 text-center shadow-md z-50',
-        marketing:
-            'bg-gray-100 border border-gray-200 p-6 flex flex-col sm:flex-row items-center justify-between gap-4',
-        cta: 'bg-indigo-600 text-white p-4 flex items-center justify-between gap-4',
-        info: 'bg-blue-50 text-blue-900 p-4 border-l-4 border-blue-400',
+        default: 'px-4 py-2 text-center',
+        bottom: 'px-4 py-2 text-center shadow-md z-50',
+        marketing: 'border border-gray-200 p-6 flex flex-col sm:flex-row items-center justify-between gap-4',
+        cta: 'p-4 flex items-center justify-between gap-4',
+        info: 'p-4 border-l-4 border-blue-400',
+    };
+
+    // Colores por defecto solo si no se especifican custom
+    const defaultColors: Record<BannerVariant, { bg: string; text: string }> = {
+        default: { bg: 'bg-blue-600', text: 'text-white' },
+        bottom: { bg: 'bg-blue-600', text: 'text-white' },
+        marketing: { bg: 'bg-gray-100', text: 'text-gray-900' },
+        cta: { bg: 'bg-indigo-600', text: 'text-white' },
+        info: { bg: 'bg-blue-50', text: 'text-blue-900' },
     };
 
     const positionClass = cn(
@@ -74,8 +82,8 @@ export function Banner({
             className={cn(
                 base,
                 variantStyles[variant],
-                bgColor,
-                textColor,
+                bgColor || defaultColors[variant].bg,
+                textColor || defaultColors[variant].text,
                 positionClass,
                 className,
             )}
