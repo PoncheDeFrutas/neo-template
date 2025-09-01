@@ -18,10 +18,15 @@ const meta = {
     args: {
         options,
         disabled: false,
+        size: 'md',
     },
     argTypes: {
         disabled: {
             control: { type: 'boolean' },
+        },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg'],
         },
     },
 } satisfies Meta<typeof Select>;
@@ -45,6 +50,48 @@ export const Default: Story = {
 
 export const Disabled: Story = {
     args: { disabled: true },
+    render: (args) => {
+        const [value, setValue] = useState(args.options[0].value);
+        return (
+            <Select
+                {...args}
+                value={value}
+                onChange={(v) => setValue(Array.isArray(v) ? v[0] ?? '' : v)}
+            />
+        );
+    },
+};
+
+export const Small: Story = {
+    args: { size: 'sm' },
+    render: (args) => {
+        const [value, setValue] = useState(args.options[0].value);
+        return (
+            <Select
+                {...args}
+                value={value}
+                onChange={(v) => setValue(Array.isArray(v) ? v[0] ?? '' : v)}
+            />
+        );
+    },
+};
+
+export const Medium: Story = {
+    args: { size: 'md' },
+    render: (args) => {
+        const [value, setValue] = useState(args.options[0].value);
+        return (
+            <Select
+                {...args}
+                value={value}
+                onChange={(v) => setValue(Array.isArray(v) ? v[0] ?? '' : v)}
+            />
+        );
+    },
+};
+
+export const Large: Story = {
+    args: { size: 'lg' },
     render: (args) => {
         const [value, setValue] = useState(args.options[0].value);
         return (

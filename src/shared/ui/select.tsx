@@ -5,23 +5,35 @@ export interface SelectOption {
     value: string;
 }
 
+export type SelectSize = 'sm' | 'md' | 'lg';
+
 export interface SelectProps
-    extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onChange' | 'value' | 'multiple'> {
+    extends Omit<
+        SelectHTMLAttributes<HTMLSelectElement>,
+        'onChange' | 'value' | 'multiple' | 'size'
+    > {
     options: SelectOption[];
     value: string | string[];
     multiple?: boolean;
+    size?: SelectSize;
     onChange: (value: string | string[]) => void;
 }
 
-const baseStyles =
-    'flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
+function selectVariants(size: SelectSize = 'md') {
+    return cn(
+        'flex w-full rounded-md border border-gray-300 bg-white px-3 py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+        size === 'sm' && 'h-8 text-xs',
+        size === 'md' && 'h-10 text-sm',
+        size === 'lg' && 'h-12 text-base',
+    );
+}
 
 function cn(...classes: Array<string | false | null | undefined>) {
     return classes.filter(Boolean).join(' ');
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
-    { options, value, onChange, className, disabled, multiple, ...props },
+    { options, value, onChange, className, disabled, multiple, size = 'md', ...props },
     ref,
 ) {
     const normalizedValue: string | ReadonlyArray<string> = multiple
@@ -31,7 +43,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
     return (
         <select
             ref={ref}
-            className={cn(baseStyles, className)}
+            className={cn(selectVariants(size), className)}
             value={normalizedValue}
             multiple={multiple}
             onChange={(e) =>
