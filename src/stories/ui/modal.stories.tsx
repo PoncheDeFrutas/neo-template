@@ -2,10 +2,35 @@ import { Button, Modal, ModalBody, ModalFooter, ModalHeader, type ModalProps } f
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
+
 /**
  * Storybook meta configuration for the Modal component.
- *
- * Includes supported `type`, `size`, and `placement` controls and sensible defaults.
+ * 
+ * Defines the story metadata including component title, default parameters,
+ * and control configurations for the Modal component's props.
+ * 
+ * @property {string} title - The story title displayed in Storybook sidebar
+ * @property {React.Component} component - The Modal component being documented
+ * @property {string[]} tags - Tags for automatic documentation generation
+ * @property {object} args - Default values for component props
+ * @property {object} argTypes - Control configurations for interactive prop manipulation
+ * @property {object} argTypes.type - Select control for modal type variants (default, static, popup, crud)
+ * @property {object} argTypes.size - Select control for modal size options (sm, md, lg, xl, 2xl)
+ * @property {object} argTypes.placement - Select control for modal positioning on screen
+ * 
+ * @example
+ * ```tsx
+ * // Usage in Storybook stories
+ * export default meta;
+ * 
+ * export const Default: Story = {
+ *   args: {
+ *     type: "popup",
+ *     size: "lg",
+ *     placement: "center"
+ *   }
+ * };
+ * ```
  */
 const meta = {
     title: 'Shared/Modal',

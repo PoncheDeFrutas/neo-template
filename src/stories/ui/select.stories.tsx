@@ -13,6 +13,31 @@ const options = [
 
 /**
  * Storybook meta configuration for the Select component.
+ * 
+ * Defines the story metadata including component title, default parameters,
+ * and control configurations for the Select component's props.
+ * 
+ * @property {string} title - The story title displayed in Storybook sidebar
+ * @property {React.Component} component - The Select component being documented
+ * @property {object} parameters - Storybook parameters including layout configuration
+ * @property {string[]} tags - Tags for automatic documentation generation
+ * @property {object} args - Default values for component props including options, disabled state, size, and variant
+ * @property {object} argTypes - Control configurations for interactive prop manipulation
+ * @property {object} argTypes.disabled - Boolean control for toggling disabled state
+ * @property {object} argTypes.size - Radio control for selecting component size (sm, md, lg)
+ * @property {object} argTypes.variant - Radio control for selecting component variant (default, underline)
+ * 
+ * @example
+ * ```tsx
+ * // Usage in Storybook stories
+ * export default meta;
+ * 
+ * export const Default: Story = {
+ *   args: {
+ *     placeholder: "Select an option..."
+ *   }
+ * };
+ * ```
  */
 const meta = {
     title: 'Shared/Select',
