@@ -6,6 +6,7 @@ export interface SelectOption {
 }
 
 export type SelectSize = 'sm' | 'md' | 'lg';
+export type SelectVariant = 'default' | 'underline';
 
 export interface SelectProps
     extends Omit<
@@ -16,16 +17,19 @@ export interface SelectProps
     value: string | string[];
     multiple?: boolean;
     size?: SelectSize;
+    variant?: SelectVariant;
     onChange: (value: string | string[]) => void;
 }
 
-function selectVariants(size: SelectSize = 'md') {
-    return cn(
-        'flex w-full rounded-md border border-gray-300 bg-white px-3 py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-        size === 'sm' && 'h-8 text-xs',
-        size === 'md' && 'h-10 text-sm',
-        size === 'lg' && 'h-12 text-base',
-    );
+function selectVariants(size: SelectSize = 'md', variant: SelectVariant = 'default') {
+    const base = 'flex w-full bg-white px-3 py-2 transition-colors focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50';
+    const shape =
+        variant === 'underline'
+            ? 'border-0 border-b border-gray-300 rounded-none focus:ring-0'
+            : 'rounded-md border border-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2';
+    const sizeCls =
+        size === 'sm' ? 'h-8 text-xs' : size === 'lg' ? 'h-12 text-base' : 'h-10 text-sm';
+    return cn(base, shape, sizeCls);
 }
 
 function cn(...classes: Array<string | false | null | undefined>) {
@@ -33,7 +37,7 @@ function cn(...classes: Array<string | false | null | undefined>) {
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
-    { options, value, onChange, className, disabled, multiple, size = 'md', ...props },
+    { options, value, onChange, className, disabled, multiple, size = 'md', variant = 'default', ...props },
     ref,
 ) {
     const normalizedValue: string | ReadonlyArray<string> = multiple
@@ -43,7 +47,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
     return (
         <select
             ref={ref}
-            className={cn(selectVariants(size), className)}
+            className={cn(selectVariants(size, variant), className)}
             value={normalizedValue}
             multiple={multiple}
             onChange={(e) =>

@@ -19,6 +19,7 @@ const meta = {
         options,
         disabled: false,
         size: 'md',
+        variant: 'default',
     },
     argTypes: {
         disabled: {
@@ -27,6 +28,10 @@ const meta = {
         size: {
             control: { type: 'inline-radio' },
             options: ['sm', 'md', 'lg'],
+        },
+        variant: {
+            control: { type: 'inline-radio' },
+            options: ['default', 'underline'],
         },
     },
 } satisfies Meta<typeof Select>;
@@ -92,6 +97,20 @@ export const Medium: Story = {
 
 export const Large: Story = {
     args: { size: 'lg' },
+    render: (args) => {
+        const [value, setValue] = useState(args.options[0].value);
+        return (
+            <Select
+                {...args}
+                value={value}
+                onChange={(v) => setValue(Array.isArray(v) ? v[0] ?? '' : v)}
+            />
+        );
+    },
+};
+
+export const Underline: Story = {
+    args: { variant: 'underline' },
     render: (args) => {
         const [value, setValue] = useState(args.options[0].value);
         return (
