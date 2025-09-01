@@ -14,6 +14,7 @@ export interface BadgeProps {
     onRemove?: () => void;
     color?: string;
     textColor?: string;
+    dotColor?: string;
 }
 
 function cn(...classes: Array<string | false | null | undefined>) {
@@ -30,6 +31,7 @@ export function Badge({
     onRemove,
     color,
     textColor,
+    dotColor,
 }: BadgeProps) {
     const base = iconOnly
         ? 'inline-flex items-center justify-center p-1'
@@ -43,17 +45,18 @@ export function Badge({
         notification: 'relative',
         chips: 'inline-flex items-center',
     };
-
-    const computedText = color
-        ? textColor ?? getContrastColor(color)
-        : undefined;
-    const style: CSSProperties | undefined = color
-        ? {
-              backgroundColor: color,
-              color: computedText,
-              ...(variant === 'bordered' ? { borderColor: computedText } : {}),
-          }
-        : undefined;
+;
+    const resolvedText = textColor ?? (color ? getContrastColor(color) : undefined);
+    const style: CSSProperties = {};
+    if (color) {
+        style.backgroundColor = color;
+    }
+    if (resolvedText) {
+        style.color = resolvedText;
+        if (variant === 'bordered') {
+            style.borderColor = resolvedText;
+        }
+    }
 
     let className = cn(base, sizeStyles, variantBase[variant]);
     if (!color) {
@@ -79,12 +82,15 @@ export function Badge({
             {children && <span>{children}</span>}
             {variant === 'notification' && (
                 <span
-                    className={
-                        color
-                            ? 'absolute top-0 right-0 block h-2 w-2 rounded-full'
-                            : 'absolute top-0 right-0 block h-2 w-2 rounded-full bg-blue-800'
+                    className={cn(
+                        'absolute top-0 right-0 block h-2 w-2 rounded-full',
+                        !dotColor && !resolvedText && 'bg-blue-800',
+                    )}
+                    style={
+                        dotColor || resolvedText
+                            ? { backgroundColor: dotColor ?? resolvedText }
+                            : undefined
                     }
-                    style={color ? { backgroundColor: computedText } : undefined}
                 />
             )}
             {variant === 'chips' && (
@@ -95,17 +101,18 @@ export function Badge({
         </>
     );
 
+    const styleProp = Object.keys(style).length ? style : undefined;
+
     if (variant === 'link' && href) {
         return (
-            <a href={href} className={className} style={style}>
+            <a href={href} className={className} style={styleProp}>
                 {content}
             </a>
         );
     }
 
-    return <span className={className}>{content}</span>;
     return (
-        <span className={className} style={style}>
+        <span className={className} style={styleProp}>
             {content}
         </span>
     );
@@ -129,9 +136,7 @@ function getContrastColor(baseColor: string): string {
                 b: num & 255,
             };
         }
-        const match = baseColor.match(
-            /^rgba?\((\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})/i,
-        );
+        const match = baseColor.match(/^rgba?\((\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})/i);
         if (match) {
             return {
                 r: parseInt(match[1], 10),

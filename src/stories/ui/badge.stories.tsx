@@ -23,6 +23,7 @@ const meta = {
         onRemove: { control: false },
         color: { control: 'color' },
         textColor: { control: 'color' },
+        dotColor: { control: 'color' },
     },
 } satisfies Meta<typeof Badge>;
 
@@ -56,6 +57,21 @@ export const CustomColors: Story = {
             </Badge>
             <Badge color="#fef3c7" textColor="#92400e">
                 Amarillo
+            </Badge>
+        </div>
+    ),
+};
+
+export const TextColorOnly: Story = { args: { textColor: '#991b1b' } };
+
+export const NotificationColors: Story = {
+    render: () => (
+        <div className="flex gap-2">
+            <Badge variant="notification" textColor="#16a34a">
+                Text color dot
+            </Badge>
+            <Badge variant="notification" dotColor="#facc15">
+                Custom dot
             </Badge>
         </div>
     ),
