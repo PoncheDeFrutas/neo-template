@@ -40,7 +40,12 @@ const Template = (args: ModalProps) => {
     return (
         <>
             <Button label="Open Modal" onClick={() => setOpen(true)} />
-            <Modal {...args} isOpen={open} onClose={() => setOpen(false)}>
+            <Modal
+                {...args}
+                isOpen={open}
+                onClose={() => setOpen(false)}
+                onSave={args.onSave ?? (() => setOpen(false))}
+            >
                 {args.type === 'crud' ? (
                     <p className="mb-4">Body content for create/update/delete.</p>
                 ) : (

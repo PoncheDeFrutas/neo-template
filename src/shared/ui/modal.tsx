@@ -23,6 +23,9 @@ export interface ModalProps {
     type?: ModalType;
     size?: ModalSize;
     placement?: ModalPlacement;
+    header?: ReactNode;
+    footer?: ReactNode;
+    onSave?: () => void;
 }
 
 const sizeClasses: Record<ModalSize, string> = {
@@ -52,6 +55,9 @@ export function Modal({
     type = 'default',
     size = 'md',
     placement = 'center',
+    header,
+    footer,
+    onSave,
 }: ModalProps) {
     useEffect(() => {
         if (!isOpen || type === 'static') return;
@@ -74,18 +80,20 @@ export function Modal({
     let content = <div className={modalClasses}>{children}</div>;
 
     if (type === 'crud') {
+        const defaultHeader = <h3 className="text-lg font-semibold">CRUD Modal</h3>;
+        const defaultFooter = (
+            <>
+                <Button variant="outline" onClick={onClose}>
+                    Cancel
+                </Button>
+                <Button onClick={onSave ?? onClose}>Save</Button>
+            </>
+        );
         content = (
             <div className={modalClasses}>
-                <ModalHeader>
-                    <h3 className="text-lg font-semibold">CRUD Modal</h3>
-                </ModalHeader>
+                <ModalHeader>{header ?? defaultHeader}</ModalHeader>
                 <ModalBody>{children}</ModalBody>
-                <ModalFooter>
-                    <Button variant="outline" onClick={onClose}>
-                        Cancel
-                    </Button>
-                    <Button onClick={onClose}>Save</Button>
-                </ModalFooter>
+                <ModalFooter>{footer ?? defaultFooter}</ModalFooter>
             </div>
         );
     }
