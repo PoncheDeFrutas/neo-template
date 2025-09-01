@@ -12,12 +12,17 @@ const meta = {
         placeholder: 'Type here...',
         disabled: false,
         size: 'md',
+        validationState: 'none',
     },
     argTypes: {
         disabled: { control: { type: 'boolean' } },
         size: {
             control: { type: 'select' },
             options: ['sm', 'md', 'lg'],
+        },
+         validationState: {
+            control: { type: 'select' },
+            options: ['none', 'success', 'error'],
         },
     },
 } satisfies Meta<typeof Input>;
@@ -32,6 +37,16 @@ export const Sizes: Story = {
             <Input {...args} size="sm" placeholder="Small" />
             <Input {...args} size="md" placeholder="Medium" />
             <Input {...args} size="lg" placeholder="Large" />
+        </div>
+    ),
+};
+
+export const Validation: Story = {
+    render: (args) => (
+        <div className="flex flex-col gap-2">
+            <Input {...args} validationState="none" placeholder="None" />
+            <Input {...args} validationState="success" placeholder="Success" />
+            <Input {...args} validationState="error" placeholder="Error" />
         </div>
     ),
 };

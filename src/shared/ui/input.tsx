@@ -1,13 +1,22 @@
 import { forwardRef, type InputHTMLAttributes } from 'react';
 
 export type InputSize = 'sm' | 'md' | 'lg';
+export type ValidationState = 'none' | 'success' | 'error';
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
     size?: InputSize;
+    validationState?: ValidationState;
 }
 
 const baseStyles =
-'flex w-full rounded-md border border-gray-300 bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
+    'flex w-full rounded-md border bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
+
+const validationStyles: Record<ValidationState, string> = {
+    none: 'border-gray-300 focus-visible:ring-blue-500',
+    success: 'border-green-500 focus-visible:ring-green-500',
+    error: 'border-red-500 focus-visible:ring-red-500',
+};
+
 function cn(...classes: Array<string | false | null | undefined>) {
     return classes.filter(Boolean).join(' ');
 }
@@ -19,10 +28,21 @@ const sizeStyles: Record<InputSize, string> = {
 };
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-    { className, size = 'md', ...props },
+    { className, size = 'md', validationState = 'none', ...props },
     ref,
 ) {
-    return <input ref={ref} className={cn(baseStyles, sizeStyles[size], className)} {...props} />;
+    return (
+        <input
+            ref={ref}
+            className={cn(
+                baseStyles,
+                validationStyles[validationState],
+                sizeStyles[size],
+                className,
+            )}
+            {...props}
+        />
+    );
 });
 
 export default Input;
