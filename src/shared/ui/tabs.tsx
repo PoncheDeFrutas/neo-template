@@ -75,9 +75,10 @@ export function TabList({ children, className, variant = 'default' }: TabListPro
 
 export interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     value: string;
+    icon?: ReactNode;
 }
 
-export function Tab({ value, className, children, ...props }: TabProps) {
+export function Tab({ value, icon, className, children, ...props }: TabProps) {
     const context = useContext(TabsContext);
     if (!context) throw new Error('Tab must be used within Tabs');
 
@@ -114,6 +115,7 @@ export function Tab({ value, className, children, ...props }: TabProps) {
             onClick={() => context.setActiveValue(value)}
             {...props}
         >
+            {icon ? <span className="mr-2 inline-block" aria-hidden="true">{icon}</span> : null}
             {children}
         </button>
     );
