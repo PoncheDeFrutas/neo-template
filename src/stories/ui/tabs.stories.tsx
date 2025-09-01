@@ -56,9 +56,30 @@ const Template = (args: any) => {
             <div style={{ display: 'flex', gap: 16 }}>
                 <Tabs defaultValue="tab1">
                     <TabList variant={args.variant}>
-                        <Tab value="tab1" icon={iconNode} activeClassName={args.activeClassName} inactiveClassName={args.inactiveClassName}>Tab 1</Tab>
-                        <Tab value="tab2" icon={iconNode} activeClassName={args.activeClassName} inactiveClassName={args.inactiveClassName}>Tab 2</Tab>
-                        <Tab value="tab3" icon={iconNode} activeClassName={args.activeClassName} inactiveClassName={args.inactiveClassName}>Tab 3</Tab>
+                        <Tab
+                            value="tab1"
+                            icon={iconNode}
+                            activeClassName={args.activeClassName}
+                            inactiveClassName={args.inactiveClassName}
+                        >
+                            Tab 1
+                        </Tab>
+                        <Tab
+                            value="tab2"
+                            icon={iconNode}
+                            activeClassName={args.activeClassName}
+                            inactiveClassName={args.inactiveClassName}
+                        >
+                            Tab 2
+                        </Tab>
+                        <Tab
+                            value="tab3"
+                            icon={iconNode}
+                            activeClassName={args.activeClassName}
+                            inactiveClassName={args.inactiveClassName}
+                        >
+                            Tab 3
+                        </Tab>
                     </TabList>
                     <div style={{ paddingLeft: 16 }}>
                         <TabPanel value="tab1">Content 1</TabPanel>
@@ -73,9 +94,30 @@ const Template = (args: any) => {
     const content = (
         <Tabs defaultValue="tab1">
             <TabList variant={args.variant}>
-                <Tab value="tab1" icon={iconNode} activeClassName={args.activeClassName} inactiveClassName={args.inactiveClassName}>Tab 1</Tab>
-                <Tab value="tab2" icon={iconNode} activeClassName={args.activeClassName} inactiveClassName={args.inactiveClassName}>Tab 2</Tab>
-                <Tab value="tab3" icon={iconNode} activeClassName={args.activeClassName} inactiveClassName={args.inactiveClassName}>Tab 3</Tab>
+                <Tab
+                    value="tab1"
+                    icon={iconNode}
+                    activeClassName={args.activeClassName}
+                    inactiveClassName={args.inactiveClassName}
+                >
+                    Tab 1
+                </Tab>
+                <Tab
+                    value="tab2"
+                    icon={iconNode}
+                    activeClassName={args.activeClassName}
+                    inactiveClassName={args.inactiveClassName}
+                >
+                    Tab 2
+                </Tab>
+                <Tab
+                    value="tab3"
+                    icon={iconNode}
+                    activeClassName={args.activeClassName}
+                    inactiveClassName={args.inactiveClassName}
+                >
+                    Tab 3
+                </Tab>
             </TabList>
             <TabPanel value="tab1">Content 1</TabPanel>
             <TabPanel value="tab2">Content 2</TabPanel>
@@ -88,7 +130,6 @@ const Template = (args: any) => {
     }
     return content;
 };
-
 
 export const Default = Template.bind({}) as Story;
 Default.args = { variant: 'default' };

@@ -60,8 +60,7 @@ export const GradientCustomColor: Story = {
     parameters: {
         docs: {
             description: {
-                story:
-                    'El gradiente ahora usa `color` como inicio y calcula el final automáticamente (ligeramente más claro/oscuro).',
+                story: 'El gradiente ahora usa `color` como inicio y calcula el final automáticamente (ligeramente más claro/oscuro).',
             },
         },
     },
@@ -73,8 +72,7 @@ export const GradientOutlineHover: Story = {
     parameters: {
         docs: {
             description: {
-                story:
-                    'En `gradientOutline`, el gradiente se aplica sólo al hacer hover; el borde usa `color`.',
+                story: 'En `gradientOutline`, el gradiente se aplica sólo al hacer hover; el borde usa `color`.',
             },
         },
     },

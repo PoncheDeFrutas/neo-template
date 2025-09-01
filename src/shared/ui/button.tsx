@@ -65,7 +65,9 @@ function adjustColor(baseColor: string): string {
         return rgbToHex(adjustRGB(r, g, b));
     }
 
-    const rgbMatch = baseColor.match(/^rgba?\((\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})(?:\s*,\s*(\d*\.?\d+))?\)$/i);
+    const rgbMatch = baseColor.match(
+        /^rgba?\((\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})(?:\s*,\s*(\d*\.?\d+))?\)$/i,
+    );
     if (rgbMatch) {
         const r = parseInt(rgbMatch[1], 10);
         const g = parseInt(rgbMatch[2], 10);
@@ -87,7 +89,11 @@ function adjustColor(baseColor: string): string {
         if (lum > 0.5) {
             return [clamp(r * (1 - factor)), clamp(g * (1 - factor)), clamp(b * (1 - factor))];
         }
-        return [clamp(r + (255 - r) * factor), clamp(g + (255 - g) * factor), clamp(b + (255 - b) * factor)];
+        return [
+            clamp(r + (255 - r) * factor),
+            clamp(g + (255 - g) * factor),
+            clamp(b + (255 - b) * factor),
+        ];
     }
 }
 
