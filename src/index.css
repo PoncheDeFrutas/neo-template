@@ -1,3 +1,78 @@
 @import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --color-bg: #ffffff;
+  --color-text: #0f172a;
+  --color-surface: #f8fafc;
+  --color-border: #e5e7eb;
+  --color-muted: #64748b;
+  --color-accent: #3b82f6;
+  --color-primary: #3b82f6;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #06b6d4;
+  --color-secondary-foreground: #0f172a;
+  --color-bg-subtle: #f8fafc;
+  --color-bg-elevated: #ffffff;
+  --color-border-subtle: #e5e7eb;
+  --color-border-strong: #94a3b8;
+  --color-muted-foreground: #64748b;
+  --color-success: #16a34a;
+  --color-success-foreground: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-foreground: #0f172a;
+  --color-danger: #ef4444;
+  --color-danger-foreground: #ffffff;
+  --color-overlay: rgba(15, 23, 42, 0.6);
+  --color-ring: #60a5fa;
+  --color-code-bg: #f1f5f9;
+}
+
+.dark {
+  --color-bg: #0f172a;
+  --color-text: #e5e7eb;
+  --color-surface: #1f2937;
+  --color-border: #334155;
+  --color-muted: #94a3b8;
+  --color-accent: #60a5fa;
+  --color-primary: #60a5fa;
+  --color-primary-foreground: #0b1220;
+  --color-secondary: #22d3ee;
+  --color-secondary-foreground: #0b1220;
+  --color-bg-subtle: #111827;
+  --color-bg-elevated: #1f2937;
+  --color-border-subtle: #334155;
+  --color-border-strong: #475569;
+  --color-muted-foreground: #94a3b8;
+  --color-success: #22c55e;
+  --color-success-foreground: #0b1220;
+  --color-warning: #f59e0b;
+  --color-warning-foreground: #0b1220;
+  --color-danger: #f87171;
+  --color-danger-foreground: #0b1220;
+  --color-overlay: rgba(0, 0, 0, 0.6);
+  --color-ring: #60a5fa;
+  --color-code-bg: #0b1220;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  color-scheme: light dark;
+}
+
+:root {
+  --color-bg: #ffffff;
+  --color-text: #111111;
+  --color-border: #d1d5db;
+}
+.dark {
+  --color-bg: #111111;
+  --color-text: #f3f3f3;
+  --color-border: #374151;
+}
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
