@@ -2,13 +2,26 @@ import { Banner, Button } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 /**
- * Storybook configuration for the Banner component.
+ * Storybook meta configuration for the Banner component.
+ * 
+ * Defines the story structure, component parameters, and control options
+ * for testing different Banner variants and positions in Storybook.
+ * 
+ * @property title - The title displayed in Storybook sidebar under 'Shared/Banner'
+ * @property component - References the Banner component to be documented
+ * @property parameters - Configuration for layout and viewport settings
+ * @property parameters.layout - Set to 'fullscreen' for full viewport rendering
+ * @property parameters.viewport - Responsive viewport configuration
+ * @property tags - Enables automatic documentation generation
+ * @property argTypes - Control definitions for interactive props
+ * @property argTypes.variant - Select control for banner style variants
+ * @property argTypes.position - Select control for banner positioning options
  */
 const meta = {
     title: 'Shared/Banner',
     component: Banner,
     parameters: { 
-        layout: 'fullscreen', // Cambiar a fullscreen para banners
+        layout: 'fullscreen',
         viewport: {
             defaultViewport: 'responsive',
         },
@@ -91,7 +104,7 @@ export const Marketing: Story = {
                         <p className="text-sm text-gray-600">Descubre las últimas funcionalidades</p>
                     </div>
                 </div>
-                <Button label="Descubrir ahora" variant="primary" />
+                <Button label="Descubrir ahora" variant="default" />
             </Banner>
             <div className="p-8">
                 <p className="text-gray-600">Contenido principal...</p>
@@ -117,7 +130,7 @@ export const Cta: Story = {
                         <p className="text-sm opacity-80">Oferta limitada - 50% descuento</p>
                     </div>
                 </div>
-                <Button label="Actualizar plan" variant="secondary" />
+                <Button label="Actualizar plan" variant="outline" />
             </Banner>
             <div className="p-8">
                 <p className="text-gray-600">Dashboard del usuario...</p>
