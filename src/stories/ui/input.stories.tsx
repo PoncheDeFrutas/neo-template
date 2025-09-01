@@ -31,6 +31,8 @@ export default meta;
 
 export type Story = StoryObj<typeof Input>;
 
+export const Default: Story = {};
+
 export const Sizes: Story = {
     render: (args) => (
         <div className="flex flex-col gap-2">
@@ -47,6 +49,33 @@ export const Validation: Story = {
             <Input {...args} validationState="none" placeholder="None" />
             <Input {...args} validationState="success" placeholder="Success" />
             <Input {...args} validationState="error" placeholder="Error" />
+        </div>
+    ),
+};
+
+export const WithElements: Story = {
+    render: (args) => (
+        <div className="flex flex-col gap-2">
+            <Input
+                {...args}
+                leftElement={
+                    <span role="img" aria-label="search">
+                        🔍
+                    </span>
+                }
+                rightElement={
+                    <span role="img" aria-label="clear">
+                        ❌
+                    </span>
+                }
+                placeholder="Icons"
+            />
+            <Input
+                {...args}
+                leftElement={<span>https://</span>}
+                rightElement={<span>.com</span>}
+                placeholder="Text"
+            />
         </div>
     ),
 };
