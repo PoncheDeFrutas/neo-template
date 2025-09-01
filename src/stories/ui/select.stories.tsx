@@ -33,7 +33,13 @@ export type Story = StoryObj<typeof Select>;
 export const Default: Story = {
     render: (args) => {
         const [value, setValue] = useState(args.options[0].value);
-        return <Select {...args} value={value} onChange={setValue} />;
+        return (
+            <Select
+                {...args}
+                value={value}
+                onChange={(v) => setValue(Array.isArray(v) ? v[0] ?? '' : v)}
+            />
+        );
     },
 };
 
@@ -41,6 +47,12 @@ export const Disabled: Story = {
     args: { disabled: true },
     render: (args) => {
         const [value, setValue] = useState(args.options[0].value);
-        return <Select {...args} value={value} onChange={setValue} />;
+        return (
+            <Select
+                {...args}
+                value={value}
+                onChange={(v) => setValue(Array.isArray(v) ? v[0] ?? '' : v)}
+            />
+        );
     },
 };

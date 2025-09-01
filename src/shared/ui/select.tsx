@@ -5,10 +5,12 @@ export interface SelectOption {
     value: string;
 }
 
-export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onChange'> {
+export interface SelectProps
+    extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onChange' | 'value' | 'multiple'> {
     options: SelectOption[];
-    value: string;
-    onChange: (value: string) => void;
+    value: string | string[];
+    multiple?: boolean;
+    onChange: (value: string | string[]) => void;
 }
 
 const baseStyles =
@@ -19,15 +21,24 @@ function cn(...classes: Array<string | false | null | undefined>) {
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
-    { options, value, onChange, className, disabled, ...props },
+    { options, value, onChange, className, disabled, multiple, ...props },
     ref,
 ) {
+    const normalizedValue: string | ReadonlyArray<string> = multiple
+        ? (Array.isArray(value) ? value : [value])
+        : (Array.isArray(value) ? (value[0] ?? '') : value);
+
     return (
         <select
             ref={ref}
             className={cn(baseStyles, className)}
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
+            value={normalizedValue}
+            multiple={multiple}
+            onChange={(e) =>
+                multiple
+                    ? onChange(Array.from(e.currentTarget.selectedOptions, (opt) => opt.value))
+                    : onChange(e.currentTarget.value)
+            }
             disabled={disabled}
             {...props}
         >
