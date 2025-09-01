@@ -4,6 +4,22 @@ export type ButtonVariant = 'default' | 'outline' | 'gradient' | 'gradientOutlin
 
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
+/**
+ * Props interface for the Button component.
+ * 
+ * @interface ButtonProps
+ * @extends {ButtonHTMLAttributes<HTMLButtonElement>}
+ * 
+ * @property {ButtonVariant} [variant] - The visual style variant of the button
+ * @property {ButtonSize} [size] - The size of the button
+ * @property {boolean} [pill] - Whether the button should have rounded pill-style borders
+ * @property {ReactNode} [leftIcon] - Icon to display on the left side of the button content
+ * @property {ReactNode} [rightIcon] - Icon to display on the right side of the button content
+ * @property {ReactNode} [icon] - Icon to display when the button is icon-only
+ * @property {boolean} [loading] - Whether the button is in a loading state
+ * @property {ReactNode} [label] - The text or content to display inside the button
+ * @property {string} [color] - Custom color override for the button
+ */
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: ButtonVariant;
     size?: ButtonSize;
@@ -16,6 +32,17 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     color?: string;
 }
 
+/**
+ * Base CSS classes for button components providing common styling and interaction states.
+ * 
+ * Includes:
+ * - Layout: inline-flex with centered content alignment
+ * - Typography: medium font weight
+ * - Focus states: outline removal with ring-based focus indicators
+ * - Accessibility: focus ring with offset for better visibility
+ * - Interactions: smooth color transitions
+ * - Disabled states: reduced opacity and disabled pointer events
+ */
 const baseStyles =
     'inline-flex items-center justify-center font-medium focus:outline-none ' +
     'focus:ring-2 ring-ring focus:ring-offset-2 transition-colors disabled:opacity-50 ' +
@@ -29,6 +56,21 @@ const sizeStyles: Record<ButtonSize, string> = {
     xl: 'text-base px-6 py-3.5',
 };
 
+/**
+ * Maps button variant types to their corresponding CSS class strings.
+ * 
+ * @remarks
+ * This record defines the styling for different button variants including:
+ * - `default`: Standard blue button with white text
+ * - `outline`: Outlined button with blue border and text, fills on hover
+ * - `gradient`: Button with gradient background
+ * - `gradientOutline`: Outlined button with gradient border that fills with gradient on hover
+ * 
+ * @example
+ * ```tsx
+ * const buttonClass = variantStyles['default']; // 'text-white bg-blue-600 hover:bg-blue-700'
+ * ```
+ */
 const variantStyles: Record<ButtonVariant, string> = {
     default: 'text-white bg-blue-600 hover:bg-blue-700',
     outline:
@@ -39,6 +81,18 @@ const variantStyles: Record<ButtonVariant, string> = {
         'hover:bg-gradient-to-r',
 };
 
+/**
+ * Concatenates CSS class names, filtering out falsy values.
+ * 
+ * @param classes - Array of class names that can include strings or falsy values
+ * @returns A space-separated string of valid class names
+ * 
+ * @example
+ * ```tsx
+ * cn('btn', 'btn-primary', false, null, 'active')
+ * // Returns: "btn btn-primary active"
+ * ```
+ */
 function cn(...classes: Array<string | false | null | undefined>) {
     return classes.filter(Boolean).join(' ');
 }
@@ -46,6 +100,25 @@ function cn(...classes: Array<string | false | null | undefined>) {
 const defaultFrom = '#06b6d4';
 const defaultTo = '#3b82f6';
 
+/**
+ * Adjusts the brightness of a color based on its luminance.
+ * 
+ * This function takes a color in various formats (hex, rgb, rgba) and automatically
+ * darkens bright colors or lightens dark colors by a fixed factor of 12%.
+ * The adjustment is determined by the color's luminance value using the relative
+ * luminance formula.
+ * 
+ * @param baseColor - The input color in hex (#RGB, #RRGGBB), rgb(r,g,b), or rgba(r,g,b,a) format
+ * @returns The adjusted color in the same format as the input, or the original color if format is unsupported
+ * 
+ * @example
+ * ```typescript
+ * adjustColor('#ff0000') // Returns darker red for bright red input
+ * adjustColor('#330000') // Returns lighter red for dark red input
+ * adjustColor('rgb(255, 0, 0)') // Returns 'rgb(224, 0, 0)'
+ * adjustColor('rgba(255, 0, 0, 0.5)') // Returns 'rgba(224, 0, 0, 0.5)'
+ * ```
+ */
 function adjustColor(baseColor: string): string {
     const clamp = (n: number) => Math.max(0, Math.min(255, Math.round(n)));
 
@@ -97,6 +170,33 @@ function adjustColor(baseColor: string): string {
     }
 }
 
+/**
+ * A flexible button component with support for various styles, icons, and states.
+ * 
+ * @param variant - The visual style variant of the button ('default', 'outline', 'gradient', 'gradientOutline')
+ * @param size - The size of the button ('sm', 'md', 'lg', etc.)
+ * @param pill - Whether the button should have fully rounded corners (pill shape)
+ * @param leftIcon - Icon element to display on the left side of the button content
+ * @param rightIcon - Icon element to display on the right side of the button content
+ * @param icon - Icon element to display as the sole content (overrides text and other icons)
+ * @param loading - Whether the button is in a loading state (shows spinner and disables interaction)
+ * @param disabled - Whether the button is disabled
+ * @param className - Additional CSS classes to apply to the button
+ * @param label - Text label for the button (alternative to children)
+ * @param color - Custom color for the button (affects background, border, or gradient depending on variant)
+ * @param style - Inline styles to apply to the button
+ * @param children - The content to display inside the button (takes precedence over label)
+ * @param ref - Forwarded ref to the underlying button element
+ * 
+ * @returns A styled button element with the specified configuration
+ * 
+ * @example
+ * ```tsx
+ * <Button variant="gradient" size="lg" leftIcon={<Icon />} loading={false}>
+ *   Click me
+ * </Button>
+ * ```
+ */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
     {
         variant = 'default',

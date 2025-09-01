@@ -3,6 +3,18 @@ import { forwardRef, type InputHTMLAttributes, type ReactNode } from 'react';
 export type InputSize = 'sm' | 'md' | 'lg';
 export type ValidationState = 'none' | 'success' | 'error';
 
+/**
+ * Props for the Input component.
+ * 
+ * @interface InputProps
+ * @extends {Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>}
+ * 
+ * @property {InputSize} [size] - The size variant of the input component
+ * @property {ValidationState} [validationState] - The validation state of the input (e.g., error, success, warning)
+ * @property {ReactNode} [leftElement] - Optional element to display on the left side of the input
+ * @property {ReactNode} [rightElement] - Optional element to display on the right side of the input
+ * @property {string} [helperText] - Optional helper text to display below the input
+ */
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
     size?: InputSize;
     validationState?: ValidationState;
@@ -11,6 +23,19 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
     helperText?: string;
 }
 
+/**
+ * Base CSS classes for input styling with consistent design system tokens.
+ * 
+ * Includes:
+ * - Full width layout and rounded borders
+ * - Surface background with text color from design tokens
+ * - Smooth color transitions
+ * - Focus ring styling with offset
+ * - Disabled state styling with reduced opacity and cursor changes
+ * 
+ * @remarks This constant provides foundational styling that can be extended
+ * or combined with variant-specific classes for different input types.
+ */
 const baseStyles =
     'w-full rounded-md border bg-surface text-text transition-colors focus-visible:outline-none focus-visible:ring-2 ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
 
@@ -42,6 +67,20 @@ const rightPaddingStyles: Record<InputSize, string> = {
     lg: 'pr-12',
 };
 
+/**
+ * A flexible input component with support for left and right elements, validation states, and helper text.
+ * 
+ * @param className - Additional CSS classes to apply to the input element
+ * @param size - The size variant of the input. Defaults to 'md'
+ * @param validationState - The validation state that affects the input's appearance. Defaults to 'none'
+ * @param leftElement - Optional element to display on the left side of the input (e.g., icon)
+ * @param rightElement - Optional element to display on the right side of the input (e.g., icon, button)
+ * @param helperText - Optional helper text displayed below the input
+ * @param props - Additional HTML input attributes
+ * @param ref - Forward ref to the underlying HTMLInputElement
+ * 
+ * @returns A styled input component wrapped in a container with optional elements and helper text
+ */
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     {
         className,

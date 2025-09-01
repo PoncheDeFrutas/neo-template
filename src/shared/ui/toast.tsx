@@ -15,6 +15,30 @@ const variantClasses: Record<TypeOptions, string> = {
     error: 'bg-danger text-danger-foreground',
 };
 
+/**
+ * Displays a toast notification with the specified message and options.
+ * 
+ * @param message - The text content to display in the toast notification
+ * @param options - Optional configuration object for the toast
+ * @param options.position - The position where the toast should appear on screen (defaults to 'bottom-right')
+ * @returns The toast instance returned by the underlying toast library
+ * 
+ * @example
+ * ```tsx
+ * // Basic usage
+ * showToast('Operation completed successfully');
+ * 
+ * // With custom position
+ * showToast('Error occurred', { position: 'top-center' });
+ * 
+ * // With additional options
+ * showToast('Custom toast', { 
+ *   position: 'top-right',
+ *   autoClose: 5000,
+ *   type: 'success'
+ * });
+ * ```
+ */
 export const showToast = (
     message: string,
     options?: ToastOptions & { position?: ToastContainerProps['position'] },
@@ -37,6 +61,28 @@ export const showErrorToast = (message: string, options?: ToastOptions) =>
 export const showLoadingToast = (message: string, options?: ToastOptions) =>
     toast.loading(message, options);
 
+/**
+ * A toast notification container component that automatically adapts to the current theme.
+ * 
+ * @param props - The props for the toast container
+ * @param props.autoTheme - Whether to automatically detect and switch between light/dark themes based on the document's class. Defaults to true
+ * @param props.theme - Manual theme override. When provided, autoTheme detection is bypassed
+ * @param props.rest - Additional props passed through to the underlying ToastContainer component
+ * 
+ * @returns A ToastContainer component with automatic theme detection and custom styling
+ * 
+ * @example
+ * ```tsx
+ * // Auto theme detection (default)
+ * <Toaster />
+ * 
+ * // Manual theme override
+ * <Toaster theme="dark" autoTheme={false} />
+ * 
+ * // With additional toast container props
+ * <Toaster position="top-right" hideProgressBar />
+ * ```
+ */
 export function Toaster(props: ToastContainerProps & { autoTheme?: boolean }) {
     const { autoTheme = true, theme, ...rest } = props;
     const detectDark = () =>

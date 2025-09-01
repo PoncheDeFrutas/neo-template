@@ -16,6 +16,20 @@ export type ModalPlacement =
     | 'bottom-center'
     | 'bottom-right';
 
+/**
+ * Props interface for the Modal component.
+ * 
+ * @interface ModalProps
+ * @property {boolean} isOpen - Controls whether the modal is visible or hidden
+ * @property {() => void} onClose - Callback function triggered when the modal should be closed
+ * @property {ReactNode} children - The content to be displayed inside the modal body
+ * @property {ModalType} [type] - Optional modal type that affects styling and behavior
+ * @property {ModalSize} [size] - Optional size configuration for the modal dimensions
+ * @property {ModalPlacement} [placement] - Optional placement/position of the modal on screen
+ * @property {ReactNode} [header] - Optional header content displayed at the top of the modal
+ * @property {ReactNode} [footer] - Optional footer content displayed at the bottom of the modal
+ * @property {() => void} [onSave] - Optional callback function triggered when save action is performed
+ */
 export interface ModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -48,6 +62,34 @@ const placementClasses: Record<ModalPlacement, string> = {
     'bottom-right': 'items-end justify-end',
 };
 
+/**
+ * A versatile modal component that supports different types, sizes, and placements.
+ * 
+ * @param props - The modal properties
+ * @param props.isOpen - Whether the modal is currently open
+ * @param props.onClose - Callback function to close the modal
+ * @param props.children - The content to be rendered inside the modal
+ * @param props.type - The type of modal ('default', 'static', 'popup', or 'crud')
+ * @param props.size - The size of the modal ('md' by default)
+ * @param props.placement - The placement of the modal ('center' by default)
+ * @param props.header - Custom header content (used with 'crud' type)
+ * @param props.footer - Custom footer content (used with 'crud' type)
+ * @param props.onSave - Callback function for save action (used with 'crud' type)
+ * 
+ * @remarks
+ * - Supports keyboard navigation (ESC key to close, except for 'static' type)
+ * - Uses React Portal to render outside the component tree
+ * - 'crud' type automatically includes header, body, and footer sections
+ * - 'popup' type renders without overlay
+ * - 'static' type prevents closing by clicking overlay or ESC key
+ * 
+ * @example
+ * ```tsx
+ * <Modal isOpen={isOpen} onClose={handleClose} type="crud" size="lg">
+ *   <p>Modal content here</p>
+ * </Modal>
+ * ```
+ */
 export function Modal({
     isOpen,
     onClose,
@@ -115,6 +157,16 @@ export function Modal({
     );
 }
 
+/**
+ * A header component for modals that provides consistent styling and layout.
+ * 
+ * Renders a flex container with items centered and justified between, featuring
+ * a bottom border and padding. Typically used at the top of modal dialogs to
+ * contain titles, close buttons, or other header content.
+ * 
+ * @param children - The content to be rendered inside the modal header
+ * @returns A styled div element containing the header content
+ */
 export function ModalHeader({ children }: { children: ReactNode }) {
     return <div className="flex items-center justify-between border-b border-border p-4">{children}</div>;
 }
