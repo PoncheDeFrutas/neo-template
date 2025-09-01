@@ -5,7 +5,6 @@ import { useState } from 'react';
 const meta: Meta<typeof Tabs> = {
     title: 'Shared/Tabs',
     component: Tabs,
-    // Show TabList/Tab/TabPanel props in Docs table
     subcomponents: { TabList, Tab, TabPanel },
     parameters: {
         layout: 'centered',
@@ -43,14 +42,12 @@ export type Story = StoryObj<typeof Tabs> & {
     };
 };
 
-// Icon for demos
 const TabStarIcon = (
     <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.357 4.19h4.4c.969 0 1.371 1.24.588 1.81l-3.567 2.59 1.357 4.19c.3.921-.755 1.688-1.539 1.118L10 14.347l-3.548 2.478c-.784.57-1.838-.197-1.539-1.118l1.357-4.19-3.567-2.59c-.783-.57-.38-1.81.588-1.81h4.4l1.357-4.19z" />
     </svg>
 );
 
-// Shared template accepting variant and demo props
 const Template = (args: any) => {
     const iconNode = args.showIcon ? TabStarIcon : undefined;
 
@@ -92,7 +89,6 @@ const Template = (args: any) => {
     return content;
 };
 
-// (Se movieron Uncontrolled/Controlled al final para que 'Default' sea primario en Docs)
 
 export const Default = Template.bind({}) as Story;
 Default.args = { variant: 'default' };
@@ -172,7 +168,6 @@ export const CustomClasses: Story = {
     ),
 };
 
-// (Opcional) Playground con controles para variant, icono y clases
 export const Playground = Template.bind({}) as Story;
 Playground.args = {
     variant: 'default',
@@ -181,7 +176,6 @@ Playground.args = {
     inactiveClassName: '',
 };
 
-// Otras historias de referencia, ubicadas al final
 export const Uncontrolled: Story = {
     render: (args: any) => (
         <Tabs defaultValue="tab1">
