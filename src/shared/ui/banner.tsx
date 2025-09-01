@@ -11,12 +11,16 @@ export type BannerVariant = 'default' | 'bottom' | 'marketing' | 'cta' | 'info';
  * @interface BannerProps
  * @property {BannerVariant} variant - Visual style of the banner.
  * @property {'top' | 'bottom'} [position] - Optional fixed position on screen.
+ * @property {string} [bgColor] - Optional Tailwind class for background color.
+ * @property {string} [textColor] - Optional Tailwind class for text color.
  * @property {ReactNode} [children] - Banner content.
  * @property {string} [className] - Additional classes.
  */
 export interface BannerProps {
     variant: BannerVariant;
     position?: 'top' | 'bottom';
+    bgColor?: string;
+    textColor?: string;
     children?: ReactNode;
     className?: string;
 }
@@ -34,10 +38,20 @@ function cn(...classes: Array<string | false | null | undefined>) {
  * Each variant maps to a set of Tailwind CSS classes providing
  * different visual styles.
  *
+ * The `bgColor` and `textColor` props accept full Tailwind classes
+ * (e.g. `bg-red-500`, `text-black`) to customize the banner's colors.
+ *
  * @param props - Component properties
  * @returns A banner element
  */
-export function Banner({ variant, position, children, className }: BannerProps) {
+export function Banner({
+    variant,
+    position,
+    bgColor,
+    textColor,
+    children,
+    className,
+}: BannerProps) {
     const base = 'w-full';
 
     const variantStyles: Record<BannerVariant, string> = {
@@ -56,6 +70,17 @@ export function Banner({ variant, position, children, className }: BannerProps) 
     );
 
     return (
-        <div className={cn(base, variantStyles[variant], positionClass, className)}>{children}</div>
+        <div
+            className={cn(
+                base,
+                variantStyles[variant],
+                bgColor,
+                textColor,
+                positionClass,
+                className,
+            )}
+        >
+            {children}
+        </div>
     );
 }
