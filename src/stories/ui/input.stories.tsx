@@ -21,7 +21,7 @@ const meta = {
             control: { type: 'select' },
             options: ['sm', 'md', 'lg'],
         },
-         validationState: {
+        validationState: {
             control: { type: 'select' },
             options: ['none', 'success', 'error'],
         },

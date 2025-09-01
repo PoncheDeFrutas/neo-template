@@ -22,7 +22,8 @@ export interface SelectProps
 }
 
 function selectVariants(size: SelectSize = 'md', variant: SelectVariant = 'default') {
-    const base = 'flex w-full bg-white px-3 py-2 transition-colors focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50';
+    const base =
+        'flex w-full bg-white px-3 py-2 transition-colors focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50';
     const shape =
         variant === 'underline'
             ? 'border-0 border-b border-gray-300 rounded-none focus:ring-0'
@@ -37,12 +38,26 @@ function cn(...classes: Array<string | false | null | undefined>) {
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
-    { options, value, onChange, className, disabled, multiple, size = 'md', variant = 'default', ...props },
+    {
+        options,
+        value,
+        onChange,
+        className,
+        disabled,
+        multiple,
+        size = 'md',
+        variant = 'default',
+        ...props
+    },
     ref,
 ) {
     const normalizedValue: string | ReadonlyArray<string> = multiple
-        ? (Array.isArray(value) ? value : [value])
-        : (Array.isArray(value) ? (value[0] ?? '') : value);
+        ? Array.isArray(value)
+            ? value
+            : [value]
+        : Array.isArray(value)
+          ? (value[0] ?? '')
+          : value;
 
     return (
         <select

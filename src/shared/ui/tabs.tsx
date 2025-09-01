@@ -76,9 +76,27 @@ export function TabList({ children, className, variant = 'default' }: TabListPro
 export interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     value: string;
     icon?: ReactNode;
+    /**
+     * Additional classes applied when the tab is active.
+     * Defaults combine with internal styles. Default active styles: 'border-blue-500 text-blue-600'.
+     */
+    activeClassName?: string;
+    /**
+     * Additional classes applied when the tab is inactive.
+     * Defaults combine with internal styles. Default inactive styles: 'border-transparent text-gray-600'.
+     */
+    inactiveClassName?: string;
 }
 
-export function Tab({ value, icon, className, children, ...props }: TabProps) {
+export function Tab({
+    value,
+    icon,
+    activeClassName,
+    inactiveClassName,
+    className,
+    children,
+    ...props
+}: TabProps) {
     const context = useContext(TabsContext);
     if (!context) throw new Error('Tab must be used within Tabs');
 
@@ -106,8 +124,10 @@ export function Tab({ value, icon, className, children, ...props }: TabProps) {
                         ? 'bg-blue-600 text-white border-blue-600'
                         : 'border-blue-500 text-blue-600'
                     : variant === 'pill'
-                        ? 'text-gray-700 hover:bg-white'
-                        : 'border-transparent text-gray-600 hover:text-gray-800',
+                      ? 'text-gray-700 hover:bg-white'
+                      : 'border-transparent text-gray-600 hover:text-gray-800',
+                // user-provided classes for active/inactive states
+                isActive ? activeClassName : inactiveClassName,
                 // full width adjustments
                 variant === 'fullWidth' && 'flex-1 text-center',
                 className,
@@ -115,7 +135,11 @@ export function Tab({ value, icon, className, children, ...props }: TabProps) {
             onClick={() => context.setActiveValue(value)}
             {...props}
         >
-            {icon ? <span className="mr-2 inline-block" aria-hidden="true">{icon}</span> : null}
+            {icon ? (
+                <span className="mr-2 inline-block" aria-hidden="true">
+                    {icon}
+                </span>
+            ) : null}
             {children}
         </button>
     );

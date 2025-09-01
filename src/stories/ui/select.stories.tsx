@@ -47,7 +47,7 @@ export const Default: Story = {
             <Select
                 {...args}
                 value={value}
-                onChange={(v) => setValue(Array.isArray(v) ? v[0] ?? '' : v)}
+                onChange={(v) => setValue(Array.isArray(v) ? (v[0] ?? '') : v)}
             />
         );
     },
@@ -61,7 +61,7 @@ export const Disabled: Story = {
             <Select
                 {...args}
                 value={value}
-                onChange={(v) => setValue(Array.isArray(v) ? v[0] ?? '' : v)}
+                onChange={(v) => setValue(Array.isArray(v) ? (v[0] ?? '') : v)}
             />
         );
     },
@@ -75,7 +75,7 @@ export const Small: Story = {
             <Select
                 {...args}
                 value={value}
-                onChange={(v) => setValue(Array.isArray(v) ? v[0] ?? '' : v)}
+                onChange={(v) => setValue(Array.isArray(v) ? (v[0] ?? '') : v)}
             />
         );
     },
@@ -89,7 +89,7 @@ export const Medium: Story = {
             <Select
                 {...args}
                 value={value}
-                onChange={(v) => setValue(Array.isArray(v) ? v[0] ?? '' : v)}
+                onChange={(v) => setValue(Array.isArray(v) ? (v[0] ?? '') : v)}
             />
         );
     },
@@ -103,7 +103,7 @@ export const Large: Story = {
             <Select
                 {...args}
                 value={value}
-                onChange={(v) => setValue(Array.isArray(v) ? v[0] ?? '' : v)}
+                onChange={(v) => setValue(Array.isArray(v) ? (v[0] ?? '') : v)}
             />
         );
     },
@@ -117,7 +117,7 @@ export const Underline: Story = {
             <Select
                 {...args}
                 value={value}
-                onChange={(v) => setValue(Array.isArray(v) ? v[0] ?? '' : v)}
+                onChange={(v) => setValue(Array.isArray(v) ? (v[0] ?? '') : v)}
             />
         );
     },

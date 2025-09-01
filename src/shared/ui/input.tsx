@@ -43,11 +43,19 @@ const rightPaddingStyles: Record<InputSize, string> = {
 };
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-    { className, size = 'md', validationState = 'none', leftElement, rightElement, helperText, ...props },
+    {
+        className,
+        size = 'md',
+        validationState = 'none',
+        leftElement,
+        rightElement,
+        helperText,
+        ...props
+    },
     ref,
 ) {
     return (
-       <div className="relative w-full">
+        <div className="relative w-full">
             {leftElement && (
                 <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
                     {leftElement}

@@ -5,6 +5,8 @@ import { useState } from 'react';
 const meta = {
     title: 'Shared/Tabs',
     component: Tabs,
+    // Show TabList/Tab/TabPanel props in Docs table
+    subcomponents: { TabList, Tab, TabPanel },
     parameters: {
         layout: 'centered',
     },
@@ -142,13 +144,60 @@ export const WithIcon: Story = {
     render: () => (
         <Tabs defaultValue="tab1">
             <TabList>
-                <Tab icon={TabStarIcon} value="tab1">Featured</Tab>
-                <Tab icon={TabStarIcon} value="tab2">Popular</Tab>
-                <Tab icon={TabStarIcon} value="tab3">New</Tab>
+                <Tab icon={TabStarIcon} value="tab1">
+                    Featured
+                </Tab>
+                <Tab icon={TabStarIcon} value="tab2">
+                    Popular
+                </Tab>
+                <Tab icon={TabStarIcon} value="tab3">
+                    New
+                </Tab>
             </TabList>
             <TabPanel value="tab1">Tab with icon: Featured</TabPanel>
             <TabPanel value="tab2">Tab with icon: Popular</TabPanel>
             <TabPanel value="tab3">Tab with icon: New</TabPanel>
+        </Tabs>
+    ),
+};
+
+export const CustomClasses: Story = {
+    name: 'Custom Classes (active/inactive)',
+    parameters: {
+        docs: {
+            description: {
+                story: "Ejemplo usando 'activeClassName' y 'inactiveClassName' en <Tab />. Por defecto, activo usa 'border-blue-500 text-blue-600' e inactivo 'border-transparent text-gray-600'.",
+            },
+        },
+    },
+    render: () => (
+        <Tabs defaultValue="tab1">
+            <TabList>
+                <Tab
+                    value="tab1"
+                    activeClassName="border-emerald-500 text-emerald-600"
+                    inactiveClassName="border-gray-400 text-gray-500"
+                >
+                    Overview
+                </Tab>
+                <Tab
+                    value="tab2"
+                    activeClassName="border-emerald-500 text-emerald-600"
+                    inactiveClassName="border-gray-400 text-gray-500"
+                >
+                    Details
+                </Tab>
+                <Tab
+                    value="tab3"
+                    activeClassName="border-emerald-500 text-emerald-600"
+                    inactiveClassName="border-gray-400 text-gray-500"
+                >
+                    Reviews
+                </Tab>
+            </TabList>
+            <TabPanel value="tab1">Overview content</TabPanel>
+            <TabPanel value="tab2">Details content</TabPanel>
+            <TabPanel value="tab3">Reviews content</TabPanel>
         </Tabs>
     ),
 };
