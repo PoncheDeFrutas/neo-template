@@ -1,6 +1,6 @@
 export { Button } from './button';
 export { Input } from './input';
 export { Select } from './select';
-export { Modal } from './modal';
-export { Tabs, TabList, Tab, TabPanel } from './tabs';
+export { Modal, ModalBody, ModalFooter, ModalHeader, type ModalProps } from './modal';
+export { Tab, TabList, TabPanel, Tabs } from './tabs';
 export { showToast, toast, Toaster } from './toast';
