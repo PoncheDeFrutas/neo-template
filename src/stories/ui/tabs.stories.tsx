@@ -2,7 +2,7 @@ import { Tabs, TabList, Tab, TabPanel } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
-const meta = {
+const meta: Meta<typeof Tabs> = {
     title: 'Shared/Tabs',
     component: Tabs,
     // Show TabList/Tab/TabPanel props in Docs table
@@ -11,133 +11,103 @@ const meta = {
         layout: 'centered',
     },
     tags: ['autodocs'],
-} satisfies Meta<typeof Tabs>;
+    argTypes: {
+        variant: {
+            control: { type: 'select' },
+            options: ['default', 'underline', 'pill', 'vertical', 'fullWidth'],
+        },
+        showIcon: {
+            control: { type: 'boolean' },
+        },
+        activeClassName: {
+            control: { type: 'text' },
+        },
+        inactiveClassName: {
+            control: { type: 'text' },
+        },
+    } as any,
+    args: {
+        variant: 'default',
+        showIcon: false,
+    } as any,
+};
 
 export default meta;
 
-export type Story = StoryObj<typeof Tabs>;
-
-export const Uncontrolled: Story = {
-    render: () => (
-        <Tabs defaultValue="tab1">
-            <TabList>
-                <Tab value="tab1">Tab 1</Tab>
-                <Tab value="tab2">Tab 2</Tab>
-            </TabList>
-            <TabPanel value="tab1">Content 1</TabPanel>
-            <TabPanel value="tab2">Content 2</TabPanel>
-        </Tabs>
-    ),
+export type Story = StoryObj<typeof Tabs> & {
+    args?: {
+        variant?: 'default' | 'underline' | 'pill' | 'vertical' | 'fullWidth';
+        showIcon?: boolean;
+        activeClassName?: string;
+        inactiveClassName?: string;
+    };
 };
 
-export const Controlled: Story = {
-    render: () => {
-        const [value, setValue] = useState('tab1');
-        return (
-            <Tabs value={value} onValueChange={setValue}>
-                <TabList>
-                    <Tab value="tab1">Tab 1</Tab>
-                    <Tab value="tab2">Tab 2</Tab>
-                </TabList>
-                <TabPanel value="tab1">Content 1</TabPanel>
-                <TabPanel value="tab2">Content 2</TabPanel>
-            </Tabs>
-        );
-    },
-};
-
-export const VariantDefault: Story = {
-    name: 'Variant: Default',
-    render: () => (
-        <Tabs defaultValue="tab1">
-            <TabList variant="default">
-                <Tab value="tab1">Tab 1</Tab>
-                <Tab value="tab2">Tab 2</Tab>
-                <Tab value="tab3">Tab 3</Tab>
-            </TabList>
-            <TabPanel value="tab1">Default variant: Content 1</TabPanel>
-            <TabPanel value="tab2">Default variant: Content 2</TabPanel>
-            <TabPanel value="tab3">Default variant: Content 3</TabPanel>
-        </Tabs>
-    ),
-};
-
-export const VariantUnderline: Story = {
-    name: 'Variant: Underline',
-    render: () => (
-        <Tabs defaultValue="tab1">
-            <TabList variant="underline">
-                <Tab value="tab1">Overview</Tab>
-                <Tab value="tab2">Details</Tab>
-                <Tab value="tab3">Reviews</Tab>
-            </TabList>
-            <TabPanel value="tab1">Underline variant: Overview</TabPanel>
-            <TabPanel value="tab2">Underline variant: Details</TabPanel>
-            <TabPanel value="tab3">Underline variant: Reviews</TabPanel>
-        </Tabs>
-    ),
-};
-
-export const VariantPill: Story = {
-    name: 'Variant: Pill',
-    render: () => (
-        <Tabs defaultValue="tab1">
-            <TabList variant="pill">
-                <Tab value="tab1">All</Tab>
-                <Tab value="tab2">Active</Tab>
-                <Tab value="tab3">Archived</Tab>
-            </TabList>
-            <TabPanel value="tab1">Pill variant: All items</TabPanel>
-            <TabPanel value="tab2">Pill variant: Active items</TabPanel>
-            <TabPanel value="tab3">Pill variant: Archived items</TabPanel>
-        </Tabs>
-    ),
-};
-
-export const VariantVertical: Story = {
-    name: 'Variant: Vertical',
-    render: () => (
-        <div style={{ display: 'flex', gap: 16 }}>
-            <Tabs defaultValue="tab1">
-                <TabList variant="vertical">
-                    <Tab value="tab1">Profile</Tab>
-                    <Tab value="tab2">Security</Tab>
-                    <Tab value="tab3">Notifications</Tab>
-                </TabList>
-                <div style={{ paddingLeft: 16 }}>
-                    <TabPanel value="tab1">Vertical variant: Profile</TabPanel>
-                    <TabPanel value="tab2">Vertical variant: Security</TabPanel>
-                    <TabPanel value="tab3">Vertical variant: Notifications</TabPanel>
-                </div>
-            </Tabs>
-        </div>
-    ),
-};
-
-export const VariantFullWidth: Story = {
-    name: 'Variant: Full Width',
-    render: () => (
-        <div style={{ width: 480 }}>
-            <Tabs defaultValue="tab1">
-                <TabList variant="fullWidth">
-                    <Tab value="tab1">First</Tab>
-                    <Tab value="tab2">Second</Tab>
-                    <Tab value="tab3">Third</Tab>
-                </TabList>
-                <TabPanel value="tab1">Full width variant: First</TabPanel>
-                <TabPanel value="tab2">Full width variant: Second</TabPanel>
-                <TabPanel value="tab3">Full width variant: Third</TabPanel>
-            </Tabs>
-        </div>
-    ),
-};
-
-// Icon example for Tabs
+// Icon for demos
 const TabStarIcon = (
     <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.357 4.19h4.4c.969 0 1.371 1.24.588 1.81l-3.567 2.59 1.357 4.19c.3.921-.755 1.688-1.539 1.118L10 14.347l-3.548 2.478c-.784.57-1.838-.197-1.539-1.118l1.357-4.19-3.567-2.59c-.783-.57-.38-1.81.588-1.81h4.4l1.357-4.19z" />
     </svg>
 );
+
+// Shared template accepting variant and demo props
+const Template = (args: any) => {
+    const iconNode = args.showIcon ? TabStarIcon : undefined;
+
+    if (args.variant === 'vertical') {
+        return (
+            <div style={{ display: 'flex', gap: 16 }}>
+                <Tabs defaultValue="tab1">
+                    <TabList variant={args.variant}>
+                        <Tab value="tab1" icon={iconNode} activeClassName={args.activeClassName} inactiveClassName={args.inactiveClassName}>Tab 1</Tab>
+                        <Tab value="tab2" icon={iconNode} activeClassName={args.activeClassName} inactiveClassName={args.inactiveClassName}>Tab 2</Tab>
+                        <Tab value="tab3" icon={iconNode} activeClassName={args.activeClassName} inactiveClassName={args.inactiveClassName}>Tab 3</Tab>
+                    </TabList>
+                    <div style={{ paddingLeft: 16 }}>
+                        <TabPanel value="tab1">Content 1</TabPanel>
+                        <TabPanel value="tab2">Content 2</TabPanel>
+                        <TabPanel value="tab3">Content 3</TabPanel>
+                    </div>
+                </Tabs>
+            </div>
+        );
+    }
+
+    const content = (
+        <Tabs defaultValue="tab1">
+            <TabList variant={args.variant}>
+                <Tab value="tab1" icon={iconNode} activeClassName={args.activeClassName} inactiveClassName={args.inactiveClassName}>Tab 1</Tab>
+                <Tab value="tab2" icon={iconNode} activeClassName={args.activeClassName} inactiveClassName={args.inactiveClassName}>Tab 2</Tab>
+                <Tab value="tab3" icon={iconNode} activeClassName={args.activeClassName} inactiveClassName={args.inactiveClassName}>Tab 3</Tab>
+            </TabList>
+            <TabPanel value="tab1">Content 1</TabPanel>
+            <TabPanel value="tab2">Content 2</TabPanel>
+            <TabPanel value="tab3">Content 3</TabPanel>
+        </Tabs>
+    );
+
+    if (args.variant === 'fullWidth') {
+        return <div style={{ width: 480 }}>{content}</div>;
+    }
+    return content;
+};
+
+// (Se movieron Uncontrolled/Controlled al final para que 'Default' sea primario en Docs)
+
+export const Default = Template.bind({}) as Story;
+Default.args = { variant: 'default' };
+
+export const Underline = Template.bind({}) as Story;
+Underline.args = { variant: 'underline' };
+
+export const Pill = Template.bind({}) as Story;
+Pill.args = { variant: 'pill' };
+
+export const Vertical = Template.bind({}) as Story;
+Vertical.args = { variant: 'vertical' };
+
+export const FullWidth = Template.bind({}) as Story;
+FullWidth.args = { variant: 'fullWidth' };
 
 export const WithIcon: Story = {
     name: 'With Icon',
@@ -200,4 +170,43 @@ export const CustomClasses: Story = {
             <TabPanel value="tab3">Reviews content</TabPanel>
         </Tabs>
     ),
+};
+
+// (Opcional) Playground con controles para variant, icono y clases
+export const Playground = Template.bind({}) as Story;
+Playground.args = {
+    variant: 'default',
+    showIcon: true,
+    activeClassName: '',
+    inactiveClassName: '',
+};
+
+// Otras historias de referencia, ubicadas al final
+export const Uncontrolled: Story = {
+    render: (args: any) => (
+        <Tabs defaultValue="tab1">
+            <TabList variant={args.variant}>
+                <Tab value="tab1">Tab 1</Tab>
+                <Tab value="tab2">Tab 2</Tab>
+            </TabList>
+            <TabPanel value="tab1">Content 1</TabPanel>
+            <TabPanel value="tab2">Content 2</TabPanel>
+        </Tabs>
+    ),
+};
+
+export const Controlled: Story = {
+    render: (args: any) => {
+        const [value, setValue] = useState('tab1');
+        return (
+            <Tabs value={value} onValueChange={setValue}>
+                <TabList variant={args.variant}>
+                    <Tab value="tab1">Tab 1</Tab>
+                    <Tab value="tab2">Tab 2</Tab>
+                </TabList>
+                <TabPanel value="tab1">Content 1</TabPanel>
+                <TabPanel value="tab2">Content 2</TabPanel>
+            </Tabs>
+        );
+    },
 };

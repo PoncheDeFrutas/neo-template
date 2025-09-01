@@ -34,11 +34,11 @@ const meta = {
             options: ['default', 'underline'],
         },
     },
-} satisfies Meta<typeof Select>;
+} as Meta<typeof Select>;
 
 export default meta;
 
-export type Story = StoryObj<typeof Select>;
+type Story = StoryObj<typeof Select>;
 
 export const Default: Story = {
     render: (args) => {
