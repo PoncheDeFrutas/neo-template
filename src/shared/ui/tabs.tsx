@@ -54,12 +54,12 @@ export interface TabListProps {
 }
 
 export function TabList({ children, className, variant = 'default' }: TabListProps) {
-    const containerBase = 'flex';
+    const containerBase = 'flex bg-surface';
     const containerVariant =
         variant === 'pill'
-            ? 'border border-border bg-surface rounded-lg p-1 gap-1'
+            ? 'border border-border rounded-lg p-1 gap-1'
             : variant === 'vertical'
-              ? 'flex-col border-l border-border gap-1'
+              ? 'flex-col border-l border-border rounded-md p-1 gap-1'
               : variant === 'fullWidth'
                 ? 'w-full border-b border-border gap-2'
                 : 'border-b border-border gap-2'; // default & underline
@@ -109,6 +109,7 @@ export function Tab({
         <button
             type="button"
             role="tab"
+            aria-selected={isActive}
             className={cn(
                 // base
                 'px-4 py-2 text-sm transition-colors focus:outline-none',
@@ -124,7 +125,7 @@ export function Tab({
                         ? 'bg-primary text-primary-foreground border-primary'
                         : 'border-primary text-primary'
                     : variant === 'pill'
-                        ? 'text-muted-foreground hover:bg-bg'
+                        ? 'text-muted-foreground hover:bg-surface'
                         : 'border-transparent text-muted-foreground hover:text-text',
                 // user-provided classes for active/inactive states
                 isActive ? activeClassName : inactiveClassName,
