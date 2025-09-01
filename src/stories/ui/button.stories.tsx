@@ -8,10 +8,11 @@ const meta = {
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   args: {
-    children: 'Button',
+    label: 'Button',
     onClick: fn(),
   },
   argTypes: {
+    label: { control: 'text' },
     variant: {
       control: 'select',
       options: ['default', 'outline', 'gradient', 'gradientOutline'],
@@ -59,11 +60,11 @@ export const Pill: Story = {
 export const Sizes: Story = {
   render: (args) => (
     <div className="flex gap-2">
-      <Button {...args} size="xs">XS</Button>
-      <Button {...args} size="sm">SM</Button>
-      <Button {...args} size="md">MD</Button>
-      <Button {...args} size="lg">LG</Button>
-      <Button {...args} size="xl">XL</Button>
+      <Button {...args} size="xs" label="XS" />
+      <Button {...args} size="sm" label="SM" />
+      <Button {...args} size="md" label="MD" />
+      <Button {...args} size="lg" label="LG" />
+      <Button {...args} size="xl" label="XL" />
     </div>
   ),
 };
@@ -76,6 +77,7 @@ export const IconButton: Story = {
   args: {
     icon: StarIcon,
     'aria-label': 'star',
+    label: undefined,
   },
 };
 
