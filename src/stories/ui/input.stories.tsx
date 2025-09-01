@@ -1,6 +1,11 @@
 import { Input } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+/**
+ * Storybook meta configuration for the Input component.
+ *
+ * Describes default args, controls, and layout for interactive documentation.
+ */
 const meta = {
     title: 'Shared/Input',
     component: Input,
@@ -33,10 +38,19 @@ const meta = {
 
 export default meta;
 
+/**
+ * Story type alias for the `Input` component.
+ */
 export type Story = StoryObj<typeof Input>;
 
+/**
+ * Basic input example with default configuration.
+ */
 export const Default: Story = {};
 
+/**
+ * Showcases all available sizes (`sm`, `md`, `lg`).
+ */
 export const Sizes: Story = {
     render: (args) => (
         <div className="flex flex-col gap-2">
@@ -47,6 +61,9 @@ export const Sizes: Story = {
     ),
 };
 
+/**
+ * Demonstrates validation states: none, success, and error.
+ */
 export const Validation: Story = {
     render: (args) => (
         <div className="flex flex-col gap-2">
@@ -57,6 +74,9 @@ export const Validation: Story = {
     ),
 };
 
+/**
+ * Input with left and right inline elements (e.g., icons).
+ */
 export const WithElements: Story = {
     render: (args) => (
         <div className="flex flex-col gap-2">
@@ -78,6 +98,9 @@ export const WithElements: Story = {
     ),
 };
 
+/**
+ * Adds helper text below the input field.
+ */
 export const WithHelperText: Story = {
     args: {
         helperText: 'This is a helper text',

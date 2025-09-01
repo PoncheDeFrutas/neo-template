@@ -2,6 +2,11 @@ import { Button, Modal, ModalBody, ModalFooter, ModalHeader, type ModalProps } f
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
+/**
+ * Storybook meta configuration for the Modal component.
+ *
+ * Includes supported `type`, `size`, and `placement` controls and sensible defaults.
+ */
 const meta = {
     title: 'Shared/Modal',
     component: Modal,
@@ -35,6 +40,11 @@ export default meta;
 
 export type Story = StoryObj<typeof Modal>;
 
+/**
+ * Reusable template for modal stories.
+ *
+ * Manages internal `open` state and wires `onClose`/`onSave` to close the modal by default.
+ */
 const Template = (args: ModalProps) => {
     const [open, setOpen] = useState(false);
     return (
@@ -66,31 +76,49 @@ const Template = (args: ModalProps) => {
     );
 };
 
+/**
+ * Default modal type.
+ */
 export const Default: Story = {
     render: Template,
     args: { type: 'default' },
 };
 
+/**
+ * Non-dismissable modal (no outside click to close).
+ */
 export const Static: Story = {
     render: Template,
     args: { type: 'static' },
 };
 
+/**
+ * Popup modal style.
+ */
 export const Popup: Story = {
     render: Template,
     args: { type: 'popup' },
 };
 
+/**
+ * CRUD-style modal rendering only body content and delegating header/footer.
+ */
 export const CRUD: Story = {
     render: Template,
     args: { type: 'crud' },
 };
 
+/**
+ * Demonstrates a larger size.
+ */
 export const Sizes: Story = {
     render: Template,
     args: { size: 'lg' },
 };
 
+/**
+ * Demonstrates alternate placements.
+ */
 export const Placements: Story = {
     render: Template,
     args: { placement: 'top-left' },

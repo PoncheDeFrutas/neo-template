@@ -2,6 +2,9 @@ import { Tabs, TabList, Tab, TabPanel } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
+/**
+ * Storybook meta configuration for the Tabs component and its subcomponents.
+ */
 const meta: Meta<typeof Tabs> = {
     title: 'Shared/Tabs',
     component: Tabs,
@@ -33,6 +36,9 @@ const meta: Meta<typeof Tabs> = {
 
 export default meta;
 
+/**
+ * Story type alias for the `Tabs` component stories with additional args.
+ */
 export type Story = StoryObj<typeof Tabs> & {
     args?: {
         variant?: 'default' | 'underline' | 'pill' | 'vertical' | 'fullWidth';
@@ -42,12 +48,18 @@ export type Story = StoryObj<typeof Tabs> & {
     };
 };
 
+/**
+ * Reusable SVG icon for tab examples.
+ */
 const TabStarIcon = (
     <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.357 4.19h4.4c.969 0 1.371 1.24.588 1.81l-3.567 2.59 1.357 4.19c.3.921-.755 1.688-1.539 1.118L10 14.347l-3.548 2.478c-.784.57-1.838-.197-1.539-1.118l1.357-4.19-3.567-2.59c-.783-.57-.38-1.81.588-1.81h4.4l1.357-4.19z" />
     </svg>
 );
 
+/**
+ * Template used to render different tab variants based on `args`.
+ */
 const Template = (args: any) => {
     const iconNode = args.showIcon ? TabStarIcon : undefined;
 
@@ -131,21 +143,39 @@ const Template = (args: any) => {
     return content;
 };
 
+/**
+ * Default horizontal tabs.
+ */
 export const Default = Template.bind({}) as Story;
 Default.args = { variant: 'default' };
 
+/**
+ * Underline-style tabs.
+ */
 export const Underline = Template.bind({}) as Story;
 Underline.args = { variant: 'underline' };
 
+/**
+ * Pill-style tabs.
+ */
 export const Pill = Template.bind({}) as Story;
 Pill.args = { variant: 'pill' };
 
+/**
+ * Vertical tab layout.
+ */
 export const Vertical = Template.bind({}) as Story;
 Vertical.args = { variant: 'vertical' };
 
+/**
+ * Full-width tab list.
+ */
 export const FullWidth = Template.bind({}) as Story;
 FullWidth.args = { variant: 'fullWidth' };
 
+/**
+ * Example showing tabs with icons.
+ */
 export const WithIcon: Story = {
     name: 'With Icon',
     render: () => (
@@ -168,6 +198,9 @@ export const WithIcon: Story = {
     ),
 };
 
+/**
+ * Example using custom active/inactive class names for <Tab />.
+ */
 export const CustomClasses: Story = {
     name: 'Custom Classes (active/inactive)',
     parameters: {
@@ -209,6 +242,9 @@ export const CustomClasses: Story = {
     ),
 };
 
+/**
+ * Playground with optional icon and custom classes.
+ */
 export const Playground = Template.bind({}) as Story;
 Playground.args = {
     variant: 'default',
@@ -217,6 +253,9 @@ Playground.args = {
     inactiveClassName: '',
 };
 
+/**
+ * Uncontrolled tabs using `defaultValue`.
+ */
 export const Uncontrolled: Story = {
     render: (args: any) => (
         <Tabs defaultValue="tab1">
@@ -230,6 +269,9 @@ export const Uncontrolled: Story = {
     ),
 };
 
+/**
+ * Controlled tabs using `value` and `onValueChange`.
+ */
 export const Controlled: Story = {
     render: (args: any) => {
         const [value, setValue] = useState('tab1');

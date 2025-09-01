@@ -2,14 +2,25 @@ import { Button, showToast, Toaster } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { ToastContainerProps, TypeOptions } from 'react-toastify';
 
+/**
+ * Allowed toast container positions.
+ */
 type ToastPosition = NonNullable<ToastContainerProps['position']>;
 
+/**
+ * Args used by the toast playground story.
+ */
 type StoryArgs = {
     message: string;
     type: TypeOptions;
     position: ToastPosition;
 } & Partial<ToastContainerProps>;
 
+/**
+ * Storybook meta configuration for the toast system.
+ *
+ * Renders a `Toaster` container and demonstrates usage of `showToast`.
+ */
 const meta = {
     title: 'Shared/Toast',
     component: Toaster,
@@ -128,6 +139,11 @@ export default meta;
 
 type Story = StoryObj<StoryArgs>;
 
+/**
+ * Interactive playground to try different toast options.
+ *
+ * Click the button to trigger a toast using the current args.
+ */
 export const Playground: Story = {
     args: {
         message: 'Message',

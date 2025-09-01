@@ -2,6 +2,30 @@ import { Button } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 
+/**
+ * Storybook meta configuration for the Button component.
+ * 
+ * @description Defines the story metadata for the shared Button component including
+ * its title, component reference, layout parameters, and control configurations.
+ * 
+ * @property {string} title - The hierarchical title displayed in Storybook sidebar
+ * @property {React.Component} component - Reference to the Button component
+ * @property {Object} parameters - Storybook parameters configuration
+ * @property {string[]} tags - Tags for automatic documentation generation
+ * @property {Object} args - Default arguments passed to all stories
+ * @property {Object} argTypes - Control types and options for each prop
+ * 
+ * @example
+ * ```tsx
+ * // Usage in story
+ * export const Default: Story = {
+ *   args: {
+ *     variant: 'default',
+ *     size: 'md'
+ *   }
+ * };
+ * ```
+ */
 const meta = {
     title: 'Shared/Button',
     component: Button,
@@ -32,28 +56,51 @@ const meta = {
 } satisfies Meta<typeof Button>;
 
 export default meta;
+/**
+ * Story type alias for the `Button` component.
+ *
+ * @see StoryObj
+ */
 export type Story = StoryObj<typeof Button>;
 
+/**
+ * Reusable SVG icon used in examples with `leftIcon`, `rightIcon`, or `icon`.
+ */
 const StarIcon = (
     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.357 4.19h4.4c.969 0 1.371 1.24.588 1.81l-3.567 2.59 1.357 4.19c.3.921-.755 1.688-1.539 1.118L10 14.347l-3.548 2.478c-.784.57-1.838-.197-1.539-1.118l1.357-4.19-3.567-2.59c-.783-.57-.38-1.81.588-1.81h4.4l1.357-4.19z" />
     </svg>
 );
 
+/**
+ * Default button state.
+ */
 export const Default: Story = {};
 
+/**
+ * Outline variant emphasizing the border.
+ */
 export const Outline: Story = {
     args: { variant: 'outline' },
 };
 
+/**
+ * Gradient variant using the default theme color.
+ */
 export const Gradient: Story = {
     args: { variant: 'gradient' },
 };
 
+/**
+ * Gradient applied to the outline (border-only gradient).
+ */
 export const GradientOutline: Story = {
     args: { variant: 'gradientOutline' },
 };
 
+/**
+ * Demonstrates custom `color` with `gradient` variant; the end tone is derived automatically.
+ */
 export const GradientCustomColor: Story = {
     name: 'Gradient (custom color)',
     args: { variant: 'gradient', color: '#22c55e', label: 'Gradient Green' },
@@ -66,6 +113,9 @@ export const GradientCustomColor: Story = {
     },
 };
 
+/**
+ * In `gradientOutline`, the gradient appears on hover; the border color follows `color`.
+ */
 export const GradientOutlineHover: Story = {
     name: 'Gradient Outline (hover)',
     args: { variant: 'gradientOutline', color: '#ef4444', label: 'Hover Me' },
@@ -78,10 +128,16 @@ export const GradientOutlineHover: Story = {
     },
 };
 
+/**
+ * Fully rounded (pill) button.
+ */
 export const Pill: Story = {
     args: { pill: true },
 };
 
+/**
+ * Displays all available sizes from `xs` to `xl`.
+ */
 export const Sizes: Story = {
     render: (args) => (
         <div className="flex gap-2">
@@ -94,10 +150,16 @@ export const Sizes: Story = {
     ),
 };
 
+/**
+ * Example with icons on both sides of the label.
+ */
 export const WithIcons: Story = {
     args: { leftIcon: StarIcon, rightIcon: StarIcon },
 };
 
+/**
+ * Icon-only button with accessible label via `aria-label`.
+ */
 export const IconButton: Story = {
     args: {
         icon: StarIcon,
@@ -106,10 +168,16 @@ export const IconButton: Story = {
     },
 };
 
+/**
+ * Loading state disables interactions and shows a spinner.
+ */
 export const Loading: Story = {
     args: { loading: true },
 };
 
+/**
+ * Disabled state of the button.
+ */
 export const Disabled: Story = {
     args: { disabled: true },
 };

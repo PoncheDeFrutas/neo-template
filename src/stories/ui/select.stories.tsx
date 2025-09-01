@@ -2,12 +2,18 @@ import { Select } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
+/**
+ * Common Select options used across stories.
+ */
 const options = [
     { label: 'Option 1', value: '1' },
     { label: 'Option 2', value: '2' },
     { label: 'Option 3', value: '3' },
 ];
 
+/**
+ * Storybook meta configuration for the Select component.
+ */
 const meta = {
     title: 'Shared/Select',
     component: Select,
@@ -38,8 +44,14 @@ const meta = {
 
 export default meta;
 
+/**
+ * Story type alias for the `Select` component.
+ */
 type Story = StoryObj<typeof Select>;
 
+/**
+ * Default Select with controlled value.
+ */
 export const Default: Story = {
     render: (args) => {
         const [value, setValue] = useState(args.options[0].value);
@@ -53,6 +65,9 @@ export const Default: Story = {
     },
 };
 
+/**
+ * Disabled Select (non-interactive).
+ */
 export const Disabled: Story = {
     args: { disabled: true },
     render: (args) => {
@@ -67,6 +82,9 @@ export const Disabled: Story = {
     },
 };
 
+/**
+ * Small size variant.
+ */
 export const Small: Story = {
     args: { size: 'sm' },
     render: (args) => {
@@ -81,6 +99,9 @@ export const Small: Story = {
     },
 };
 
+/**
+ * Medium size variant.
+ */
 export const Medium: Story = {
     args: { size: 'md' },
     render: (args) => {
@@ -95,6 +116,9 @@ export const Medium: Story = {
     },
 };
 
+/**
+ * Large size variant.
+ */
 export const Large: Story = {
     args: { size: 'lg' },
     render: (args) => {
@@ -109,6 +133,9 @@ export const Large: Story = {
     },
 };
 
+/**
+ * Underline variant with an underline-only style.
+ */
 export const Underline: Story = {
     args: { variant: 'underline' },
     render: (args) => {
