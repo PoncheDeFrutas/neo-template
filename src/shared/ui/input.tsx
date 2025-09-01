@@ -8,6 +8,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
     validationState?: ValidationState;
     leftElement?: ReactNode;
     rightElement?: ReactNode;
+    helperText?: string;
 }
 
 const baseStyles =
@@ -42,7 +43,7 @@ const rightPaddingStyles: Record<InputSize, string> = {
 };
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-    { className, size = 'md', validationState = 'none', leftElement, rightElement, ...props },
+    { className, size = 'md', validationState = 'none', leftElement, rightElement, helperText, ...props },
     ref,
 ) {
     return (
@@ -69,6 +70,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
                     {rightElement}
                 </span>
             )}
+            {helperText && <p className="mt-1 text-sm text-gray-500">{helperText}</p>}
         </div>
     );
 });

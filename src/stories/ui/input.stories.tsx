@@ -13,6 +13,7 @@ const meta = {
         disabled: false,
         size: 'md',
         validationState: 'none',
+        helperText: '',
     },
     argTypes: {
         disabled: { control: { type: 'boolean' } },
@@ -24,6 +25,9 @@ const meta = {
             control: { type: 'select' },
             options: ['none', 'success', 'error'],
         },
+        helperText: { control: { type: 'text' } },
+        leftElement: { control: false },
+        rightElement: { control: false },
     },
 } satisfies Meta<typeof Input>;
 
@@ -70,12 +74,12 @@ export const WithElements: Story = {
                 }
                 placeholder="Icons"
             />
-            <Input
-                {...args}
-                leftElement={<span>https://</span>}
-                rightElement={<span>.com</span>}
-                placeholder="Text"
-            />
         </div>
     ),
+};
+
+export const WithHelperText: Story = {
+    args: {
+        helperText: 'This is a helper text',
+    },
 };
