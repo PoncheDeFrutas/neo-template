@@ -1,25 +1,24 @@
 import { Input } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-
 /**
  * Storybook meta configuration for the Input component.
- * 
+ *
  * Defines the story metadata including component title, default parameters,
  * and control configurations for the Input component's props.
- * 
+ *
  * @property {string} title - The story title displayed in Storybook sidebar
  * @property {React.Component} component - The Input component being documented
  * @property {object} parameters - Storybook parameters including layout configuration
  * @property {string[]} tags - Tags for automatic documentation generation
  * @property {object} args - Default values for component props
  * @property {object} argTypes - Control configurations for interactive prop manipulation
- * 
+ *
  * @example
  * ```tsx
  * // Usage in Storybook stories
  * export default meta;
- * 
+ *
  * export const Default: Story = {
  *   args: {
  *     placeholder: "Enter text..."

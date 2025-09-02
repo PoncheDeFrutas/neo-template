@@ -57,7 +57,8 @@ export function Banner({
     const variantStyles: Record<BannerVariant, string> = {
         default: 'px-4 py-2 text-center',
         bottom: 'px-4 py-2 text-center shadow-md z-50',
-        marketing: 'border border-gray-200 p-6 flex flex-col sm:flex-row items-center justify-between gap-4',
+        marketing:
+            'border border-gray-200 p-6 flex flex-col sm:flex-row items-center justify-between gap-4',
         cta: 'p-4 flex items-center justify-between gap-4',
         info: 'p-4 border-l-4 border-blue-400',
     };

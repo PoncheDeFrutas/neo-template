@@ -3,11 +3,11 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 /**
  * Storybook meta configuration for the Banner component.
- * 
+ *
  *
  * Defines the story structure, component parameters, and control options
  * for testing different Banner variants and positions in Storybook.
- * 
+ *
  *
  * The `bgColor` and `textColor` controls accept Tailwind CSS classes to
  * override the component's default background and text colors when needed.
@@ -35,39 +35,38 @@ const meta = {
     },
     tags: ['autodocs'],
     // En el argTypes del meta
-argTypes: {
-    variant: {
-        control: { type: 'select' },
-        options: ['default', 'bottom', 'marketing', 'cta', 'info'],
+    argTypes: {
+        variant: {
+            control: { type: 'select' },
+            options: ['default', 'bottom', 'marketing', 'cta', 'info'],
+        },
+        position: {
+            control: { type: 'select' },
+            options: ['top', 'bottom'],
+        },
+        bgColor: {
+            control: { type: 'select' },
+            options: [
+                'bg-blue-600', // default/bottom
+                'bg-gray-100', // marketing
+                'bg-indigo-600', // cta
+                'bg-blue-50', // info
+                'bg-red-600', // alternative
+                'bg-green-600', // alternative
+                'bg-yellow-100', // alternative
+            ],
+        },
+        textColor: {
+            control: { type: 'select' },
+            options: [
+                'text-white',
+                'text-gray-900',
+                'text-blue-900',
+                'text-red-900',
+                'text-green-900',
+            ],
+        },
     },
-    position: {
-        control: { type: 'select' },
-        options: ['top', 'bottom'],
-    },
-    bgColor: {
-        control: { type: 'select' },
-        options: [
-            'bg-blue-600',    // default/bottom
-            'bg-gray-100',    // marketing
-            'bg-indigo-600',  // cta
-            'bg-blue-50',     // info
-            'bg-red-600',     // alternative
-            'bg-green-600',   // alternative
-            'bg-yellow-100',  // alternative
-        ],
-    },
-    textColor: {
-        control: { type: 'select' },
-        options: [
-            'text-white',
-            'text-gray-900',
-            'text-blue-900',
-            'text-red-900',
-            'text-green-900',
-        ],
-    },
-},
-
 } satisfies Meta<typeof Banner>;
 
 export default meta;

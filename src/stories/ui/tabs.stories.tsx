@@ -2,13 +2,12 @@ import { Tabs, TabList, Tab, TabPanel } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
-
 /**
  * Storybook meta configuration for the Tabs component.
- * 
+ *
  * Defines the story metadata including component title, subcomponents, default parameters,
  * and control configurations for the Tabs component's props.
- * 
+ *
  * @property {string} title - The story title displayed in Storybook sidebar
  * @property {React.Component} component - The Tabs component being documented
  * @property {object} subcomponents - Related subcomponents (TabList, Tab, TabPanel)
@@ -20,12 +19,12 @@ import { useState } from 'react';
  * @property {object} argTypes.showIcon - Boolean control for icon display
  * @property {object} argTypes.activeClassName - Text control for active tab styling
  * @property {object} argTypes.inactiveClassName - Text control for inactive tab styling
- * 
+ *
  * @example
  * ```tsx
  * // Usage in Storybook stories
  * export default meta;
- * 
+ *
  * export const Default: Story = {
  *   args: {
  *     variant: "underline",

@@ -18,7 +18,7 @@ export type ModalPlacement =
 
 /**
  * Props interface for the Modal component.
- * 
+ *
  * @interface ModalProps
  * @property {boolean} isOpen - Controls whether the modal is visible or hidden
  * @property {() => void} onClose - Callback function triggered when the modal should be closed
@@ -64,7 +64,7 @@ const placementClasses: Record<ModalPlacement, string> = {
 
 /**
  * A versatile modal component that supports different types, sizes, and placements.
- * 
+ *
  * @param props - The modal properties
  * @param props.isOpen - Whether the modal is currently open
  * @param props.onClose - Callback function to close the modal
@@ -75,14 +75,14 @@ const placementClasses: Record<ModalPlacement, string> = {
  * @param props.header - Custom header content (used with 'crud' type)
  * @param props.footer - Custom footer content (used with 'crud' type)
  * @param props.onSave - Callback function for save action (used with 'crud' type)
- * 
+ *
  * @remarks
  * - Supports keyboard navigation (ESC key to close, except for 'static' type)
  * - Uses React Portal to render outside the component tree
  * - 'crud' type automatically includes header, body, and footer sections
  * - 'popup' type renders without overlay
  * - 'static' type prevents closing by clicking overlay or ESC key
- * 
+ *
  * @example
  * ```tsx
  * <Modal isOpen={isOpen} onClose={handleClose} type="crud" size="lg">
@@ -159,16 +159,20 @@ export function Modal({
 
 /**
  * A header component for modals that provides consistent styling and layout.
- * 
+ *
  * Renders a flex container with items centered and justified between, featuring
  * a bottom border and padding. Typically used at the top of modal dialogs to
  * contain titles, close buttons, or other header content.
- * 
+ *
  * @param children - The content to be rendered inside the modal header
  * @returns A styled div element containing the header content
  */
 export function ModalHeader({ children }: { children: ReactNode }) {
-    return <div className="flex items-center justify-between border-b border-border p-4">{children}</div>;
+    return (
+        <div className="flex items-center justify-between border-b border-border p-4">
+            {children}
+        </div>
+    );
 }
 
 export function ModalBody({ children }: { children: ReactNode }) {

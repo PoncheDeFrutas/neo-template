@@ -4,17 +4,17 @@ import { fn } from 'storybook/test';
 
 /**
  * Storybook meta configuration for the Button component.
- * 
+ *
  * @description Defines the story metadata for the shared Button component including
  * its title, component reference, layout parameters, and control configurations.
- * 
+ *
  * @property {string} title - The hierarchical title displayed in Storybook sidebar
  * @property {React.Component} component - Reference to the Button component
  * @property {Object} parameters - Storybook parameters configuration
  * @property {string[]} tags - Tags for automatic documentation generation
  * @property {Object} args - Default arguments passed to all stories
  * @property {Object} argTypes - Control types and options for each prop
- * 
+ *
  * @example
  * ```tsx
  * // Usage in story

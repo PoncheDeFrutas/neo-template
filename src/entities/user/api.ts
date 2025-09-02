@@ -9,7 +9,7 @@ export async function fetchUsers(): Promise<User[]> {
 
 /**
  * Creates a new user by sending a POST request to the users endpoint.
- * 
+ *
  * @param user - The user object to be created
  * @returns A promise that resolves to the created user object
  * @throws Will throw an error if the API request fails

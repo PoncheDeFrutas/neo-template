@@ -45,7 +45,6 @@ export function Badge({
         notification: 'relative',
         chips: 'inline-flex items-center',
     };
-;
     const resolvedText = textColor ?? (color ? getContrastColor(color) : undefined);
     const style: CSSProperties = {};
     if (color) {

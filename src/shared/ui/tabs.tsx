@@ -23,7 +23,7 @@ const TabListContext = createContext<TabListContextValue | null>(null);
 
 /**
  * Props for the Tabs component.
- * 
+ *
  * @interface TabsProps
  * @property {string} [value] - The controlled value of the currently active tab
  * @property {string} [defaultValue] - The default value for the active tab when uncontrolled
@@ -39,14 +39,14 @@ export interface TabsProps {
 
 /**
  * A tabs component that supports both controlled and uncontrolled modes.
- * 
+ *
  * @param value - The controlled value of the active tab. When provided, the component operates in controlled mode.
  * @param defaultValue - The initial value for the active tab when operating in uncontrolled mode. Defaults to empty string.
  * @param onValueChange - Callback function called when the active tab changes. Receives the new tab value as parameter.
  * @param children - React children elements, typically TabsList and TabsContent components.
- * 
+ *
  * @returns JSX element that provides tab context to child components.
- * 
+ *
  * @example
  * ```tsx
  * // Uncontrolled usage
@@ -58,7 +58,7 @@ export interface TabsProps {
  *   <TabsContent value="tab1">Content 1</TabsContent>
  *   <TabsContent value="tab2">Content 2</TabsContent>
  * </Tabs>
- * 
+ *
  * // Controlled usage
  * <Tabs value={activeTab} onValueChange={setActiveTab}>
  *   {children}
@@ -86,7 +86,7 @@ export function Tabs({ value, defaultValue, onValueChange, children }: TabsProps
 
 /**
  * Props for the TabList component.
- * 
+ *
  * @interface TabListProps
  * @property {ReactNode} children - The child elements to be rendered within the tab list
  * @property {string} [className] - Optional CSS class name for styling the tab list
@@ -100,7 +100,7 @@ export interface TabListProps {
 
 /**
  * A container component that renders a list of tabs with different visual variants.
- * 
+ *
  * @param props - The component props
  * @param props.children - The tab elements to render within the list
  * @param props.className - Additional CSS classes to apply to the container
@@ -110,7 +110,7 @@ export interface TabListProps {
  *   - 'vertical': Vertical layout with left border
  *   - 'fullWidth': Full width tabs with bottom border
  *   - 'underline': Horizontal tabs with underline styling
- * 
+ *
  * @returns A tablist container with the specified variant styling and context provider
  */
 export function TabList({ children, className, variant = 'default' }: TabListProps) {
@@ -151,7 +151,7 @@ export interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 /**
  * A tab component that renders an individual tab button within a tabs container.
  * Must be used within a Tabs component context.
- * 
+ *
  * @param value - Unique identifier for this tab, used to determine active state
  * @param icon - Optional icon element to display before the tab text
  * @param activeClassName - Additional CSS classes to apply when the tab is active
@@ -159,9 +159,9 @@ export interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * @param className - Additional CSS classes to apply to the tab button
  * @param children - The content to display inside the tab (typically text)
  * @param props - Additional HTML button props
- * 
+ *
  * @throws {Error} When used outside of a Tabs component context
- * 
+ *
  * @example
  * ```tsx
  * <Tabs defaultValue="tab1">
@@ -213,8 +213,8 @@ export function Tab({
                         ? 'bg-primary text-primary-foreground border-primary'
                         : 'border-primary text-primary'
                     : variant === 'pill'
-                        ? 'text-muted-foreground hover:bg-surface'
-                        : 'border-transparent text-muted-foreground hover:text-text',
+                      ? 'text-muted-foreground hover:bg-surface'
+                      : 'border-transparent text-muted-foreground hover:text-text',
                 // user-provided classes for active/inactive states
                 isActive ? activeClassName : inactiveClassName,
                 // full width adjustments
@@ -243,16 +243,16 @@ export interface TabPanelProps {
 /**
  * A tab panel component that displays content based on the active tab value.
  * Must be used within a Tabs context provider.
- * 
+ *
  * @param props - The component props
  * @param props.value - The unique identifier for this tab panel
  * @param props.children - The content to display when this panel is active
  * @param props.className - Optional CSS class name for styling
- * 
+ *
  * @returns The tab panel element when active, or null when inactive
- * 
+ *
  * @throws {Error} When used outside of a Tabs context
- * 
+ *
  * @example
  * ```tsx
  * <Tabs>

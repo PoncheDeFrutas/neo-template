@@ -4,7 +4,7 @@ export type Theme = 'light' | 'dark';
 
 /**
  * Context value interface for theme management.
- * 
+ *
  * @interface ThemeContextValue
  * @property {Theme} theme - The current active theme
  * @property {() => void} toggleTheme - Function to toggle between available themes
@@ -16,10 +16,10 @@ interface ThemeContextValue {
 
 /**
  * Context for managing theme state and theme switching functionality.
- * 
+ *
  * Provides access to the current theme value and a function to toggle between themes.
  * The default context value includes a 'light' theme and a no-op toggle function.
- * 
+ *
  * @example
  * ```tsx
  * const { theme, toggleTheme } = useContext(ThemeContext);
@@ -32,7 +32,7 @@ export const ThemeContext = createContext<ThemeContextValue>({
 
 /**
  * Props for the ThemeProvider component.
- * 
+ *
  * @interface ThemeProviderProps
  * @property {ReactNode} children - The child components to be wrapped by the theme provider
  * @property {boolean} [persist] - Optional flag to determine if theme preferences should be persisted across sessions
@@ -46,10 +46,10 @@ const STORAGE_KEY = 'theme';
 
 /**
  * ThemeProvider component that manages theme state and persistence across the application.
- * 
+ *
  * @param children - React children components to be wrapped by the theme provider
  * @param persist - Whether to persist theme preference in localStorage (defaults to true)
- * 
+ *
  * @description
  * This provider component:
  * - Initializes theme from localStorage if persistence is enabled and valid theme is stored
@@ -57,7 +57,7 @@ const STORAGE_KEY = 'theme';
  * - Persists theme changes to localStorage when persist is true
  * - Applies 'dark' class to document.documentElement for CSS styling
  * - Provides theme state and toggleTheme function through context
- * 
+ *
  * @example
  * ```tsx
  * <ThemeProvider persist={true}>

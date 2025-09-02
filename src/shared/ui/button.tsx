@@ -6,10 +6,10 @@ export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Props interface for the Button component.
- * 
+ *
  * @interface ButtonProps
  * @extends {ButtonHTMLAttributes<HTMLButtonElement>}
- * 
+ *
  * @property {ButtonVariant} [variant] - The visual style variant of the button
  * @property {ButtonSize} [size] - The size of the button
  * @property {boolean} [pill] - Whether the button should have rounded pill-style borders
@@ -34,7 +34,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 /**
  * Base CSS classes for button components providing common styling and interaction states.
- * 
+ *
  * Includes:
  * - Layout: inline-flex with centered content alignment
  * - Typography: medium font weight
@@ -58,14 +58,14 @@ const sizeStyles: Record<ButtonSize, string> = {
 
 /**
  * Maps button variant types to their corresponding CSS class strings.
- * 
+ *
  * @remarks
  * This record defines the styling for different button variants including:
  * - `default`: Standard blue button with white text
  * - `outline`: Outlined button with blue border and text, fills on hover
  * - `gradient`: Button with gradient background
  * - `gradientOutline`: Outlined button with gradient border that fills with gradient on hover
- * 
+ *
  * @example
  * ```tsx
  * const buttonClass = variantStyles['default']; // 'text-white bg-blue-600 hover:bg-blue-700'
@@ -73,20 +73,18 @@ const sizeStyles: Record<ButtonSize, string> = {
  */
 const variantStyles: Record<ButtonVariant, string> = {
     default: 'text-white bg-blue-600 hover:bg-blue-700',
-    outline:
-        'border border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white',
+    outline: 'border border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white',
     gradient: 'text-white bg-gradient-to-r hover:bg-gradient-to-r',
     gradientOutline:
-        'text-blue-700 border-2 border-cyan-500 hover:text-white ' +
-        'hover:bg-gradient-to-r',
+        'text-blue-700 border-2 border-cyan-500 hover:text-white ' + 'hover:bg-gradient-to-r',
 };
 
 /**
  * Concatenates CSS class names, filtering out falsy values.
- * 
+ *
  * @param classes - Array of class names that can include strings or falsy values
  * @returns A space-separated string of valid class names
- * 
+ *
  * @example
  * ```tsx
  * cn('btn', 'btn-primary', false, null, 'active')
@@ -102,15 +100,15 @@ const defaultTo = '#3b82f6';
 
 /**
  * Adjusts the brightness of a color based on its luminance.
- * 
+ *
  * This function takes a color in various formats (hex, rgb, rgba) and automatically
  * darkens bright colors or lightens dark colors by a fixed factor of 12%.
  * The adjustment is determined by the color's luminance value using the relative
  * luminance formula.
- * 
+ *
  * @param baseColor - The input color in hex (#RGB, #RRGGBB), rgb(r,g,b), or rgba(r,g,b,a) format
  * @returns The adjusted color in the same format as the input, or the original color if format is unsupported
- * 
+ *
  * @example
  * ```typescript
  * adjustColor('#ff0000') // Returns darker red for bright red input
@@ -172,7 +170,7 @@ function adjustColor(baseColor: string): string {
 
 /**
  * A flexible button component with support for various styles, icons, and states.
- * 
+ *
  * @param variant - The visual style variant of the button ('default', 'outline', 'gradient', 'gradientOutline')
  * @param size - The size of the button ('sm', 'md', 'lg', etc.)
  * @param pill - Whether the button should have fully rounded corners (pill shape)
@@ -187,9 +185,9 @@ function adjustColor(baseColor: string): string {
  * @param style - Inline styles to apply to the button
  * @param children - The content to display inside the button (takes precedence over label)
  * @param ref - Forwarded ref to the underlying button element
- * 
+ *
  * @returns A styled button element with the specified configuration
- * 
+ *
  * @example
  * ```tsx
  * <Button variant="gradient" size="lg" leftIcon={<Icon />} loading={false}>

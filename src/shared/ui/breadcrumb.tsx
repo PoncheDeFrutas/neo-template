@@ -27,12 +27,7 @@ function cn(...classes: Array<string | false | null | undefined>) {
 }
 
 const defaultSeparator = (
-    <svg
-        className="w-4 h-4"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        aria-hidden="true"
-    >
+    <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
         <path
             fillRule="evenodd"
             d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
@@ -102,23 +97,21 @@ export function Breadcrumb({
 }
 
 export function BreadcrumbItem({ item, isLast, separator }: BreadcrumbItemProps) {
-    const content = item.href && !isLast ? (
-        <a
-            href={item.href}
-            className="inline-flex items-center gap-1 hover:underline"
-        >
-            {item.icon && <span className="me-1">{item.icon}</span>}
-            {item.label}
-        </a>
-    ) : (
-        <span
-            className="inline-flex items-center gap-1"
-            aria-current={isLast ? 'page' : undefined}
-        >
-            {item.icon && <span className="me-1">{item.icon}</span>}
-            {item.label}
-        </span>
-    );
+    const content =
+        item.href && !isLast ? (
+            <a href={item.href} className="inline-flex items-center gap-1 hover:underline">
+                {item.icon && <span className="me-1">{item.icon}</span>}
+                {item.label}
+            </a>
+        ) : (
+            <span
+                className="inline-flex items-center gap-1"
+                aria-current={isLast ? 'page' : undefined}
+            >
+                {item.icon && <span className="me-1">{item.icon}</span>}
+                {item.label}
+            </span>
+        );
 
     return (
         <li className="inline-flex items-center">

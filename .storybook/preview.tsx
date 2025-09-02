@@ -10,7 +10,11 @@ const withTheme = (Story: any, context: any) => {
         const apply = (mode: string) => {
             if (mode === 'dark') root.classList.add('dark');
             else if (mode === 'light') root.classList.remove('dark');
-            else root.classList.toggle('dark', window.matchMedia('(prefers-color-scheme: dark)').matches);
+            else
+                root.classList.toggle(
+                    'dark',
+                    window.matchMedia('(prefers-color-scheme: dark)').matches,
+                );
         };
         apply(theme);
 

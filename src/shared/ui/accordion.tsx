@@ -85,9 +85,7 @@ export function Accordion({
     };
 
     return (
-        <AccordionContext.Provider
-            value={{ openItems, toggleItem, colorClass: color, arrowIcon }}
-        >
+        <AccordionContext.Provider value={{ openItems, toggleItem, colorClass: color, arrowIcon }}>
             <div className={cn(flush ? '' : `border ${color} rounded-md`, className)}>
                 {children}
             </div>
@@ -147,12 +145,7 @@ export function AccordionItem({
     const panelId = `accordion-panel-${id}`;
 
     const icon = arrowIcon ?? context.arrowIcon ?? (
-        <svg
-            className="w-4 h-4"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-        >
+        <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path
                 fillRule="evenodd"
                 d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"
@@ -207,10 +200,7 @@ export function AccordionItem({
                 >
                     <span>{title}</span>
                     <span
-                        className={cn(
-                            'ml-auto transition-transform',
-                            isOpen && 'rotate-180',
-                        )}
+                        className={cn('ml-auto transition-transform', isOpen && 'rotate-180')}
                         aria-hidden="true"
                     >
                         {icon}
@@ -224,9 +214,7 @@ export function AccordionItem({
                 aria-hidden={!isOpen}
                 ref={panelRef}
                 style={{ maxHeight }}
-                className={cn(
-                    'overflow-hidden transition-[max-height] duration-300 ease-in-out',
-                )}
+                className={cn('overflow-hidden transition-[max-height] duration-300 ease-in-out')}
             >
                 <div className="px-4 pb-4">{children}</div>
             </div>

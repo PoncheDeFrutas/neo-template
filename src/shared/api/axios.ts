@@ -1,23 +1,23 @@
 /**
  * Configured Axios instance for making API requests with automatic authentication.
- * 
+ *
  * This module exports a pre-configured Axios instance that:
  * - Uses the base URL from environment variables (VITE_API_BASE_URL)
  * - Automatically attaches Bearer tokens from localStorage to requests
  * - Handles 401 unauthorized responses
  * - Provides consistent HTTP client configuration across the application
- * 
+ *
  * @example
  * ```typescript
  * import api from './axios';
- * 
+ *
  * // GET request
  * const response = await api.get('/users');
- * 
+ *
  * // POST request
  * const newUser = await api.post('/users', { name: 'John' });
  * ```
- * 
+ *
  * @module axios
  * @since 1.0.0
  */
@@ -37,7 +37,7 @@ api.interceptors.request.use(
         /**
          * Retrieves the authentication token from the browser's localStorage.
          * Uses optional chaining to safely access localStorage in environments where it may not be available.
-         * 
+         *
          * @returns The stored token string if found, null if not found, or undefined if localStorage is unavailable
          */
         const token = globalThis.localStorage?.getItem('token');
