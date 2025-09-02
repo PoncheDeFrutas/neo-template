@@ -13,11 +13,25 @@ function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(' ');
 }
 
-const placementStyles: Record<Placement, string> = {
-  left: '-translate-x-full left-0 top-0 h-full w-64',
-  right: 'translate-x-full right-0 top-0 h-full w-64',
-  top: '-translate-y-full top-0 left-0 w-full h-64',
-  bottom: 'translate-y-full bottom-0 left-0 w-full h-64',
+const basePlacement: Record<Placement, string> = {
+  left: 'left-0 top-0 h-full w-64',
+  right: 'right-0 top-0 h-full w-64',
+  top: 'top-0 left-0 w-full h-64',
+  bottom: 'bottom-0 left-0 w-full h-64',
+};
+
+const closedTransform: Record<Placement, string> = {
+  left: '-translate-x-full',
+  right: 'translate-x-full',
+  top: '-translate-y-full',
+  bottom: 'translate-y-full',
+};
+
+const openTransform: Record<Placement, string> = {
+  left: 'translate-x-0',
+  right: 'translate-x-0',
+  top: 'translate-y-0',
+  bottom: 'translate-y-0',
 };
 
 export function Drawer({
@@ -28,20 +42,18 @@ export function Drawer({
 }: DrawerProps) {
   return (
     <>
-      {/* Backdrop */}
       <div
         className={cn(
-          'fixed inset-0 z-40 bg-black/50 transition-opacity',
+          'fixed inset-0 z-40 bg-overlay transition-opacity',
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         )}
         onClick={onClose}
       />
-      {/* Panel */}
       <aside
         className={cn(
-          'fixed z-50 bg-white dark:bg-gray-800 p-4 transition-transform',
-          placementStyles[placement],
-          isOpen && 'translate-x-0 translate-y-0'
+          'fixed z-50 bg-elevated text-text p-4 transition-transform transform-gpu will-change-transform',
+          basePlacement[placement],
+          isOpen ? openTransform[placement] : closedTransform[placement]
         )}
       >
         {children}
@@ -50,7 +62,6 @@ export function Drawer({
   );
 }
 
-/* Variante para navegación */
 export interface NavItem {
   label: string;
   href: string;
@@ -72,7 +83,7 @@ export function NavigationDrawer({
           <a
             key={label}
             href={href}
-            className="flex items-center gap-2 rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="flex items-center gap-2 rounded p-2 hover:bg-surface"
           >
             {icon}
             <span>{label}</span>
