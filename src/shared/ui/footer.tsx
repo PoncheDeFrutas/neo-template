@@ -1,5 +1,4 @@
 import { cloneElement, type FC, type ReactElement } from 'react';
-import Image from 'next/image';
 
 export interface FooterProps {
   variant?: 0 | 1;
@@ -36,7 +35,7 @@ const LogoSocialFooter: ReactElement = (
     <div className="max-w-screen-xl mx-auto p-4 md:py-8">
       <div className="sm:flex sm:items-center sm:justify-between">
         <a href="/" className="flex items-center mb-4 sm:mb-0 space-x-3">
-          <Image src="/logo.svg" alt="Logo" width={32} height={32} />
+          <img src="/vite.svg" alt="Logo" width={32} height={32} />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             NeoTemplate
           </span>
