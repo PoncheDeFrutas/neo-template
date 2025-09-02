@@ -46,9 +46,10 @@ export function Breadcrumb({
     className,
 }: BreadcrumbProps) {
     const variantStyles: Record<NonNullable<BreadcrumbProps['variant']>, string> = {
-        default: '',
-        solid: 'p-3 bg-gray-50 rounded-md',
-        header: 'bg-gray-50 border p-3',
+        default: 'bg-transparent',
+        // Use design tokens so it adapts to light/dark themes
+        solid: 'p-3 bg-surface rounded-md',
+        header: 'bg-surface border border-border p-3 rounded-md',
     };
 
     const sizeStyles: Record<NonNullable<BreadcrumbProps['size']>, string> = {
@@ -58,7 +59,7 @@ export function Breadcrumb({
     };
 
     const style: CSSProperties = {};
-    let navClass = cn(variantStyles[variant], sizeStyles[size], className);
+    let navClass = cn('text-text', variantStyles[variant], sizeStyles[size], className);
     if (color) {
         if (color.startsWith('bg-')) {
             navClass = cn(navClass, color);

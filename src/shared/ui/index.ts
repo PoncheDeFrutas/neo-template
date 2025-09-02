@@ -9,3 +9,4 @@ export { Banner } from './banner';
 export { Badge } from './badge';
 export { Breadcrumb, BreadcrumbItem } from './breadcrumb';
 export { ButtonGroup } from './button-group';
+export { Card } from './card';

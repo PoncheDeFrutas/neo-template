@@ -86,7 +86,12 @@ export function Accordion({
 
     return (
         <AccordionContext.Provider value={{ openItems, toggleItem, colorClass: color, arrowIcon }}>
-            <div className={cn(flush ? '' : `border ${color} rounded-md`, className)}>
+            <div
+                className={cn(
+                    flush ? 'bg-transparent' : `border ${color} rounded-md bg-elevated`,
+                    className,
+                )}
+            >
                 {children}
             </div>
         </AccordionContext.Provider>
@@ -193,7 +198,7 @@ export function AccordionItem({
                     id={headerId}
                     type="button"
                     role="button"
-                    className="flex w-full items-center gap-2 p-4 text-left"
+                    className="flex w-full items-center gap-2 p-4 text-left text-text bg-transparent"
                     onClick={() => toggleItem(value)}
                     aria-expanded={isOpen}
                     aria-controls={panelId}
