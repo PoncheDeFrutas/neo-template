@@ -1,4 +1,10 @@
-import { forwardRef, type InputHTMLAttributes, type ReactNode } from 'react';
+import {
+    type ChangeEvent,
+    forwardRef,
+    type InputHTMLAttributes,
+    type ReactNode,
+    useState,
+} from 'react';
 
 export type InputSize = 'sm' | 'md' | 'lg';
 export type ValidationState = 'none' | 'success' | 'error';
@@ -16,7 +22,7 @@ export type ValidationState = 'none' | 'success' | 'error';
  * @property {ReactNode} [interactiveLeftElement] - Optional interactive element on the left side
  * @property {ReactNode} [interactiveRightElement] - Optional interactive element on the right side
  * @property {string} [helperText] - Optional helper text to display below the input
- * @property {'default' | 'search'} [variant] - Input visual variant
+ * @property {'default' | 'search' | 'number'} [variant] - Input visual variant
  */
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
     size?: InputSize;
@@ -26,7 +32,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
     interactiveLeftElement?: ReactNode;
     interactiveRightElement?: ReactNode;
     helperText?: string;
-    variant?: 'default' | 'search';
+    variant?: 'default' | 'search' | 'number';
 }
 
 /**
@@ -101,10 +107,65 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         helperText,
         variant = 'default',
         type,
+        onChange,
+        min,
+        max,
+        step = 1,
+        value,
+        defaultValue,
         ...props
     },
     ref,
 ) {
+     const isNumber = variant === 'number';
+
+    const parseNumber = (val: unknown) => {
+        const num = typeof val === 'number' ? val : parseFloat(String(val ?? 0));
+        return Number.isNaN(num) ? 0 : num;
+    };
+
+    const clamp = (val: number) => {
+        let result = val;
+        if (min !== undefined) result = Math.max(result, parseNumber(min));
+        if (max !== undefined) result = Math.min(result, parseNumber(max));
+        return result;
+    };
+
+    const [internalValue, setInternalValue] = useState<number>(
+        clamp(parseNumber(value ?? defaultValue ?? 0)),
+    );
+
+    const currentValue = isNumber
+        ? value !== undefined
+            ? clamp(parseNumber(value))
+            : internalValue
+        : undefined;
+
+    const emitChange = (val: number, e?: ChangeEvent<HTMLInputElement>) => {
+        onChange?.({
+            ...e,
+            target: { ...e?.target, value: String(val) },
+        } as ChangeEvent<HTMLInputElement>);
+    };
+
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const next = clamp(parseNumber(e.target.value));
+        if (value === undefined) setInternalValue(next);
+        emitChange(next, e);
+    };
+
+    const increment = () => {
+        const next = clamp((currentValue ?? 0) + parseNumber(step));
+        if (value === undefined) setInternalValue(next);
+        emitChange(next);
+    };
+
+    const decrement = () => {
+        const next = clamp((currentValue ?? 0) - parseNumber(step));
+        if (value === undefined) setInternalValue(next);
+        emitChange(next);
+    };
+
     const mergedLeft =
         interactiveLeftElement ??
         leftElement ??
@@ -112,21 +173,35 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
             <span role="img" aria-label="search">
                 🔍
             </span>
+             ) : isNumber ? (
+            <button type="button" onClick={decrement} aria-label="decrement" className="px-1">
+                −
+            </button>
         ) : undefined);
-    const mergedRight = interactiveRightElement ?? rightElement;
+
+    const mergedRight =
+        interactiveRightElement ??
+        rightElement ??
+        (isNumber ? (
+            <button type="button" onClick={increment} aria-label="increment" className="px-1">
+                +
+            </button>
+        ) : undefined);
 
     const showLeft = Boolean(mergedLeft);
     const showRight = Boolean(mergedRight);
 
-    const inputType = type ?? (variant === 'search' ? 'search' : undefined);
+ const leftInteractive = Boolean(interactiveLeftElement) || isNumber;
+    const rightInteractive = Boolean(interactiveRightElement) || isNumber;
 
+    const inputType = type ?? (variant === 'search' ? 'search' : isNumber ? 'number' : undefined);
     return (
         <div className="relative w-full">
             {showLeft && (
                 <span
                     className={cn(
                         'absolute inset-y-0 left-0 flex items-center pl-2',
-                        !interactiveLeftElement && 'pointer-events-none',
+                        !leftInteractive && 'pointer-events-none',
                     )}
                 >
                     {mergedLeft}
@@ -144,12 +219,21 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
                     className,
                 )}
                 {...props}
+                {...(isNumber
+                    ? {
+                          value: String(currentValue ?? 0),
+                          onChange: handleInputChange,
+                          min,
+                          max,
+                          step,
+                      }
+                    : { onChange })}
             />
             {showRight && (
                 <span
                     className={cn(
                         'absolute inset-y-0 right-0 flex items-center pr-2',
-                        !interactiveRightElement && 'pointer-events-none',
+                        !rightInteractive && 'pointer-events-none',
                     )}
                 >
                     {mergedRight}

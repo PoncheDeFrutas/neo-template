@@ -56,7 +56,7 @@ const meta = {
         rightElement: { control: false },
         variant: {
             control: { type: 'select' },
-            options: ['default', 'search'],
+            options: ['default', 'search', 'number'],
         },
         interactiveLeftElement: { control: false },
         interactiveRightElement: { control: false },
@@ -141,5 +141,19 @@ export const Search: Story = {
     args: {
         variant: 'search',
         placeholder: 'Search...',
+    },
+};
+
+
+/**
+ * Demonstrates the number variant with increment and decrement controls.
+ */
+export const NumberVariant: Story = {
+    args: {
+        variant: 'number',
+        min: 0,
+        max: 10,
+        step: 1,
+        defaultValue: 0,
     },
 };
