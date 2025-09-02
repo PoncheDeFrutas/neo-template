@@ -178,3 +178,29 @@ body {
 .ring-danger {
     --tw-ring-color: var(--color-danger);
 }
+
+/* Global theme transition helper
+   Add the class `theme-transition` to the root element briefly when toggling
+   themes to smoothly animate color-related properties consistently. */
+:root {
+    --theme-transition-duration: 300ms;
+    --theme-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-transition,
+.theme-transition * {
+    transition:
+        background-color var(--theme-transition-duration) var(--theme-transition-easing),
+        color var(--theme-transition-duration) var(--theme-transition-easing),
+        border-color var(--theme-transition-duration) var(--theme-transition-easing),
+        fill var(--theme-transition-duration) var(--theme-transition-easing),
+        stroke var(--theme-transition-duration) var(--theme-transition-easing),
+        box-shadow var(--theme-transition-duration) var(--theme-transition-easing);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-transition,
+    .theme-transition * {
+        transition: none !important;
+    }
+}

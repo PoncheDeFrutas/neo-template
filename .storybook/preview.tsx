@@ -8,6 +8,8 @@ const withTheme = (Story: any, context: any) => {
     useEffect(() => {
         const root = document.documentElement;
         const apply = (mode: string) => {
+            // Add temporary transition class to animate theme change consistently
+            root.classList.add('theme-transition');
             if (mode === 'dark') root.classList.add('dark');
             else if (mode === 'light') root.classList.remove('dark');
             else
@@ -15,8 +17,14 @@ const withTheme = (Story: any, context: any) => {
                     'dark',
                     window.matchMedia('(prefers-color-scheme: dark)').matches,
                 );
+            // Remove the class after the duration to avoid affecting other transitions
+            const timeout = window.setTimeout(
+                () => root.classList.remove('theme-transition'),
+                320,
+            );
+            return () => window.clearTimeout(timeout);
         };
-        apply(theme);
+        const cleanup = apply(theme);
 
         let mql: MediaQueryList | null = null;
         const onChange = (e: MediaQueryListEvent) => {
@@ -30,6 +38,7 @@ const withTheme = (Story: any, context: any) => {
         }
         return () => {
             mql?.removeEventListener?.('change', onChange);
+            cleanup?.();
         };
     }, [context.globals.theme]);
 
