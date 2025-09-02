@@ -8,3 +8,4 @@ export { Accordion, AccordionItem } from './accordion';
 export { Banner } from './banner';
 export { Badge } from './badge';
 export { Breadcrumb, BreadcrumbItem } from './breadcrumb';
+export { ButtonGroup } from './button-group';

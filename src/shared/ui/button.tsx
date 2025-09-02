@@ -220,7 +220,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
 
     const colorStyle = (() => {
         if (!color) return undefined;
-        if (variant === 'outline' || variant === 'gradientOutline') {
+        if (variant === 'outline') {
+            // Ensure hover background matches provided color, not the default blue class
+            return hovered
+                ? { backgroundColor: color, borderColor: color }
+                : { color, borderColor: color };
+        }
+        if (variant === 'gradientOutline') {
+            // Keep border/text color when idle; gradient handled separately on hover
             return hovered ? { borderColor: color } : { color, borderColor: color };
         }
         return { backgroundColor: color };
