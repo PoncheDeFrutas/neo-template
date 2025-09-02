@@ -51,9 +51,7 @@ export function Card({
 
     const content = (
         <div className="flex flex-col gap-4 p-5">
-            {title && (
-                <h5 className="text-xl font-bold tracking-tight text-text">{title}</h5>
-            )}
+            {title && <h5 className="text-xl font-bold tracking-tight text-text">{title}</h5>}
             {children && <div className="font-normal text-muted-foreground">{children}</div>}
             {actions.length > 0 && (
                 <div className="mt-auto flex gap-2">
