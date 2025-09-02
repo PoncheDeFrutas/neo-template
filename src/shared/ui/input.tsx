@@ -119,9 +119,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     },
     ref,
 ) {
-     const isNumber = variant === 'number';
+    const isNumber = variant === 'number';
     const isTel = variant === 'tel';
-
 
     const parseNumber = (val: unknown) => {
         const num = typeof val === 'number' ? val : parseFloat(String(val ?? 0));
@@ -177,7 +176,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
             <span role="img" aria-label="search">
                 🔍
             </span>
-             ) : isNumber ? (
+        ) : isNumber ? (
             <button type="button" onClick={decrement} aria-label="decrement" className="px-1">
                 −
             </button>
@@ -195,7 +194,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     const showLeft = Boolean(mergedLeft);
     const showRight = Boolean(mergedRight);
 
- const leftInteractive = Boolean(interactiveLeftElement) || isNumber;
+    const leftInteractive = Boolean(interactiveLeftElement) || isNumber;
     const rightInteractive = Boolean(interactiveRightElement) || isNumber;
 
     const inputType =

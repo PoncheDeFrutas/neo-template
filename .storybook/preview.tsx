@@ -18,10 +18,7 @@ const withTheme = (Story: any, context: any) => {
                     window.matchMedia('(prefers-color-scheme: dark)').matches,
                 );
             // Remove the class after the duration to avoid affecting other transitions
-            const timeout = window.setTimeout(
-                () => root.classList.remove('theme-transition'),
-                320,
-            );
+            const timeout = window.setTimeout(() => root.classList.remove('theme-transition'), 320);
             return () => window.clearTimeout(timeout);
         };
         const cleanup = apply(theme);

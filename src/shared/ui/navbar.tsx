@@ -11,9 +11,14 @@ export interface NavItem {
 
 export interface NavbarProps {
     items: NavItem[];
+    className?: string;
 }
 
-export function Navbar({ items }: NavbarProps) {
+function cn(...classes: Array<string | false | null | undefined>) {
+    return classes.filter(Boolean).join(' ');
+}
+
+export function Navbar({ items, className }: NavbarProps) {
     const sections: Record<NavPosition, NavItem[]> = {
         left: [],
         center: [],
@@ -25,7 +30,7 @@ export function Navbar({ items }: NavbarProps) {
     }
 
     return (
-        <nav className="flex items-center justify-between">
+        <nav className={cn('flex items-center justify-between', className)}>
             <div className="flex items-center gap-2">
                 {sections.left.map((item) => (
                     <div key={item.id}>{item.component}</div>

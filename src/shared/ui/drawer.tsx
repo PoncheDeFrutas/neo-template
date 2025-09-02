@@ -7,6 +7,7 @@ interface DrawerProps {
     onClose: () => void;
     placement?: Placement;
     children?: ReactNode;
+    className?: string;
 }
 
 function cn(...classes: Array<string | false | null | undefined>) {
@@ -34,13 +35,14 @@ const openTransform: Record<Placement, string> = {
     bottom: 'translate-y-0',
 };
 
-export function Drawer({ isOpen, onClose, placement = 'left', children }: DrawerProps) {
+export function Drawer({ isOpen, onClose, placement = 'left', children, className }: DrawerProps) {
     return (
         <>
             <div
                 className={cn(
                     'fixed inset-0 z-40 bg-overlay transition-opacity',
                     isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none',
+                    className,
                 )}
                 onClick={onClose}
             />
@@ -49,6 +51,7 @@ export function Drawer({ isOpen, onClose, placement = 'left', children }: Drawer
                     'fixed z-50 bg-elevated text-text p-4 transition-transform transform-gpu will-change-transform',
                     basePlacement[placement],
                     isOpen ? openTransform[placement] : closedTransform[placement],
+                    className,
                 )}
             >
                 {children}
@@ -65,12 +68,13 @@ export interface NavItem {
 
 interface NavigationDrawerProps extends Omit<DrawerProps, 'children'> {
     items: NavItem[];
+    navClassName?: string;
 }
 
-export function NavigationDrawer({ items, ...props }: NavigationDrawerProps) {
+export function NavigationDrawer({ items, navClassName, ...props }: NavigationDrawerProps) {
     return (
         <Drawer {...props}>
-            <nav className="space-y-2">
+            <nav className={cn('space-y-2', navClassName)}>
                 {items.map(({ label, href, icon }) => (
                     <a
                         key={label}

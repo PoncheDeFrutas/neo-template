@@ -15,6 +15,7 @@ export interface BadgeProps {
     color?: string;
     textColor?: string;
     dotColor?: string;
+    className?: string;
 }
 
 function cn(...classes: Array<string | false | null | undefined>) {
@@ -32,6 +33,7 @@ export function Badge({
     color,
     textColor,
     dotColor,
+    className,
 }: BadgeProps) {
     const base = iconOnly
         ? 'inline-flex items-center justify-center p-1'
@@ -57,21 +59,23 @@ export function Badge({
         }
     }
 
-    let className = cn(base, sizeStyles, variantBase[variant]);
+    let badgeClassName = cn(base, sizeStyles, variantBase[variant]);
     if (!color) {
-        className = cn(
-            className,
+        badgeClassName = cn(
+            badgeClassName,
             'bg-blue-100 text-blue-800',
             variant === 'bordered' && 'border-blue-800',
             variant === 'link' && 'hover:bg-blue-200',
         );
     } else if (variant === 'link') {
-        className = cn(className, 'hover:opacity-80');
+        badgeClassName = cn(badgeClassName, 'hover:opacity-80');
     }
 
     if (icon && !iconOnly && variant !== 'chips') {
-        className = cn(className, 'inline-flex items-center gap-1');
+        badgeClassName = cn(badgeClassName, 'inline-flex items-center gap-1');
     }
+
+    const mergedClassName = cn(badgeClassName, className);
 
     const content = iconOnly ? (
         icon
@@ -104,14 +108,14 @@ export function Badge({
 
     if (variant === 'link' && href) {
         return (
-            <a href={href} className={className} style={styleProp}>
+            <a href={href} className={mergedClassName} style={styleProp}>
                 {content}
             </a>
         );
     }
 
     return (
-        <span className={className} style={styleProp}>
+        <span className={mergedClassName} style={styleProp}>
             {content}
         </span>
     );

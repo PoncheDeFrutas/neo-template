@@ -3,6 +3,10 @@ import { createPortal } from 'react-dom';
 
 import { Button } from './button';
 
+function cn(...classes: Array<string | false | null | undefined>) {
+    return classes.filter(Boolean).join(' ');
+}
+
 export type ModalType = 'default' | 'static' | 'popup' | 'crud';
 export type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 export type ModalPlacement =
@@ -40,6 +44,8 @@ export interface ModalProps {
     header?: ReactNode;
     footer?: ReactNode;
     onSave?: () => void;
+    className?: string;
+    overlayClassName?: string;
 }
 
 const sizeClasses: Record<ModalSize, string> = {
@@ -100,6 +106,8 @@ export function Modal({
     header,
     footer,
     onSave,
+    className,
+    overlayClassName,
 }: ModalProps) {
     useEffect(() => {
         if (!isOpen || type === 'static') return;
@@ -112,12 +120,18 @@ export function Modal({
 
     if (!isOpen) return null;
 
-    const containerClasses = `fixed inset-0 z-50 flex ${placementClasses[placement]} ${
-        type === 'popup' ? 'pointer-events-none' : ''
-    }`;
-    const modalClasses = `relative z-10 w-full ${sizeClasses[size]} rounded-md bg-elevated text-text pointer-events-auto ${
-        type === 'crud' ? '' : 'p-4'
-    }`;
+    const containerClasses = cn(
+        'fixed inset-0 z-50 flex',
+        placementClasses[placement],
+        type === 'popup' && 'pointer-events-none',
+    );
+    const modalClasses = cn(
+        'relative z-10 w-full',
+        sizeClasses[size],
+        'rounded-md bg-elevated text-text pointer-events-auto',
+        type === 'crud' ? '' : 'p-4',
+        className,
+    );
 
     let content = <div className={modalClasses}>{children}</div>;
 
@@ -143,7 +157,7 @@ export function Modal({
     const overlay =
         type === 'popup' ? null : (
             <div
-                className="absolute inset-0 bg-overlay"
+                className={cn('absolute inset-0 bg-overlay', overlayClassName)}
                 onClick={type === 'static' ? undefined : onClose}
             />
         );
@@ -167,19 +181,28 @@ export function Modal({
  * @param children - The content to be rendered inside the modal header
  * @returns A styled div element containing the header content
  */
-export function ModalHeader({ children }: { children: ReactNode }) {
+export function ModalHeader({ children, className }: { children: ReactNode; className?: string }) {
     return (
-        <div className="flex items-center justify-between border-b border-border p-4">
+        <div
+            className={cn(
+                'flex items-center justify-between border-b border-border p-4',
+                className,
+            )}
+        >
             {children}
         </div>
     );
 }
 
-export function ModalBody({ children }: { children: ReactNode }) {
-    return <div className="p-4">{children}</div>;
+export function ModalBody({ children, className }: { children: ReactNode; className?: string }) {
+    return <div className={cn('p-4', className)}>{children}</div>;
 }
 
-export function ModalFooter({ children }: { children: ReactNode }) {
-    return <div className="flex justify-end gap-2 border-t border-border p-4">{children}</div>;
+export function ModalFooter({ children, className }: { children: ReactNode; className?: string }) {
+    return (
+        <div className={cn('flex justify-end gap-2 border-t border-border p-4', className)}>
+            {children}
+        </div>
+    );
 }
 export default Modal;

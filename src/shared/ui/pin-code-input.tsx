@@ -2,13 +2,18 @@ import { useEffect, useRef, useState } from 'react';
 
 import { Input } from './input';
 
+function cn(...classes: Array<string | false | null | undefined>) {
+    return classes.filter(Boolean).join(' ');
+}
+
 export interface PinCodeInputProps {
     length?: number;
     value?: string;
     onChange?: (value: string) => void;
+    className?: string;
 }
 
-export function PinCodeInput({ length = 4, value, onChange }: PinCodeInputProps) {
+export function PinCodeInput({ length = 4, value, onChange, className }: PinCodeInputProps) {
     const [digits, setDigits] = useState<string[]>(Array(length).fill(''));
     const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
 
@@ -57,11 +62,13 @@ export function PinCodeInput({ length = 4, value, onChange }: PinCodeInputProps)
     };
 
     return (
-        <div className="flex gap-2">
+        <div className={cn('flex gap-2', className)}>
             {Array.from({ length }).map((_, i) => (
                 <Input
                     key={i}
-                    ref={(el) => { inputsRef.current[i] = el; }}
+                    ref={(el) => {
+                        inputsRef.current[i] = el;
+                    }}
                     className="w-10 text-center"
                     maxLength={1}
                     value={digits[i]}

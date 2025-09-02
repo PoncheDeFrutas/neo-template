@@ -144,7 +144,6 @@ export const Search: Story = {
     },
 };
 
-
 /**
  * Demonstrates the number variant with increment and decrement controls.
  */
