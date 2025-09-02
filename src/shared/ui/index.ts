@@ -16,3 +16,4 @@ export { default as Footer } from './footer';
 export { Navbar } from './navbar';
 export { Spinner } from './spinner';
 export { FileInput } from './file-input';
+export { PinCodeInput } from './pin-code-input';
