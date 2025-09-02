@@ -54,7 +54,12 @@ pnpm lint:fix
 
 ### Variables de entorno
 
-Copia `.env.example` a `.env` y completa las variables necesarias como `VITE_API_BASE_URL`.
+Copia `.env.example` a `.env` y completa las siguientes variables obligatorias:
+
+- `VITE_API_BASE_URL`: URL base para las solicitudes HTTP.
+
+El esquema en `src/shared/config/env.ts` valida estas variables en tiempo de ejecución y
+arrojará un error si alguna falta o es inválida.
 
 ### Consultas a la API
 
