@@ -8,16 +8,19 @@
  *
  * @fileoverview Application bootstrap and initialization
  */
-import { ThemeProvider } from './app/providers/ThemeProvider';
+import App from '@app/index';
+import { ErrorBoundary } from '@shared/ui';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import './index.css';
-import App from '@app/index';
+
+import { ThemeProvider } from './app/providers/ThemeProvider';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <ThemeProvider>
-            <App />
+            <ErrorBoundary>
+                <App />
+            </ErrorBoundary>
         </ThemeProvider>
     </StrictMode>,
 );
