@@ -13,14 +13,20 @@ export type ValidationState = 'none' | 'success' | 'error';
  * @property {ValidationState} [validationState] - The validation state of the input (e.g., error, success, warning)
  * @property {ReactNode} [leftElement] - Optional element to display on the left side of the input
  * @property {ReactNode} [rightElement] - Optional element to display on the right side of the input
+ * @property {ReactNode} [interactiveLeftElement] - Optional interactive element on the left side
+ * @property {ReactNode} [interactiveRightElement] - Optional interactive element on the right side
  * @property {string} [helperText] - Optional helper text to display below the input
+ * @property {'default' | 'search'} [variant] - Input visual variant
  */
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
     size?: InputSize;
     validationState?: ValidationState;
     leftElement?: ReactNode;
     rightElement?: ReactNode;
+    interactiveLeftElement?: ReactNode;
+    interactiveRightElement?: ReactNode;
     helperText?: string;
+    variant?: 'default' | 'search';
 }
 
 /**
@@ -48,7 +54,6 @@ const validationStyles: Record<ValidationState, string> = {
 function cn(...classes: Array<string | false | null | undefined | number | bigint>) {
     return classes.filter(Boolean).join(' ');
 }
-
 const sizeStyles: Record<InputSize, string> = {
     sm: 'h-8 px-2 py-1 text-sm',
     md: 'h-10 px-3 py-2 text-sm',
@@ -75,7 +80,10 @@ const rightPaddingStyles: Record<InputSize, string> = {
  * @param validationState - The validation state that affects the input's appearance. Defaults to 'none'
  * @param leftElement - Optional element to display on the left side of the input (e.g., icon)
  * @param rightElement - Optional element to display on the right side of the input (e.g., icon, button)
+ * @param interactiveLeftElement - Interactive element on the left side
+ * @param interactiveRightElement - Interactive element on the right side
  * @param helperText - Optional helper text displayed below the input
+ * @param variant - Visual variant of the input
  * @param props - Additional HTML input attributes
  * @param ref - Forward ref to the underlying HTMLInputElement
  *
@@ -88,33 +96,63 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         validationState = 'none',
         leftElement,
         rightElement,
+        interactiveLeftElement,
+        interactiveRightElement,
         helperText,
+        variant = 'default',
+        type,
         ...props
     },
     ref,
 ) {
+    const mergedLeft =
+        interactiveLeftElement ??
+        leftElement ??
+        (variant === 'search' ? (
+            <span role="img" aria-label="search">
+                🔍
+            </span>
+        ) : undefined);
+    const mergedRight = interactiveRightElement ?? rightElement;
+
+    const showLeft = Boolean(mergedLeft);
+    const showRight = Boolean(mergedRight);
+
+    const inputType = type ?? (variant === 'search' ? 'search' : undefined);
+
     return (
         <div className="relative w-full">
-            {leftElement && (
-                <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
-                    {leftElement}
+            {showLeft && (
+                <span
+                    className={cn(
+                        'absolute inset-y-0 left-0 flex items-center pl-2',
+                        !interactiveLeftElement && 'pointer-events-none',
+                    )}
+                >
+                    {mergedLeft}
                 </span>
             )}
             <input
                 ref={ref}
+                type={inputType}
                 className={cn(
                     baseStyles,
                     validationStyles[validationState],
                     sizeStyles[size],
-                    leftElement && leftPaddingStyles[size],
-                    rightElement && rightPaddingStyles[size],
+                    showLeft && leftPaddingStyles[size],
+                    showRight && rightPaddingStyles[size],
                     className,
                 )}
                 {...props}
             />
-            {rightElement && (
-                <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                    {rightElement}
+            {showRight && (
+                <span
+                    className={cn(
+                        'absolute inset-y-0 right-0 flex items-center pr-2',
+                        !interactiveRightElement && 'pointer-events-none',
+                    )}
+                >
+                    {mergedRight}
                 </span>
             )}
             {helperText && <p className="mt-1 text-sm text-muted-foreground">{helperText}</p>}

@@ -39,6 +39,7 @@ const meta = {
         size: 'md',
         validationState: 'none',
         helperText: '',
+        variant: 'default',
     },
     argTypes: {
         disabled: { control: { type: 'boolean' } },
@@ -53,6 +54,12 @@ const meta = {
         helperText: { control: { type: 'text' } },
         leftElement: { control: false },
         rightElement: { control: false },
+        variant: {
+            control: { type: 'select' },
+            options: ['default', 'search'],
+        },
+        interactiveLeftElement: { control: false },
+        interactiveRightElement: { control: false },
     },
 } satisfies Meta<typeof Input>;
 
@@ -124,5 +131,15 @@ export const WithElements: Story = {
 export const WithHelperText: Story = {
     args: {
         helperText: 'This is a helper text',
+    },
+};
+
+/**
+ * Demonstrates the search variant with default search icon.
+ */
+export const Search: Story = {
+    args: {
+        variant: 'search',
+        placeholder: 'Search...',
     },
 };
