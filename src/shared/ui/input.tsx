@@ -22,7 +22,7 @@ export type ValidationState = 'none' | 'success' | 'error';
  * @property {ReactNode} [interactiveLeftElement] - Optional interactive element on the left side
  * @property {ReactNode} [interactiveRightElement] - Optional interactive element on the right side
  * @property {string} [helperText] - Optional helper text to display below the input
- * @property {'default' | 'search' | 'number'} [variant] - Input visual variant
+ * @property {'default' | 'search' | 'number' | 'tel'} [variant] - Input visual variant
  */
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
     size?: InputSize;
@@ -32,7 +32,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
     interactiveLeftElement?: ReactNode;
     interactiveRightElement?: ReactNode;
     helperText?: string;
-    variant?: 'default' | 'search' | 'number';
+    variant?: 'default' | 'search' | 'number' | 'tel';
 }
 
 /**
@@ -113,11 +113,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         step = 1,
         value,
         defaultValue,
+        inputMode,
+        pattern,
         ...props
     },
     ref,
 ) {
      const isNumber = variant === 'number';
+    const isTel = variant === 'tel';
+
 
     const parseNumber = (val: unknown) => {
         const num = typeof val === 'number' ? val : parseFloat(String(val ?? 0));
@@ -194,7 +198,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
  const leftInteractive = Boolean(interactiveLeftElement) || isNumber;
     const rightInteractive = Boolean(interactiveRightElement) || isNumber;
 
-    const inputType = type ?? (variant === 'search' ? 'search' : isNumber ? 'number' : undefined);
+    const inputType =
+        type ?? (variant === 'search' ? 'search' : isTel ? 'tel' : isNumber ? 'number' : undefined);
+    const resolvedInputMode = isTel ? (inputMode ?? 'tel') : inputMode;
     return (
         <div className="relative w-full">
             {showLeft && (
@@ -210,6 +216,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
             <input
                 ref={ref}
                 type={inputType}
+                inputMode={resolvedInputMode}
+                pattern={pattern}
                 className={cn(
                     baseStyles,
                     validationStyles[validationState],

@@ -56,7 +56,7 @@ const meta = {
         rightElement: { control: false },
         variant: {
             control: { type: 'select' },
-            options: ['default', 'search', 'number'],
+            options: ['default', 'search', 'number', 'tel'],
         },
         interactiveLeftElement: { control: false },
         interactiveRightElement: { control: false },
@@ -155,5 +155,16 @@ export const NumberVariant: Story = {
         max: 10,
         step: 1,
         defaultValue: 0,
+    },
+};
+
+/**
+ * Demonstrates the telephone variant with numeric keypad input.
+ */
+export const TelVariant: Story = {
+    args: {
+        variant: 'tel',
+        placeholder: 'Phone number',
+        pattern: '[0-9]*',
     },
 };
