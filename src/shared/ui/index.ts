@@ -11,3 +11,4 @@ export { Breadcrumb, BreadcrumbItem } from './breadcrumb';
 export { ButtonGroup } from './button-group';
 export { Card } from './card';
 export { Carousel, type CarouselItem } from './carousel';
+export { Drawer, NavigationDrawer } from './drawer';
