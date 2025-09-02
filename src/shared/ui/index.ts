@@ -12,3 +12,4 @@ export { ButtonGroup } from './button-group';
 export { Card } from './card';
 export { Carousel, type CarouselItem } from './carousel';
 export { Drawer, NavigationDrawer } from './drawer';
+export { default as Footer } from './footer';
