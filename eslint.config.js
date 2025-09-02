@@ -41,6 +41,7 @@ export default tseslint.config(
                     { type: 'widgets', pattern: 'src/widgets/*' },
                     { type: 'pages', pattern: 'src/pages/*' },
                     { type: 'app', pattern: 'src/app/*' },
+                    { type: 'routes', pattern: 'src/routes/*' },
                 ],
             },
             rules: {
@@ -64,7 +65,10 @@ export default tseslint.config(
                                 from: 'pages',
                                 allow: ['shared', 'entities', 'features', 'widgets', 'pages'],
                             },
-                            { from: 'app', allow: ['*'] },
+                            {
+                                from: 'app',
+                                allow: ['shared', 'entities', 'features', 'widgets', 'pages', 'app'],
+                            },
                         ],
                     },
                 ],
