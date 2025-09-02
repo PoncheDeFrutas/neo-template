@@ -1,5 +1,5 @@
 import ClientLayout from '@app/layouts/clientLayout';
-import ProtectedRoute from '@app/providers/protectedRoute';
+import ProtectedRoute from '@/shared/router/protectedRoute';
 import { lazy, Suspense } from 'react';
 import type { RouteObject } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ const NotFoundPage = lazy(() => import('@pages/not-found'));
 
 const clientRoutes: RouteObject[] = [
     {
-        element: <ProtectedRoute role="client" />,
+        element: <ProtectedRoute requiredRoles={['client']} />,
         children: [
             {
                 path: '/',

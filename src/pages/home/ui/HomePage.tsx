@@ -1,4 +1,4 @@
-import { ThemeToggle } from '@/features/theme-toogle';
+import { ThemeToggle } from '@/features/theme-toggle';
 import { Input } from '@/shared/ui';
 import { CounterWidget } from '@widgets/counter';
 import type { FC } from 'react';
