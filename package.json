@@ -13,7 +13,8 @@
         "lint:fix": "eslint . --fix",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
-        "docs:api": "typedoc"
+        "docs:api": "typedoc",
+        "test": "vitest"
     },
     "dependencies": {
         "@tailwindcss/vite": "^4.1.12",
