@@ -15,3 +15,4 @@ export { Drawer, NavigationDrawer } from './drawer';
 export { default as Footer } from './footer';
 export { Navbar } from './navbar';
 export { Spinner } from './spinner';
+export { FileInput } from './file-input';
