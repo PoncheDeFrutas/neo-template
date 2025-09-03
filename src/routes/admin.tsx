@@ -4,7 +4,6 @@ import { lazy, Suspense } from 'react';
 import type { RouteObject } from 'react-router-dom';
 
 const AboutPage = lazy(() => import('@pages/about'));
-const NotFoundPage = lazy(() => import('@pages/not-found'));
 
 const adminRoutes: RouteObject[] = [
     {
@@ -19,14 +18,6 @@ const adminRoutes: RouteObject[] = [
                         element: (
                             <Suspense fallback={<div>Loading...</div>}>
                                 <AboutPage />
-                            </Suspense>
-                        ),
-                    },
-                    {
-                        path: '*',
-                        element: (
-                            <Suspense fallback={<div>Loading...</div>}>
-                                <NotFoundPage />
                             </Suspense>
                         ),
                     },
