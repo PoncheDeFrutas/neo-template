@@ -112,7 +112,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) =>
                     {required ? <span className="text-danger"> *</span> : null}
                 </label>
             )}
-            <div className="relative">
+            <div className={cn('relative', fullWidth ? 'w-full' : 'inline-block')}>
                 {withLeftIcon && (
                     <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-muted-foreground">
                         {leftIcon}
@@ -322,7 +322,7 @@ export const SearchableSelect = (props: SearchableSelectProps) => {
                     {label}
                 </label>
             )}
-            <div className="relative">
+            <div className={cn('relative', fullWidth ? 'w-full' : 'inline-block')}>
                 <button
                     ref={buttonRef}
                     type="button"

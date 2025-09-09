@@ -110,6 +110,7 @@ export function Modal(props: ModalProps) {
                     className={cn(
                         'w-full rounded-xl border border-border bg-surface shadow-lg outline-none',
                         'transition-all duration-200 ease-out',
+                        'max-h-[85vh] flex flex-col',
                         sizeClass[size],
                         className,
                     )}
@@ -137,7 +138,7 @@ export function Modal(props: ModalProps) {
                             <X size={18} />
                         </button>
                     </div>
-                    <div className="p-4">{children}</div>
+                    <div className="flex-1 overflow-auto p-4">{children}</div>
                     {footer ? <div className="border-t border-border p-4">{footer}</div> : null}
                 </div>
             </div>

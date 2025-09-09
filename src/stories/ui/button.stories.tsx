@@ -1,183 +1,238 @@
 import { Button } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
+import { ArrowRight, ExternalLink, Mail, Save } from 'lucide-react';
 
-/**
- * Storybook meta configuration for the Button component.
- *
- * @description Defines the story metadata for the shared Button component including
- * its title, component reference, layout parameters, and control configurations.
- *
- * @property {string} title - The hierarchical title displayed in Storybook sidebar
- * @property {React.Component} component - Reference to the Button component
- * @property {Object} parameters - Storybook parameters configuration
- * @property {string[]} tags - Tags for automatic documentation generation
- * @property {Object} args - Default arguments passed to all stories
- * @property {Object} argTypes - Control types and options for each prop
- *
- * @example
- * ```tsx
- * // Usage in story
- * export const Default: Story = {
- *   args: {
- *     variant: 'default',
- *     size: 'md'
- *   }
- * };
- * ```
- */
+type Variant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'destructive' | 'custom';
+type Size = 'sm' | 'md' | 'lg' | 'icon';
+type Shape = 'rounded' | 'square' | 'pill' | 'circle';
+
+type StoryArgs = {
+    as: 'button' | 'a';
+    label?: string;
+    variant: Variant;
+    size: Size;
+    shape: Shape;
+    fullWidth?: boolean;
+    loading?: boolean;
+    disabled?: boolean;
+    className?: string;
+    href?: string;
+    target?: string;
+    withLeftIcon?: boolean;
+    withRightIcon?: boolean;
+};
+
 const meta = {
     title: 'Shared/Button',
     component: Button,
-    parameters: { layout: 'centered' },
+    parameters: {
+        layout: 'centered',
+        docs: {
+            description: {
+                component: `
+Buttons trigger actions or navigate to other views. This component supports multiple variants, sizes, shapes and can render as an anchor for links.
+
+Usage
+\`\`\`tsx
+import { Button } from '@shared/ui';
+
+// Primary action
+<Button variant="primary" onClick={() => alert('Clicked!')}>Continue</Button>
+
+// With icons
+import { Mail, ArrowRight } from 'lucide-react';
+<Button leftIcon={<Mail size={16} />} rightIcon={<ArrowRight size={16} />}>Contact</Button>
+
+// As link
+<Button as="a" variant="link" href="/docs">Docs</Button>
+
+// Icon button
+import { Save } from 'lucide-react';
+<Button size="icon" aria-label="Save"><Save size={16} /></Button>
+
+// Custom styles (variant="custom")
+<Button variant="custom" className="bg-primary text-primary-foreground">Custom</Button>
+\`\`\`
+
+Props
+- as: 'button' | 'a' — Render as a button or anchor (default: 'button').
+- label/children: string | ReactNode — Content; use \`children\` for advanced layouts.
+- variant: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'destructive' | 'custom' (default: 'primary').
+- size: 'sm' | 'md' | 'lg' | 'icon' — Visual size (default: 'md').
+- shape: 'rounded' | 'square' | 'pill' | 'circle' (default: 'rounded').
+- fullWidth: boolean — Stretch to full width.
+- loading: boolean — Shows a spinner and sets aria-busy.
+- leftIcon/rightIcon: ReactNode — Optional icons.
+- className: string — Extra classes. When \`variant="custom"\`, built-in colors are omitted.
+- href/target/rel: anchor attributes when \`as="a"\`.
+
+Notes
+- Accessibility: Loading state adds \`aria-busy\` and disables the control.
+- Link variant uses minimal padding and underline style.
+- Icon size expects only an icon as content; label is ignored.
+                `,
+            },
+        },
+    },
     tags: ['autodocs'],
-    args: {
-        label: 'Button',
-        onClick: fn(),
-    },
     argTypes: {
-        label: { control: 'text' },
+        as: { control: { type: 'inline-radio' }, options: ['button', 'a'], description: 'Render mode' },
+        label: { control: 'text', description: 'Text label (or use children)' },
         variant: {
-            control: 'select',
-            options: ['default', 'outline', 'gradient', 'gradientOutline'],
+            control: { type: 'select' },
+            options: ['primary', 'secondary', 'outline', 'ghost', 'link', 'destructive', 'custom'],
+            description: 'Visual variant',
         },
-        size: {
-            control: 'select',
-            options: ['xs', 'sm', 'md', 'lg', 'xl'],
-        },
-        pill: { control: 'boolean' },
-        loading: { control: 'boolean' },
-        disabled: { control: 'boolean' },
-        color: { control: 'color' },
-        leftIcon: { control: false },
-        rightIcon: { control: false },
-        icon: { control: false },
+        size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg', 'icon'], description: 'Button size' },
+        shape: { control: { type: 'inline-radio' }, options: ['rounded', 'square', 'pill', 'circle'], description: 'Shape' },
+        fullWidth: { control: 'boolean', description: 'Full width' },
+        loading: { control: 'boolean', description: 'Loading state' },
+        disabled: { control: 'boolean', description: 'Disabled state' },
+        className: { control: 'text', description: 'Extra classes (for custom variant)' },
+        href: { control: 'text', description: 'Link URL (when as="a")' },
+        target: { control: 'text', description: 'Link target (when as="a")' },
+        withLeftIcon: { control: 'boolean', description: 'Show left icon' },
+        withRightIcon: { control: 'boolean', description: 'Show right icon' },
     },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
-/**
- * Story type alias for the `Button` component.
- *
- * @see StoryObj
- */
-export type Story = StoryObj<typeof Button>;
 
-/**
- * Reusable SVG icon used in examples with `leftIcon`, `rightIcon`, or `icon`.
- */
-const StarIcon = (
-    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.357 4.19h4.4c.969 0 1.371 1.24.588 1.81l-3.567 2.59 1.357 4.19c.3.921-.755 1.688-1.539 1.118L10 14.347l-3.548 2.478c-.784.57-1.838-.197-1.539-1.118l1.357-4.19-3.567-2.59c-.783-.57-.38-1.81.588-1.81h4.4l1.357-4.19z" />
-    </svg>
-);
+type Story = StoryObj<StoryArgs>;
 
-/**
- * Default button state.
- */
-export const Default: Story = {};
-
-/**
- * Outline variant emphasizing the border.
- */
-export const Outline: Story = {
-    args: { variant: 'outline' },
-};
-
-/**
- * Gradient variant using the default theme color.
- */
-export const Gradient: Story = {
-    args: { variant: 'gradient' },
-};
-
-/**
- * Gradient applied to the outline (border-only gradient).
- */
-export const GradientOutline: Story = {
-    args: { variant: 'gradientOutline' },
-};
-
-/**
- * Demonstrates custom `color` with `gradient` variant; the end tone is derived automatically.
- */
-export const GradientCustomColor: Story = {
-    name: 'Gradient (custom color)',
-    args: { variant: 'gradient', color: '#22c55e', label: 'Gradient Green' },
-    parameters: {
-        docs: {
-            description: {
-                story: 'El gradiente ahora usa `color` como inicio y calcula el final automáticamente (ligeramente más claro/oscuro).',
-            },
-        },
+export const Playground: Story = {
+    args: {
+        as: 'button',
+        label: 'Continue',
+        variant: 'primary',
+        size: 'md',
+        shape: 'rounded',
+        fullWidth: false,
+        loading: false,
+        disabled: false,
+        className: '',
+        href: '/docs',
+        target: '_self',
+        withLeftIcon: false,
+        withRightIcon: false,
+    },
+    parameters: { docs: { description: { story: 'Interactive control center.' } } },
+    render: (args) => {
+        const { as, href, target, withLeftIcon, withRightIcon, label, ...rest } = args;
+        const left = withLeftIcon ? <Mail size={16} /> : undefined;
+        const right = withRightIcon ? <ArrowRight size={16} /> : undefined;
+        const props: any = { as, label, leftIcon: left, rightIcon: right, ...rest };
+        if (as === 'a') {
+            props.href = href || '#';
+            props.target = target;
+            props.rel = target === '_blank' ? 'noreferrer noopener' : undefined;
+        }
+        return <Button {...props} />;
     },
 };
 
-/**
- * In `gradientOutline`, the gradient appears on hover; the border color follows `color`.
- */
-export const GradientOutlineHover: Story = {
-    name: 'Gradient Outline (hover)',
-    args: { variant: 'gradientOutline', color: '#ef4444', label: 'Hover Me' },
-    parameters: {
-        docs: {
-            description: {
-                story: 'En `gradientOutline`, el gradiente se aplica sólo al hacer hover; el borde usa `color`.',
-            },
-        },
-    },
-};
-
-/**
- * Fully rounded (pill) button.
- */
-export const Pill: Story = {
-    args: { pill: true },
-};
-
-/**
- * Displays all available sizes from `xs` to `xl`.
- */
-export const Sizes: Story = {
+export const Variants: Story = {
+    args: { as: 'button', label: 'Action', size: 'md', shape: 'rounded', variant: 'primary' },
+    parameters: { docs: { description: { story: 'All visual variants.' } } },
     render: (args) => (
-        <div className="flex gap-2">
-            <Button {...args} size="xs" label="XS" />
-            <Button {...args} size="sm" label="SM" />
-            <Button {...args} size="md" label="MD" />
-            <Button {...args} size="lg" label="LG" />
-            <Button {...args} size="xl" label="XL" />
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+            <Button {...(args as any)} variant="primary" />
+            <Button {...(args as any)} variant="secondary" />
+            <Button {...(args as any)} variant="outline" />
+            <Button {...(args as any)} variant="ghost" />
+            <Button {...(args as any)} variant="link" />
+            <Button {...(args as any)} variant="destructive" />
         </div>
     ),
 };
 
-/**
- * Example with icons on both sides of the label.
- */
-export const WithIcons: Story = {
-    args: { leftIcon: StarIcon, rightIcon: StarIcon },
+export const Sizes: Story = {
+    args: { as: 'button', label: 'Size', variant: 'primary', shape: 'rounded', size: 'md' },
+    parameters: { docs: { description: { story: 'sm, md, lg and icon size.' } } },
+    render: (args) => (
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+            <Button {...(args as any)} size="sm" />
+            <Button {...(args as any)} size="md" />
+            <Button {...(args as any)} size="lg" />
+            <Button {...(args as any)} size="icon" aria-label="Save">
+                <Save size={16} />
+            </Button>
+        </div>
+    ),
 };
 
-/**
- * Icon-only button with accessible label via `aria-label`.
- */
-export const IconButton: Story = {
+export const Shapes: Story = {
+    args: { as: 'button', label: 'Shape', variant: 'primary', size: 'md', shape: 'rounded' },
+    parameters: { docs: { description: { story: 'rounded, square, pill, circle.' } } },
+    render: (args) => (
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+            <Button {...(args as any)} shape="rounded" />
+            <Button {...(args as any)} shape="square" />
+            <Button {...(args as any)} shape="pill" />
+            <Button {...(args as any)} shape="circle" />
+        </div>
+    ),
+};
+
+export const WithIcons: Story = {
+    args: { as: 'button', label: 'Contact', variant: 'secondary', size: 'md', shape: 'rounded' },
+    parameters: { docs: { description: { story: 'Left and right icons.' } } },
+    render: (args) => (
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+            <Button {...(args as any)} leftIcon={<Mail size={16} />} />
+            <Button {...(args as any)} rightIcon={<ArrowRight size={16} />} />
+            <Button {...(args as any)} leftIcon={<Mail size={16} />} rightIcon={<ArrowRight size={16} />} />
+        </div>
+    ),
+};
+
+export const LoadingAndDisabled: Story = {
+    args: { as: 'button', label: 'Processing', variant: 'primary', size: 'md', shape: 'rounded' },
+    parameters: { docs: { description: { story: 'Loading and disabled states.' } } },
+    render: (args) => (
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+            <Button {...(args as any)} loading />
+            <Button {...(args as any)} disabled />
+        </div>
+    ),
+};
+
+export const FullWidth: Story = {
+    args: { as: 'button', label: 'Full width', variant: 'outline', size: 'md', shape: 'rounded' },
+    parameters: { docs: { description: { story: 'Stretch to full width.' } } },
+    render: (args) => (
+        <div style={{ width: 360 }}>
+            <Button {...(args as any)} fullWidth />
+        </div>
+    ),
+};
+
+export const AsLink: Story = {
     args: {
-        icon: StarIcon,
-        'aria-label': 'star',
-        label: undefined,
+        as: 'a',
+        label: 'Open Docs',
+        variant: 'link',
+        size: 'md',
+        shape: 'rounded',
+        href: 'https://storybook.js.org',
+        target: '_blank',
+    },
+    parameters: { docs: { description: { story: 'Rendered as an anchor with link variant.' } } },
+    render: (args) => {
+        const props: any = { ...args, rel: args.target === '_blank' ? 'noreferrer noopener' : undefined };
+        return <Button {...props} rightIcon={<ExternalLink size={16} />} />;
     },
 };
 
-/**
- * Loading state disables interactions and shows a spinner.
- */
-export const Loading: Story = {
-    args: { loading: true },
+export const Custom: Story = {
+    args: {
+        as: 'button',
+        label: 'Custom',
+        variant: 'custom',
+        size: 'md',
+        shape: 'rounded',
+        className: 'bg-primary text-primary-foreground hover:opacity-90',
+    },
+    parameters: { docs: { description: { story: 'Provide your own classes when using variant="custom".' } } },
 };
 
-/**
- * Disabled state of the button.
- */
-export const Disabled: Story = {
-    args: { disabled: true },
-};

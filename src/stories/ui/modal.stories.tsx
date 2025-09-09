@@ -1,149 +1,243 @@
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader, type ModalProps } from '@shared/ui';
+import { Button, Modal } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
-/**
- * Storybook meta configuration for the Modal component.
- *
- * Defines the story metadata including component title, default parameters,
- * and control configurations for the Modal component's props.
- *
- * @property {string} title - The story title displayed in Storybook sidebar
- * @property {React.Component} component - The Modal component being documented
- * @property {string[]} tags - Tags for automatic documentation generation
- * @property {object} args - Default values for component props
- * @property {object} argTypes - Control configurations for interactive prop manipulation
- * @property {object} argTypes.type - Select control for modal type variants (default, static, popup, crud)
- * @property {object} argTypes.size - Select control for modal size options (sm, md, lg, xl, 2xl)
- * @property {object} argTypes.placement - Select control for modal positioning on screen
- *
- * @example
- * ```tsx
- * // Usage in Storybook stories
- * export default meta;
- *
- * export const Default: Story = {
- *   args: {
- *     type: "popup",
- *     size: "lg",
- *     placement: "center"
- *   }
- * };
- * ```
- */
+type Size = 'sm' | 'md' | 'lg';
+
+type StoryArgs = {
+    size: Size;
+    title?: string;
+    description?: string;
+    withFooter?: boolean;
+    blurOverlay?: boolean;
+    closeOnOverlay?: boolean;
+    className?: string;
+    content?: string;
+};
+
 const meta = {
     title: 'Shared/Modal',
     component: Modal,
-    tags: ['autodocs'],
-    argTypes: {
-        type: { control: 'select', options: ['default', 'static', 'popup', 'crud'] },
-        size: { control: 'select', options: ['sm', 'md', 'lg', 'xl', '2xl'] },
-        placement: {
-            control: 'select',
-            options: [
-                'center',
-                'top-left',
-                'top-center',
-                'top-right',
-                'center-left',
-                'center-right',
-                'bottom-left',
-                'bottom-center',
-                'bottom-right',
-            ],
+    parameters: {
+        layout: 'padded',
+        docs: {
+            description: {
+                component: `
+Modals display important content in a dedicated layer and require user interaction to proceed.
+
+Usage
+\`\`\`tsx
+import { Modal, Button } from '@shared/ui';
+import { useState } from 'react';
+
+function Example() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open</Button>
+      <Modal
+        open={open}
+        onOpenChange={setOpen}
+        size="md"
+        title="Dialog title"
+        description="Helpful description"
+      >
+        Content goes here.
+      </Modal>
+    </>
+  );
+}
+\`\`\`
+
+Props
+- size: 'sm' | 'md' | 'lg' — Max width (default: 'md').
+- title/description/footer: ReactNode — Optional header/footer content.
+- blurOverlay: boolean — Blur the background overlay (default: true).
+- closeOnOverlay: boolean — Clicking the overlay closes the modal (default: true).
+- className: string — Extra classes for the panel.
+- open: boolean, onOpenChange: (open: boolean) => void — Controlled state.
+
+Notes
+- Keyboard: ESC closes. Focus is trapped within the dialog while open.
+- Scrolling: Body scroll is locked to prevent background scroll.
+- Accessibility: Uses \`role="dialog"\`, \`aria-modal\`, and labels/descriptions when provided.
+                `,
+            },
         },
     },
-    args: {
-        type: 'default',
-        size: 'md',
-        placement: 'center',
+    tags: ['autodocs'],
+    argTypes: {
+        size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'], description: 'Dialog size' },
+        title: { control: 'text', description: 'Header title' },
+        description: { control: 'text', description: 'Header description' },
+        withFooter: { control: 'boolean', description: 'Show example footer actions' },
+        blurOverlay: { control: 'boolean', description: 'Blur background overlay' },
+        closeOnOverlay: { control: 'boolean', description: 'Close when clicking overlay' },
+        className: { control: 'text', description: 'Extra classes for the panel' },
+        content: { control: 'text', description: 'Body content (for examples)' },
     },
-} satisfies Meta<typeof Modal>;
+} satisfies Meta<any>;
 
 export default meta;
 
-export type Story = StoryObj<typeof Modal>;
+type Story = StoryObj<StoryArgs>;
 
-/**
- * Reusable template for modal stories.
- *
- * Manages internal `open` state and wires `onClose`/`onSave` to close the modal by default.
- */
-const Template = (args: ModalProps) => {
-    const [open, setOpen] = useState(false);
+function FooterActions({ onClose }: { onClose: () => void }) {
     return (
-        <>
-            <Button label="Open Modal" onClick={() => setOpen(true)} />
-            <Modal
-                {...args}
-                isOpen={open}
-                onClose={() => setOpen(false)}
-                onSave={args.onSave ?? (() => setOpen(false))}
-            >
-                {args.type === 'crud' ? (
-                    <p className="mb-4">Body content for create/update/delete.</p>
-                ) : (
-                    <>
-                        <ModalHeader>
-                            <h2 className="text-lg font-bold">Modal Title</h2>
-                        </ModalHeader>
-                        <ModalBody>
-                            <p className="mb-4">This is a simple modal.</p>
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button label="Close" onClick={() => setOpen(false)} />
-                        </ModalFooter>
-                    </>
-                )}
-            </Modal>
-        </>
+        <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
+            <Button variant="outline" onClick={onClose} size="sm">
+                Cancel
+            </Button>
+            <Button onClick={onClose} size="sm">
+                Confirm
+            </Button>
+        </div>
     );
+}
+
+export const Playground: Story = {
+    args: {
+        size: 'md',
+        title: 'Dialog title',
+        description: 'Short helpful text.',
+        withFooter: false,
+        blurOverlay: true,
+        closeOnOverlay: true,
+        className: '',
+        content:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec magna eros. Integer sit amet dui nec purus posuere imperdiet.',
+    },
+    parameters: { docs: { description: { story: 'Interactive control center.' } } },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        return (
+            <div style={{ display: 'grid', gap: 12 }}>
+                <Button onClick={() => setOpen(true)}>Open modal</Button>
+                <Modal
+                    open={open}
+                    onOpenChange={setOpen}
+                    size={args.size}
+                    title={args.title}
+                    description={args.description}
+                    blurOverlay={args.blurOverlay}
+                    closeOnOverlay={args.closeOnOverlay}
+                    className={args.className}
+                    footer={args.withFooter ? <FooterActions onClose={() => setOpen(false)} /> : undefined}
+                >
+                    {args.content}
+                </Modal>
+            </div>
+        );
+    },
 };
 
-/**
- * Default modal type.
- */
-export const Default: Story = {
-    render: Template,
-    args: { type: 'default' },
-};
-
-/**
- * Non-dismissable modal (no outside click to close).
- */
-export const Static: Story = {
-    render: Template,
-    args: { type: 'static' },
-};
-
-/**
- * Popup modal style.
- */
-export const Popup: Story = {
-    render: Template,
-    args: { type: 'popup' },
-};
-
-/**
- * CRUD-style modal rendering only body content and delegating header/footer.
- */
-export const CRUD: Story = {
-    render: Template,
-    args: { type: 'crud' },
-};
-
-/**
- * Demonstrates a larger size.
- */
 export const Sizes: Story = {
-    render: Template,
-    args: { size: 'lg' },
+    args: { blurOverlay: true, closeOnOverlay: true },
+    parameters: { docs: { description: { story: 'sm, md, lg modal widths.' } } },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        const [size, setSize] = useState<Size>('sm');
+        return (
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                {(['sm', 'md', 'lg'] as Size[]).map((sz) => (
+                    <Button key={sz} onClick={() => { setSize(sz); setOpen(true); }}>
+                        Open {sz}
+                    </Button>
+                ))}
+                <Modal
+                    open={open}
+                    onOpenChange={setOpen}
+                    size={size}
+                    title={`Size ${size}`}
+                    description="Modal width changes by size."
+                    blurOverlay={args.blurOverlay}
+                    closeOnOverlay={args.closeOnOverlay}
+                >
+                    This is a {size} modal.
+                </Modal>
+            </div>
+        );
+    },
 };
 
-/**
- * Demonstrates alternate placements.
- */
-export const Placements: Story = {
-    render: Template,
-    args: { placement: 'top-left' },
+export const WithFooter: Story = {
+    args: { size: 'md', blurOverlay: true, closeOnOverlay: true },
+    parameters: { docs: { description: { story: 'Modal with footer actions.' } } },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        return (
+            <div style={{ display: 'grid', gap: 12 }}>
+                <Button onClick={() => setOpen(true)}>Open with footer</Button>
+                <Modal
+                    open={open}
+                    onOpenChange={setOpen}
+                    size={args.size}
+                    title="Review changes"
+                    description="Make sure everything looks correct before continuing."
+                    blurOverlay={args.blurOverlay}
+                    closeOnOverlay={args.closeOnOverlay}
+                    footer={<FooterActions onClose={() => setOpen(false)} />}
+                >
+                    Content with example actions in the footer.
+                </Modal>
+            </div>
+        );
+    },
 };
+
+export const LongContent: Story = {
+    args: { size: 'md', blurOverlay: true, closeOnOverlay: true },
+    parameters: { docs: { description: { story: 'Scrollable content area when content is long.' } } },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        const para =
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Cras vel sapien at augue euismod lobortis. Integer eget turpis vitae sem pulvinar hendrerit.';
+        return (
+            <div style={{ display: 'grid', gap: 12 }}>
+                <Button onClick={() => setOpen(true)}>Open long content</Button>
+                <Modal
+                    open={open}
+                    onOpenChange={setOpen}
+                    size={args.size}
+                    title="Long content"
+                    description="Scroll within the page if content overflows the viewport."
+                    blurOverlay={args.blurOverlay}
+                    closeOnOverlay={args.closeOnOverlay}
+                >
+                    <div style={{ display: 'grid', gap: 12 }}>
+                        {Array.from({ length: 20 }).map((_, i) => (
+                            <p key={i}>{para}</p>
+                        ))}
+                    </div>
+                </Modal>
+            </div>
+        );
+    },
+};
+
+export const OverlayBehavior: Story = {
+    args: { size: 'md', blurOverlay: true, closeOnOverlay: false },
+    parameters: { docs: { description: { story: 'Toggle overlay blur and click-to-close behavior.' } } },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        return (
+            <div style={{ display: 'grid', gap: 12 }}>
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                    <Button onClick={() => setOpen(true)}>Open (overlay click disabled)</Button>
+                </div>
+                <Modal
+                    open={open}
+                    onOpenChange={setOpen}
+                    size={args.size}
+                    title="Overlay behavior"
+                    description={`Blur overlay: ${args.blurOverlay ? 'on' : 'off'}. Click overlay to close: ${args.closeOnOverlay ? 'on' : 'off'}.`}
+                    blurOverlay={args.blurOverlay}
+                    closeOnOverlay={args.closeOnOverlay}
+                >
+                    Try pressing ESC to close, or toggle props in the playground.
+                </Modal>
+            </div>
+        );
+    },
+};
+

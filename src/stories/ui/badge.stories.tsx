@@ -1,78 +1,202 @@
 import { Badge } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
+import { Check, X } from 'lucide-react';
+
+type Variant = 'neutral' | 'success' | 'warning' | 'danger' | 'custom';
+type Tone = 'soft' | 'solid' | 'outline';
+type Size = 'sm' | 'md' | 'lg';
+
+type StoryArgs = {
+    children: string;
+    variant: Variant;
+    tone: Tone;
+    size: Size;
+    className?: string;
+    withLeftIcon?: boolean;
+    withRightIcon?: boolean;
+};
 
 const meta = {
     title: 'Shared/Badge',
     component: Badge,
-    parameters: { layout: 'centered' },
-    tags: ['autodocs'],
-    args: {
-        children: 'Badge',
-    },
-    argTypes: {
-        children: { control: 'text' },
-        size: { control: 'select', options: ['default', 'large'] },
-        variant: {
-            control: 'select',
-            options: ['default', 'bordered', 'pill', 'link', 'notification', 'chips'],
+    parameters: {
+        layout: 'centered',
+        docs: {
+            description: {
+                component: `
+Badges are small status or categorization pills. They support variant, tone, size and optional icons.
+
+Usage
+\`\`\`tsx
+import { Badge } from '@shared/ui';
+
+// Soft tone (default)
+<Badge>New</Badge>
+<Badge variant="success">Active</Badge>
+<Badge variant="warning">Pending</Badge>
+<Badge variant="danger">Blocked</Badge>
+
+// Solid tone
+<Badge variant="success" tone="solid">Active</Badge>
+
+// Outline tone
+<Badge variant="warning" tone="outline">Pending</Badge>
+
+// Sizes
+<Badge size="sm">Small</Badge>
+<Badge size="md">Medium</Badge>
+<Badge size="lg">Large</Badge>
+
+// With icons
+import { Check, X } from 'lucide-react';
+
+<Badge variant="success" tone="solid" size="md" leftIcon={<Check size={12} />}>Done</Badge>
+<Badge variant="danger" tone="soft" size="md" rightIcon={<X size={12} />}>Error</Badge>
+
+// Custom styling (variant="custom"): you own all classes
+<Badge variant="custom" className="bg-primary text-primary-foreground border border-transparent">Custom</Badge>
+\`\`\`
+
+Props
+- children: string — The label text displayed inside the badge.
+- variant: 'neutral' | 'success' | 'warning' | 'danger' | 'custom' — Visual intent (default: 'neutral').
+- tone: 'soft' | 'solid' | 'outline' — Style tone (default: 'soft').
+- size: 'sm' | 'md' | 'lg' — Size of the badge (default: 'md').
+- leftIcon/rightIcon: ReactNode — Optional icons placed at the sides.
+- className: string — Extra classes (use with variant="custom").
+
+Notes
+- Using variant="custom" disables built-in styles; provide your own classes via className.
+- Icons are vertically centered and padded for visual balance.
+                `,
+            },
         },
-        href: { control: 'text' },
-        icon: { control: false },
-        iconOnly: { control: 'boolean' },
-        onRemove: { control: false },
-        color: { control: 'color' },
-        textColor: { control: 'color' },
-        dotColor: { control: 'color' },
     },
-} satisfies Meta<typeof Badge>;
+    tags: ['autodocs'],
+    argTypes: {
+        children: { control: 'text', description: 'Label text' },
+        variant: {
+            control: { type: 'inline-radio' },
+            options: ['neutral', 'success', 'warning', 'danger', 'custom'],
+            description: 'Visual variant',
+        },
+        tone: {
+            control: { type: 'inline-radio' },
+            options: ['soft', 'solid', 'outline'],
+            description: 'Style tone',
+        },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg'],
+            description: 'Badge size',
+        },
+        className: { control: 'text', description: 'Extra classes (for custom variant)' },
+        withLeftIcon: { control: 'boolean', description: 'Show a left icon (Check)' },
+        withRightIcon: { control: 'boolean', description: 'Show a right icon (X)' },
+    },
+} satisfies Meta<StoryArgs>;
 
 export default meta;
-export type Story = StoryObj<typeof Badge>;
 
-const StarIcon = (
-    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.357 4.19h4.4c.969 0 1.371 1.24.588 1.81l-3.567 2.59 1.357 4.19c.3.921-.755 1.688-1.539 1.118L10 14.347l-3.548 2.478c-.784.57-1.838-.197-1.539-1.118l1.357-4.19-3.567-2.59c-.783-.57-.38-1.81.588-1.81h4.4l1.357-4.19z" />
-    </svg>
-);
+type Story = StoryObj<StoryArgs>;
 
-export const Default: Story = {};
-export const Large: Story = { args: { size: 'large' } };
-export const Bordered: Story = { args: { variant: 'bordered' } };
-export const Pill: Story = { args: { variant: 'pill' } };
-export const Link: Story = { args: { variant: 'link', href: '#' } };
-export const WithIcon: Story = { args: { icon: StarIcon } };
-export const Notification: Story = { args: { variant: 'notification' } };
-export const IconOnly: Story = { args: { icon: StarIcon, iconOnly: true } };
-export const Chips: Story = { args: { variant: 'chips', onRemove: fn() } };
+export const Playground: Story = {
+    args: {
+        children: 'New',
+        variant: 'neutral',
+        tone: 'soft',
+        size: 'md',
+        className: '',
+        withLeftIcon: false,
+        withRightIcon: false,
+    },
+    parameters: { docs: { description: { story: 'Interactive control center.' } } },
+    render: (args) => {
+        const { children, withLeftIcon, withRightIcon, ...rest } = args;
+        return (
+            <div style={{ display: 'grid', gap: 16, placeItems: 'center' }}>
+                <Badge
+                    {...rest}
+                    leftIcon={withLeftIcon ? <Check size={12} /> : undefined}
+                    rightIcon={withRightIcon ? <X size={12} /> : undefined}
+                >
+                    {children}
+                </Badge>
+            </div>
+        );
+    },
+};
 
-export const CustomColors: Story = {
-    render: () => (
-        <div className="flex gap-2">
-            <Badge color="#fee2e2" textColor="#991b1b">
-                Rojo
-            </Badge>
-            <Badge color="#dcfce7" textColor="#166534">
-                Verde
-            </Badge>
-            <Badge color="#fef3c7" textColor="#92400e">
-                Amarillo
-            </Badge>
+export const Variants: Story = {
+    args: { children: 'Label', size: 'md', tone: 'soft', variant: 'neutral' },
+    parameters: {
+        docs: { description: { story: 'Available variants under soft tone.' } },
+    },
+    render: (args) => (
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+            <Badge {...args} variant="neutral">Neutral</Badge>
+            <Badge {...args} variant="success">Success</Badge>
+            <Badge {...args} variant="warning">Warning</Badge>
+            <Badge {...args} variant="danger">Danger</Badge>
         </div>
     ),
 };
 
-export const TextColorOnly: Story = { args: { textColor: '#991b1b' } };
-
-export const NotificationColors: Story = {
-    render: () => (
-        <div className="flex gap-2">
-            <Badge variant="notification" textColor="#16a34a">
-                Text color dot
-            </Badge>
-            <Badge variant="notification" dotColor="#facc15">
-                Custom dot
-            </Badge>
+export const Tones: Story = {
+    args: { children: 'Status', variant: 'success', size: 'md', tone: 'soft' },
+    parameters: {
+        docs: { description: { story: 'Soft, solid and outline tones.' } },
+    },
+    render: (args) => (
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+            <Badge {...args} tone="soft">Soft</Badge>
+            <Badge {...args} tone="solid">Solid</Badge>
+            <Badge {...args} tone="outline">Outline</Badge>
         </div>
     ),
+};
+
+export const Sizes: Story = {
+    args: { children: 'Size', variant: 'neutral', tone: 'soft', size: 'md' },
+    parameters: {
+        docs: { description: { story: 'Badge sizes: sm, md, lg.' } },
+    },
+    render: (args) => (
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            <Badge {...args} size="sm">SM</Badge>
+            <Badge {...args} size="md">MD</Badge>
+            <Badge {...args} size="lg">LG</Badge>
+        </div>
+    ),
+};
+
+export const WithIcons: Story = {
+    args: { children: 'With Icons', variant: 'success', tone: 'solid', size: 'md' },
+    parameters: {
+        docs: { description: { story: 'Left and right icon examples.' } },
+    },
+    render: (args) => (
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+            <Badge {...args} leftIcon={<Check size={12} />}>Done</Badge>
+            <Badge {...args} variant="danger" tone="soft" rightIcon={<X size={12} />}>Error</Badge>
+        </div>
+    ),
+};
+
+export const Custom: Story = {
+    args: {
+        children: 'Custom',
+        variant: 'custom',
+        tone: 'soft',
+        size: 'md',
+        className: 'bg-primary text-primary-foreground border border-transparent',
+    },
+    parameters: {
+        docs: {
+            description: {
+                story:
+                    'When using variant="custom", built-in styles are disabled. Provide your own classes.',
+            },
+        },
+    },
 };

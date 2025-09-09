@@ -1,317 +1,151 @@
-import { Tabs, TabList, Tab, TabPanel } from '@shared/ui';
+import { Tabs } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
-/**
- * Storybook meta configuration for the Tabs component.
- *
- * Defines the story metadata including component title, subcomponents, default parameters,
- * and control configurations for the Tabs component's props.
- *
- * @property {string} title - The story title displayed in Storybook sidebar
- * @property {React.Component} component - The Tabs component being documented
- * @property {object} subcomponents - Related subcomponents (TabList, Tab, TabPanel)
- * @property {object} parameters - Storybook parameters including layout configuration
- * @property {string[]} tags - Tags for automatic documentation generation
- * @property {object} args - Default values for component props
- * @property {object} argTypes - Control configurations for interactive prop manipulation
- * @property {object} argTypes.variant - Select control for tab variants (default, underline, pill, vertical, fullWidth)
- * @property {object} argTypes.showIcon - Boolean control for icon display
- * @property {object} argTypes.activeClassName - Text control for active tab styling
- * @property {object} argTypes.inactiveClassName - Text control for inactive tab styling
- *
- * @example
- * ```tsx
- * // Usage in Storybook stories
- * export default meta;
- *
- * export const Default: Story = {
- *   args: {
- *     variant: "underline",
- *     showIcon: true
- *   }
- * };
- * ```
- */
-const meta: Meta<typeof Tabs> = {
+type Size = 'sm' | 'md';
+
+type StoryArgs = {
+    size: Size;
+    value?: string;
+    defaultValue?: string;
+    withDisabledSecond?: boolean;
+    listClassName?: string;
+    triggerClassName?: string;
+    contentClassName?: string;
+};
+
+const meta = {
     title: 'Shared/Tabs',
     component: Tabs,
-    subcomponents: { TabList, Tab, TabPanel },
     parameters: {
-        layout: 'centered',
-    },
-    tags: ['autodocs'],
-    argTypes: {
-        variant: {
-            control: { type: 'select' },
-            options: ['default', 'underline', 'pill', 'vertical', 'fullWidth'],
-        },
-        showIcon: {
-            control: { type: 'boolean' },
-        },
-        activeClassName: {
-            control: { type: 'text' },
-        },
-        inactiveClassName: {
-            control: { type: 'text' },
-        },
-    } as any,
-    args: {
-        variant: 'default',
-        showIcon: false,
-    } as any,
-};
-
-export default meta;
-
-/**
- * Story type alias for the `Tabs` component stories with additional args.
- */
-export type Story = StoryObj<typeof Tabs> & {
-    args?: {
-        variant?: 'default' | 'underline' | 'pill' | 'vertical' | 'fullWidth';
-        showIcon?: boolean;
-        activeClassName?: string;
-        inactiveClassName?: string;
-    };
-};
-
-/**
- * Reusable SVG icon for tab examples.
- */
-const TabStarIcon = (
-    <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.357 4.19h4.4c.969 0 1.371 1.24.588 1.81l-3.567 2.59 1.357 4.19c.3.921-.755 1.688-1.539 1.118L10 14.347l-3.548 2.478c-.784.57-1.838-.197-1.539-1.118l1.357-4.19-3.567-2.59c-.783-.57-.38-1.81.588-1.81h4.4l1.357-4.19z" />
-    </svg>
-);
-
-/**
- * Template used to render different tab variants based on `args`.
- */
-const Template = (args: any) => {
-    const iconNode = args.showIcon ? TabStarIcon : undefined;
-
-    if (args.variant === 'vertical') {
-        return (
-            <div style={{ display: 'flex', gap: 16 }}>
-                <Tabs defaultValue="tab1">
-                    <TabList variant={args.variant}>
-                        <Tab
-                            value="tab1"
-                            icon={iconNode}
-                            activeClassName={args.activeClassName}
-                            inactiveClassName={args.inactiveClassName}
-                        >
-                            Tab 1
-                        </Tab>
-                        <Tab
-                            value="tab2"
-                            icon={iconNode}
-                            activeClassName={args.activeClassName}
-                            inactiveClassName={args.inactiveClassName}
-                        >
-                            Tab 2
-                        </Tab>
-                        <Tab
-                            value="tab3"
-                            icon={iconNode}
-                            activeClassName={args.activeClassName}
-                            inactiveClassName={args.inactiveClassName}
-                        >
-                            Tab 3
-                        </Tab>
-                    </TabList>
-                    <div style={{ paddingLeft: 16 }}>
-                        <TabPanel value="tab1">Content 1</TabPanel>
-                        <TabPanel value="tab2">Content 2</TabPanel>
-                        <TabPanel value="tab3">Content 3</TabPanel>
-                    </div>
-                </Tabs>
-            </div>
-        );
-    }
-
-    const content = (
-        <Tabs defaultValue="tab1">
-            <TabList variant={args.variant}>
-                <Tab
-                    value="tab1"
-                    icon={iconNode}
-                    activeClassName={args.activeClassName}
-                    inactiveClassName={args.inactiveClassName}
-                >
-                    Tab 1
-                </Tab>
-                <Tab
-                    value="tab2"
-                    icon={iconNode}
-                    activeClassName={args.activeClassName}
-                    inactiveClassName={args.inactiveClassName}
-                >
-                    Tab 2
-                </Tab>
-                <Tab
-                    value="tab3"
-                    icon={iconNode}
-                    activeClassName={args.activeClassName}
-                    inactiveClassName={args.inactiveClassName}
-                >
-                    Tab 3
-                </Tab>
-            </TabList>
-            <TabPanel value="tab1">Content 1</TabPanel>
-            <TabPanel value="tab2">Content 2</TabPanel>
-            <TabPanel value="tab3">Content 3</TabPanel>
-        </Tabs>
-    );
-
-    if (args.variant === 'fullWidth') {
-        return <div style={{ width: 480 }}>{content}</div>;
-    }
-    return content;
-};
-
-/**
- * Default horizontal tabs.
- */
-export const Default = Template.bind({}) as Story;
-Default.args = { variant: 'default' };
-
-/**
- * Underline-style tabs.
- */
-export const Underline = Template.bind({}) as Story;
-Underline.args = { variant: 'underline' };
-
-/**
- * Pill-style tabs.
- */
-export const Pill = Template.bind({}) as Story;
-Pill.args = { variant: 'pill' };
-
-/**
- * Vertical tab layout.
- */
-export const Vertical = Template.bind({}) as Story;
-Vertical.args = { variant: 'vertical' };
-
-/**
- * Full-width tab list.
- */
-export const FullWidth = Template.bind({}) as Story;
-FullWidth.args = { variant: 'fullWidth' };
-
-/**
- * Example showing tabs with icons.
- */
-export const WithIcon: Story = {
-    name: 'With Icon',
-    render: () => (
-        <Tabs defaultValue="tab1">
-            <TabList>
-                <Tab icon={TabStarIcon} value="tab1">
-                    Featured
-                </Tab>
-                <Tab icon={TabStarIcon} value="tab2">
-                    Popular
-                </Tab>
-                <Tab icon={TabStarIcon} value="tab3">
-                    New
-                </Tab>
-            </TabList>
-            <TabPanel value="tab1">Tab with icon: Featured</TabPanel>
-            <TabPanel value="tab2">Tab with icon: Popular</TabPanel>
-            <TabPanel value="tab3">Tab with icon: New</TabPanel>
-        </Tabs>
-    ),
-};
-
-/**
- * Example using custom active/inactive class names for <Tab />.
- */
-export const CustomClasses: Story = {
-    name: 'Custom Classes (active/inactive)',
-    parameters: {
+        layout: 'padded',
         docs: {
             description: {
-                story: "Ejemplo usando 'activeClassName' y 'inactiveClassName' en <Tab />. Por defecto, activo usa 'border-blue-500 text-blue-600' e inactivo 'border-transparent text-gray-600'.",
+                component: `
+Tabs organize content into multiple sections, displaying one panel at a time. Controlled and uncontrolled modes are supported.
+
+Usage
+\`\`\`tsx
+import { Tabs } from '@shared/ui';
+
+const items = [
+  { value: 'account', label: 'Account', content: <div>Account content</div> },
+  { value: 'password', label: 'Password', content: <div>Password content</div> },
+  { value: 'billing', label: 'Billing', content: <div>Billing content</div> },
+];
+
+// Uncontrolled (defaultValue)
+<Tabs items={items} defaultValue="account" />
+
+// Controlled
+function Example() {
+  const [val, setVal] = useState('account');
+  return <Tabs items={items} value={val} onValueChange={setVal} />;
+}
+\`\`\`
+
+Props
+- items: Array<{ value: string; label: ReactNode; content: ReactNode; disabled?: boolean }>
+- value?: string, defaultValue?: string, onValueChange?: (value: string) => void
+- size?: 'sm' | 'md' — Tab trigger size (default: 'md')
+- listClassName/triggerClassName/contentClassName?: string — Style overrides
+
+Notes
+- Keyboard: ArrowLeft/ArrowRight navigate between enabled tabs; Home/End jump to first/last.
+- Disabled tabs are skipped by keyboard navigation and cannot be activated.
+                `,
             },
         },
     },
-    render: () => (
-        <Tabs defaultValue="tab1">
-            <TabList>
-                <Tab
-                    value="tab1"
-                    activeClassName="border-emerald-500 text-emerald-600"
-                    inactiveClassName="border-gray-400 text-gray-500"
-                >
-                    Overview
-                </Tab>
-                <Tab
-                    value="tab2"
-                    activeClassName="border-emerald-500 text-emerald-600"
-                    inactiveClassName="border-gray-400 text-gray-500"
-                >
-                    Details
-                </Tab>
-                <Tab
-                    value="tab3"
-                    activeClassName="border-emerald-500 text-emerald-600"
-                    inactiveClassName="border-gray-400 text-gray-500"
-                >
-                    Reviews
-                </Tab>
-            </TabList>
-            <TabPanel value="tab1">Overview content</TabPanel>
-            <TabPanel value="tab2">Details content</TabPanel>
-            <TabPanel value="tab3">Reviews content</TabPanel>
-        </Tabs>
+    tags: ['autodocs'],
+    argTypes: {
+        size: { control: { type: 'inline-radio' }, options: ['sm', 'md'], description: 'Trigger size' },
+        value: { control: 'text', description: 'Selected value (controlled)' },
+        defaultValue: { control: 'text', description: 'Initial value (uncontrolled)' },
+        withDisabledSecond: { control: 'boolean', description: 'Disable the second tab (demo)' },
+        listClassName: { control: 'text', description: 'Tab list classes' },
+        triggerClassName: { control: 'text', description: 'Trigger classes' },
+        contentClassName: { control: 'text', description: 'Content classes' },
+    },
+} satisfies Meta<any>;
+
+export default meta;
+
+type Story = StoryObj<StoryArgs>;
+
+function buildItems(disableSecond?: boolean) {
+    return [
+        { value: 'account', label: 'Account', content: <div>Update your profile settings here.</div> },
+        {
+            value: 'password',
+            label: 'Password',
+            disabled: !!disableSecond,
+            content: <div>Change your password and manage security options.</div>,
+        },
+        { value: 'billing', label: 'Billing', content: <div>Manage billing information and invoices.</div> },
+    ];
+}
+
+export const Playground: Story = {
+    args: {
+        size: 'md',
+        defaultValue: 'account',
+        withDisabledSecond: false,
+        listClassName: '',
+        triggerClassName: '',
+        contentClassName: '',
+    },
+    parameters: { docs: { description: { story: 'Interactive control center.' } } },
+    render: (args) => (
+        <Tabs
+            items={buildItems(args.withDisabledSecond)}
+            size={args.size}
+            value={args.value}
+            defaultValue={args.defaultValue}
+            onValueChange={() => {}}
+            listClassName={args.listClassName}
+            triggerClassName={args.triggerClassName}
+            contentClassName={args.contentClassName}
+        />
     ),
 };
 
-/**
- * Playground with optional icon and custom classes.
- */
-export const Playground = Template.bind({}) as Story;
-Playground.args = {
-    variant: 'default',
-    showIcon: true,
-    activeClassName: '',
-    inactiveClassName: '',
-};
-
-/**
- * Uncontrolled tabs using `defaultValue`.
- */
-export const Uncontrolled: Story = {
-    render: (args: any) => (
-        <Tabs defaultValue="tab1">
-            <TabList variant={args.variant}>
-                <Tab value="tab1">Tab 1</Tab>
-                <Tab value="tab2">Tab 2</Tab>
-            </TabList>
-            <TabPanel value="tab1">Content 1</TabPanel>
-            <TabPanel value="tab2">Content 2</TabPanel>
-        </Tabs>
+export const Sizes: Story = {
+    args: { withDisabledSecond: false },
+    parameters: { docs: { description: { story: 'sm and md trigger sizes.' } } },
+    render: (args) => (
+        <div className="grid gap-8">
+            <Tabs items={buildItems(args.withDisabledSecond)} size="sm" defaultValue="account" />
+            <Tabs items={buildItems(args.withDisabledSecond)} size="md" defaultValue="account" />
+        </div>
     ),
 };
 
-/**
- * Controlled tabs using `value` and `onValueChange`.
- */
+export const DisabledTab: Story = {
+    parameters: { docs: { description: { story: 'Second tab is disabled.' } } },
+    render: () => <Tabs items={buildItems(true)} defaultValue="account" />,
+};
+
 export const Controlled: Story = {
-    render: (args: any) => {
-        const [value, setValue] = useState('tab1');
+    parameters: { docs: { description: { story: 'Controlled tabs with external controls.' } } },
+    render: () => {
+        const [val, setVal] = useState('account');
         return (
-            <Tabs value={value} onValueChange={setValue}>
-                <TabList variant={args.variant}>
-                    <Tab value="tab1">Tab 1</Tab>
-                    <Tab value="tab2">Tab 2</Tab>
-                </TabList>
-                <TabPanel value="tab1">Content 1</TabPanel>
-                <TabPanel value="tab2">Content 2</TabPanel>
-            </Tabs>
+            <div className="grid gap-3">
+                <div className="flex gap-2">
+                    <button className="px-3 py-1 rounded border" onClick={() => setVal('account')}>
+                        Account
+                    </button>
+                    <button className="px-3 py-1 rounded border" onClick={() => setVal('password')}>
+                        Password
+                    </button>
+                    <button className="px-3 py-1 rounded border" onClick={() => setVal('billing')}>
+                        Billing
+                    </button>
+                </div>
+                <Tabs items={buildItems(false)} value={val} onValueChange={setVal} />
+            </div>
         );
     },
 };
+
