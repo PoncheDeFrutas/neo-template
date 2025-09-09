@@ -3,22 +3,24 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-    --color-bg: #ffffff;
-    --color-text: #0f172a;
-    --color-surface: #f8fafc;
-    --color-border: #e5e7eb;
-    --color-muted: #64748b;
-    --color-accent: #3b82f6;
-    --color-primary: #3b82f6;
+    /* Purple + Gray palette (Light) */
+    --color-bg: #f5f3ff; /* violet-50 */
+    --color-text: #0f172a; /* slate-900 */
+    --color-surface: #faf8ff; /* subtle lavender */
+    --color-border: #d4d4d8; /* zinc-300 for clearer contrast */
+    --color-muted: #9ca3af; /* gray-400 (paler) */
+    /* Primary azul/celeste */
+    --color-primary: #2563eb; /* sky-500 */
     --color-primary-foreground: #ffffff;
-    --color-secondary: #06b6d4;
-    --color-secondary-foreground: #0f172a;
-    --color-accent-foreground: #ffffff;
-    --color-bg-subtle: #f8fafc;
+    --color-secondary: #a1a1aa; /* zinc-400 (paler gray) */
+    --color-secondary-foreground: #0f172a; /* dark text on pale gray */
+    --color-accent: #38bdf8; /* sky-400 */
+    --color-accent-foreground: #0f172a;
+    --color-bg-subtle: #f8f6ff;
     --color-bg-elevated: #ffffff;
-    --color-border-subtle: #e5e7eb;
-    --color-border-strong: #94a3b8;
-    --color-muted-foreground: #64748b;
+    --color-border-subtle: #e4e4e7; /* zinc-200 subtle */
+    --color-border-strong: #a1a1aa; /* zinc-400 strong */
+    --color-muted-foreground: #71717a; /* zinc-500 */
     --color-success: #16a34a;
     --color-success-foreground: #ffffff;
     --color-warning: #f59e0b;
@@ -26,42 +28,126 @@
     --color-danger: #ef4444;
     --color-danger-foreground: #ffffff;
     --color-overlay: rgba(15, 23, 42, 0.6);
-    --color-ring: #60a5fa;
-    --color-code-bg: #f1f5f9;
+    --color-ring: #7dd3fc; /* sky-300 */
+    --color-code-bg: #f5f3ff;
+}
+
+.html,
+html {
+    /* Smooth scroll for in-page anchors like #actores */
+    scroll-behavior: smooth;
+}
+
+/* Evitar salto de layout por aparición/desaparición del scrollbar vertical */
+html {
+    /* Reserva el gutter del scrollbar para evitar saltos de layout */
+    scrollbar-gutter: stable;
+}
+@supports not (scrollbar-gutter: stable) {
+    /* Fallback amplio: fuerza la reserva del espacio del scrollbar */
+    html {
+        overflow-y: scroll;
+    }
 }
 
 .dark {
-    --color-bg: #000000;
+    /* Purple + Gray palette (Dark) */
+    --color-bg: #000000; /* deep violet */
     --color-text: #ffffff;
-    --color-surface: #111111;
-    --color-border: #262626;
-    --color-muted: #737373;
-    --color-accent: #60a5fa;
-    --color-primary: #60a5fa;
-    --color-primary-foreground: #000000;
-    --color-secondary: #22d3ee;
-    --color-secondary-foreground: #000000;
-    --color-accent-foreground: #000000;
-    --color-bg-subtle: #0a0a0a;
-    --color-bg-elevated: #171717;
-    --color-border-subtle: #262626;
-    --color-border-strong: #404040;
-    --color-muted-foreground: #737373;
+    --color-surface: #000000; /* slightly lighter */
+    --color-border: #3f3f46; /* neutral pale gray (zinc-700) */
+    --color-muted: #a1a1aa; /* zinc-400 (paler) */
+    --color-primary: #2563eb; /* sky-400 */
+    --color-primary-foreground: #ffffff;
+    --color-secondary: #a1a1aa; /* paler gray */
+    --color-secondary-foreground: #0b0b0b; /* dark text for contrast */
+    --color-accent: #7dd3fc; /* sky-300 */
+    --color-accent-foreground: #0b0b0b;
+    --color-bg-subtle: #000000;
+    --color-bg-elevated: #000000;
+    --color-border-subtle: #000000; /* zinc-800 subtle */
+    --color-border-strong: #52525b; /* zinc-600 */
+    --color-muted-foreground: #c4c4cf;
     --color-success: #22c55e;
-    --color-success-foreground: #000000;
+    --color-success-foreground: #0b0b0b;
     --color-warning: #f59e0b;
-    --color-warning-foreground: #000000;
+    --color-warning-foreground: #0b0b0b;
     --color-danger: #f87171;
-    --color-danger-foreground: #000000;
+    --color-danger-foreground: #0b0b0b;
     --color-overlay: rgba(0, 0, 0, 0.8);
-    --color-ring: #60a5fa;
-    --color-code-bg: #0a0a0a;
+    --color-ring: #bae6fd; /* sky-200 */
+    --color-code-bg: #000000;
 }
 
 body {
     background-color: var(--color-bg);
     color: var(--color-text);
     color-scheme: light dark;
+}
+
+/* Evita desbordes horizontales ocasionados por elementos fijos al viewport */
+html,
+body {
+    overflow-x: hidden;
+}
+
+/* Fondo público (light/dark) aplicado en DefaultLayout mediante la clase .public-bg */
+.public-bg {
+    position: relative;
+    z-index: 0; /* create stacking context for bg layers */
+}
+.public-bg::before,
+.public-bg::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    pointer-events: none;
+    z-index: -1; /* sit behind the content */
+    opacity: 1;
+    transition: opacity var(--theme-transition-duration) var(--theme-transition-easing);
+    will-change: opacity;
+}
+/* Light background */
+.public-bg::before {
+    background-image: url('/Fondo-white.webp');
+    opacity: 1;
+}
+/* Dark background (hidden by default) */
+.public-bg::after {
+    background-image: url('/Fondo-black.webp');
+    opacity: 0;
+}
+.dark .public-bg::before {
+    opacity: 0;
+}
+.dark .public-bg::after {
+    opacity: 1;
+}
+
+/* Personalización de scrollbars (tema-aware) */
+/* Firefox */
+:root {
+    scrollbar-width: thin; /* auto | thin | none */
+    scrollbar-color: var(--color-border-strong) transparent; /* thumb track */
+}
+/* WebKit/Blink (Chrome, Edge, Safari) */
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: var(--color-border-strong);
+    border-radius: 999px;
+    border: 2px solid transparent; /* crea padding visual */
+}
+*::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-muted-foreground);
 }
 
 /* Token utilities */
@@ -73,6 +159,15 @@ body {
 }
 .bg-elevated {
     background-color: var(--color-bg-elevated);
+}
+.bg-border {
+    background-color: var(--color-border);
+}
+.bg-border-subtle {
+    background-color: var(--color-border-subtle);
+}
+.bg-border-strong {
+    background-color: var(--color-border-strong);
 }
 .bg-overlay {
     background-color: var(--color-overlay);
@@ -99,6 +194,15 @@ body {
 .text-accent {
     color: var(--color-accent);
 }
+.text-success {
+    color: var(--color-success);
+}
+.text-warning {
+    color: var(--color-warning);
+}
+.text-danger {
+    color: var(--color-danger);
+}
 .text-accent-foreground {
     color: var(--color-accent-foreground);
 }
@@ -114,6 +218,9 @@ body {
 
 .border-border {
     border-color: var(--color-border);
+}
+.border-border-subtle {
+    border-color: var(--color-border-subtle);
 }
 .border-strong {
     border-color: var(--color-border-strong);
@@ -139,6 +246,15 @@ body {
 
 .bg-primary {
     background-color: var(--color-primary);
+}
+.bg-primary-foreground {
+    background-color: var(--color-primary-foreground);
+}
+.bg-danger-foreground {
+    background-color: var(--color-danger-foreground);
+}
+.bg-success-foreground {
+    background-color: var(--color-success-foreground);
 }
 .bg-secondary {
     background-color: var(--color-secondary);
@@ -183,24 +299,135 @@ body {
    Add the class `theme-transition` to the root element briefly when toggling
    themes to smoothly animate color-related properties consistently. */
 :root {
-    --theme-transition-duration: 300ms;
+    --theme-transition-duration: 325ms;
     --theme-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .theme-transition,
-.theme-transition * {
-    transition:
-        background-color var(--theme-transition-duration) var(--theme-transition-easing),
-        color var(--theme-transition-duration) var(--theme-transition-easing),
-        border-color var(--theme-transition-duration) var(--theme-transition-easing),
-        fill var(--theme-transition-duration) var(--theme-transition-easing),
-        stroke var(--theme-transition-duration) var(--theme-transition-easing),
-        box-shadow var(--theme-transition-duration) var(--theme-transition-easing);
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after,
+.theme-transition svg,
+.theme-transition svg * {
+    transition-property:
+        background-color, background, color, border-color, border, outline-color,
+        text-decoration-color, fill, stroke, fill-opacity, stroke-opacity, box-shadow, opacity,
+        filter, backdrop-filter, caret-color !important;
+    transition-duration: var(--theme-transition-duration) !important;
+    transition-timing-function: var(--theme-transition-easing) !important;
+}
+
+/* Placeholders de inputs/textarea: color transiciona junto con el tema */
+.theme-transition input::placeholder,
+.theme-transition textarea::placeholder {
+    transition: color var(--theme-transition-duration) var(--theme-transition-easing) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
     .theme-transition,
-    .theme-transition * {
+    .theme-transition *,
+    .theme-transition *::before,
+    .theme-transition *::after,
+    .theme-transition svg,
+    .theme-transition svg * {
         transition: none !important;
+    }
+}
+
+/* Skeleton styles (neutral and theme-aware) */
+.skeleton {
+    background-color: var(--skeleton-base);
+}
+.skeleton--shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(90deg, transparent, var(--skeleton-highlight), transparent);
+    animation: skeleton-shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+:root {
+    --skeleton-base: #e9eaee;
+    --skeleton-highlight: #f3f4f6;
+}
+.dark {
+    --skeleton-base: #1f1f25;
+    --skeleton-highlight: #2b2b33;
+}
+
+/* Utility: hide native number input spinners */
+.no-spin::-webkit-outer-spin-button,
+.no-spin::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.no-spin[type='number'] {
+    -moz-appearance: textfield;
+}
+
+/* Progress animations */
+@keyframes progress-indeterminate {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(300%);
+    }
+}
+.progress--indeterminate {
+    position: relative;
+}
+.progress--indeterminate.progress__bar,
+.progress .progress--indeterminate .progress__bar {
+    animation: progress-indeterminate 1.2s ease-in-out infinite;
+    width: 40%;
+}
+
+/* Spinner (circular) */
+@keyframes spinner-rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner-dash {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 100, 200;
+        stroke-dashoffset: -15px;
+    }
+    100% {
+        stroke-dasharray: 100, 200;
+        stroke-dashoffset: -125px;
+    }
+}
+
+.spinner {
+    display: inline-flex;
+}
+.spinner--indeterminate .spinner__svg {
+    animation: spinner-rotate 1.4s linear infinite;
+}
+.spinner--indeterminate .spinner__circle {
+    animation: spinner-dash 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .spinner--indeterminate .spinner__svg,
+    .spinner--indeterminate .spinner__circle {
+        animation: none !important;
     }
 }

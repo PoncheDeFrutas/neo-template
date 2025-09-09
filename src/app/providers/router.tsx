@@ -3,30 +3,25 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import adminRoutes from '@/routes/admin';
 import clientRoutes from '@/routes/client';
-import HomePage from '@/pages/home';
+import defaultRoutes from '@/routes/default';
 
 const NotFoundPage = lazy(() => import('@pages/not-found'));
-const UIShowcasePage = lazy(() => import('@pages/ui'));
 
+/**
+ * Application router configuration using React Router's createBrowserRouter.
+ *
+ * Combines multiple route configurations including default routes, client-specific routes,
+ * and admin routes. Includes a catch-all route (*) that renders a NotFoundPage component
+ * wrapped in Suspense with a loading fallback for unmatched paths.
+ *
+ * @remarks
+ * The router uses browser history API for navigation and includes lazy loading
+ * support through React Suspense for the 404 page.
+ */
 const router = createBrowserRouter([
+    ...defaultRoutes,
     ...clientRoutes,
     ...adminRoutes,
-    {
-        path: '/',
-        element: (
-            <Suspense fallback={<div>Loading...</div>}>
-                <HomePage />
-            </Suspense>
-        )
-    },
-    {
-        path: '/ui',
-        element: (
-            <Suspense fallback={<div>Loading...</div>}>
-                <UIShowcasePage />
-            </Suspense>
-        ),
-    },
     {
         path: '*',
         element: (

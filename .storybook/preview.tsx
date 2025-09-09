@@ -1,35 +1,34 @@
+/* eslint-disable react-refresh/only-export-components */
 import type { Preview } from '@storybook/react-vite';
+import type { FC, ReactNode } from 'react';
 import React, { useEffect } from 'react';
 import '../src/index.css';
 
-const withTheme = (Story: any, context: any) => {
-    const { theme } = context.globals;
+type ThemeMode = 'light' | 'dark' | 'system';
 
+const WithTheme: FC<{ mode: ThemeMode; children: ReactNode }> = ({ mode, children }) => {
     useEffect(() => {
         const root = document.documentElement;
-        const apply = (mode: string) => {
-            // Add temporary transition class to animate theme change consistently
+        const apply = (m: ThemeMode) => {
             root.classList.add('theme-transition');
-            if (mode === 'dark') root.classList.add('dark');
-            else if (mode === 'light') root.classList.remove('dark');
+            if (m === 'dark') root.classList.add('dark');
+            else if (m === 'light') root.classList.remove('dark');
             else
                 root.classList.toggle(
                     'dark',
                     window.matchMedia('(prefers-color-scheme: dark)').matches,
                 );
-            // Remove the class after the duration to avoid affecting other transitions
             const timeout = window.setTimeout(() => root.classList.remove('theme-transition'), 320);
             return () => window.clearTimeout(timeout);
         };
-        const cleanup = apply(theme);
-
+        const cleanup = apply(mode);
         let mql: MediaQueryList | null = null;
         const onChange = (e: MediaQueryListEvent) => {
-            if (context.globals.theme === 'system') {
+            if (mode === 'system') {
                 root.classList.toggle('dark', e.matches);
             }
         };
-        if (theme === 'system') {
+        if (mode === 'system') {
             mql = window.matchMedia('(prefers-color-scheme: dark)');
             mql.addEventListener?.('change', onChange);
         }
@@ -37,9 +36,9 @@ const withTheme = (Story: any, context: any) => {
             mql?.removeEventListener?.('change', onChange);
             cleanup?.();
         };
-    }, [context.globals.theme]);
+    }, [mode]);
 
-    return <Story />;
+    return <>{children}</>;
 };
 
 const preview: Preview = {
@@ -58,7 +57,13 @@ const preview: Preview = {
             },
         },
     },
-    decorators: [withTheme],
+    decorators: [
+        (Story, context) => (
+            <WithTheme mode={(context.globals.theme as ThemeMode) ?? 'light'}>
+                <Story />
+            </WithTheme>
+        ),
+    ],
     parameters: {
         controls: {
             matchers: {

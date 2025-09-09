@@ -1,176 +1,55 @@
-import { Select } from '@shared/ui';
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Select, SearchableSelect } from '@/shared/ui/Select';
 import { useState } from 'react';
 
-/**
- * Common Select options used across stories.
- */
-const options = [
-    { label: 'Option 1', value: '1' },
-    { label: 'Option 2', value: '2' },
-    { label: 'Option 3', value: '3' },
+export default {
+    title: 'UI/Select',
+};
+
+const baseOptions = [
+    { label: 'Opción A', value: 'a' },
+    { label: 'Opción B', value: 'b' },
+    { label: 'Opción C', value: 'c' },
 ];
 
-/**
- * Storybook meta configuration for the Select component.
- *
- * Defines the story metadata including component title, default parameters,
- * and control configurations for the Select component's props.
- *
- * @property {string} title - The story title displayed in Storybook sidebar
- * @property {React.Component} component - The Select component being documented
- * @property {object} parameters - Storybook parameters including layout configuration
- * @property {string[]} tags - Tags for automatic documentation generation
- * @property {object} args - Default values for component props including options, disabled state, size, and variant
- * @property {object} argTypes - Control configurations for interactive prop manipulation
- * @property {object} argTypes.disabled - Boolean control for toggling disabled state
- * @property {object} argTypes.size - Radio control for selecting component size (sm, md, lg)
- * @property {object} argTypes.variant - Radio control for selecting component variant (default, underline)
- *
- * @example
- * ```tsx
- * // Usage in Storybook stories
- * export default meta;
- *
- * export const Default: Story = {
- *   args: {
- *     placeholder: "Select an option..."
- *   }
- * };
- * ```
- */
-const meta = {
-    title: 'Shared/Select',
-    component: Select,
-    parameters: {
-        layout: 'centered',
-    },
-    tags: ['autodocs'],
-    args: {
-        options,
-        disabled: false,
-        size: 'md',
-        variant: 'default',
-    },
-    argTypes: {
-        disabled: {
-            control: { type: 'boolean' },
-        },
-        size: {
-            control: { type: 'inline-radio' },
-            options: ['sm', 'md', 'lg'],
-        },
-        variant: {
-            control: { type: 'inline-radio' },
-            options: ['default', 'underline'],
-        },
-    },
-} as Meta<typeof Select>;
+export const NativeBasic = () => (
+    <div className="max-w-sm space-y-6">
+        <Select label="Nativo" placeholder="Selecciona una opción" options={baseOptions} />
+        <Select
+            label="Error"
+            placeholder="Selecciona"
+            error="Campo requerido"
+            options={baseOptions}
+        />
+        <Select label="Éxito" placeholder="Selecciona" success="¡Listo!" options={baseOptions} />
+    </div>
+);
 
-export default meta;
+export const NativeVariants = () => (
+    <div className="max-w-sm space-y-6">
+        <Select
+            label="Outline (default)"
+            placeholder="Selecciona"
+            options={baseOptions}
+            variant="outline"
+        />
+        <Select label="Filled" placeholder="Selecciona" options={baseOptions} variant="filled" />
+        <Select label="Ghost" placeholder="Selecciona" options={baseOptions} variant="ghost" />
+    </div>
+);
 
-/**
- * Story type alias for the `Select` component.
- */
-type Story = StoryObj<typeof Select>;
-
-/**
- * Default Select with controlled value.
- */
-export const Default: Story = {
-    render: (args) => {
-        const [value, setValue] = useState(args.options[0].value);
-        return (
-            <Select
-                {...args}
-                value={value}
-                onChange={(v) => setValue(Array.isArray(v) ? (v[0] ?? '') : v)}
+export const Searchable = () => {
+    const [val, setVal] = useState<string | null>(null);
+    return (
+        <div className="max-w-sm space-y-6">
+            <SearchableSelect
+                label="Buscable"
+                placeholder="Elige una opción"
+                options={baseOptions}
+                value={val}
+                onChange={setVal}
+                hint="Escribe para filtrar"
             />
-        );
-    },
-};
-
-/**
- * Disabled Select (non-interactive).
- */
-export const Disabled: Story = {
-    args: { disabled: true },
-    render: (args) => {
-        const [value, setValue] = useState(args.options[0].value);
-        return (
-            <Select
-                {...args}
-                value={value}
-                onChange={(v) => setValue(Array.isArray(v) ? (v[0] ?? '') : v)}
-            />
-        );
-    },
-};
-
-/**
- * Small size variant.
- */
-export const Small: Story = {
-    args: { size: 'sm' },
-    render: (args) => {
-        const [value, setValue] = useState(args.options[0].value);
-        return (
-            <Select
-                {...args}
-                value={value}
-                onChange={(v) => setValue(Array.isArray(v) ? (v[0] ?? '') : v)}
-            />
-        );
-    },
-};
-
-/**
- * Medium size variant.
- */
-export const Medium: Story = {
-    args: { size: 'md' },
-    render: (args) => {
-        const [value, setValue] = useState(args.options[0].value);
-        return (
-            <Select
-                {...args}
-                value={value}
-                onChange={(v) => setValue(Array.isArray(v) ? (v[0] ?? '') : v)}
-            />
-        );
-    },
-};
-
-/**
- * Large size variant.
- */
-export const Large: Story = {
-    args: { size: 'lg' },
-    render: (args) => {
-        const [value, setValue] = useState(args.options[0].value);
-        return (
-            <Select
-                {...args}
-                value={value}
-                onChange={(v) => setValue(Array.isArray(v) ? (v[0] ?? '') : v)}
-            />
-        );
-    },
-};
-
-/**
- * Underline variant with an underline-only style.
- */
-export const Underline: Story = {
-    args: { variant: 'underline' },
-    render: (args) => {
-        const [value, setValue] = useState(args.options[0].value);
-        return (
-            <Select
-                {...args}
-                value={value}
-                onChange={(v) => setValue(Array.isArray(v) ? (v[0] ?? '') : v)}
-            />
-        );
-    },
+            <div className="text-sm text-muted-foreground">Valor: {String(val)}</div>
+        </div>
+    );
 };

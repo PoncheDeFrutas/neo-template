@@ -1,3 +1,2 @@
-export { default } from './ui/UIShowcasePage';
-export { default as UIShowcasePage } from './ui/UIShowcasePage';
-
+export { default } from './ui/UiPage';
+export { default as UiPage } from './ui/UiPage';

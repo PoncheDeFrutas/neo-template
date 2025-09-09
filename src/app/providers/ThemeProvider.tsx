@@ -25,6 +25,7 @@ interface ThemeContextValue {
  * const { theme, toggleTheme } = useContext(ThemeContext);
  * ```
  */
+// eslint-disable-next-line react-refresh/only-export-components
 export const ThemeContext = createContext<ThemeContextValue>({
     theme: 'light',
     toggleTheme: () => {},
@@ -81,7 +82,13 @@ export function ThemeProvider({ children, persist = true }: ThemeProviderProps) 
             window.localStorage.setItem(STORAGE_KEY, theme);
         }
         if (typeof document !== 'undefined') {
-            document.documentElement.classList.toggle('dark', theme === 'dark');
+            const root = document.documentElement;
+            root.classList.add('theme-transition');
+            root.classList.toggle('dark', theme === 'dark');
+            const id = window.setTimeout(() => {
+                root.classList.remove('theme-transition');
+            }, 350);
+            return () => window.clearTimeout(id);
         }
     }, [theme, persist]);
 
@@ -92,4 +99,5 @@ export function ThemeProvider({ children, persist = true }: ThemeProviderProps) 
     return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => useContext(ThemeContext);

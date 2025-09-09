@@ -21,11 +21,12 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ requiredRoles }) => {
         requiredRoles.length === 0 || roles.some((role) => requiredRoles.includes(role));
 
     const shouldRedirect = !isAuthenticated || isExpired || !hasRole;
-    if (shouldRedirect && location.pathname !== '/ui') {
-        return <Navigate to="/ui" replace state={{ from: location }} />;
+    const redirectTo = '/';
+    if (shouldRedirect && location.pathname !== redirectTo) {
+        return <Navigate to={redirectTo} replace state={{ from: location }} />;
     }
     if (shouldRedirect) {
-        // Already at /ui (public). Render nothing to avoid loops.
+        // Already at public route. Render nothing to avoid loops.
         return null;
     }
 

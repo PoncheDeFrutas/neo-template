@@ -1,6 +1,6 @@
 import AdminLayout from '@app/layouts/adminLayout';
 import ProtectedRoute from '@/shared/router/protectedRoute';
-import { lazy, Suspense } from 'react';
+import { lazy } from 'react';
 import type { RouteObject } from 'react-router-dom';
 
 const AboutPage = lazy(() => import('@pages/about'));
@@ -15,11 +15,7 @@ const adminRoutes: RouteObject[] = [
                 children: [
                     {
                         index: true,
-                        element: (
-                            <Suspense fallback={<div>Loading...</div>}>
-                                <AboutPage />
-                            </Suspense>
-                        ),
+                        element: <AboutPage />,
                     },
                 ],
             },
