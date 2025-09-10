@@ -1,10 +1,10 @@
+import { BarChart, Settings, ShieldCheck, User, Users } from 'lucide-react';
 import type { FC } from 'react';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, Button } from '@/shared/ui';
-import { useAuth } from '@/features/auth';
-import { User, ShieldCheck, Users, Settings, BarChart } from 'lucide-react';
 
+import { useAuth } from '@/features/auth';
+import { Button, Card } from '@/shared/ui';
 
 type Action = {
     label: string;
@@ -54,9 +54,10 @@ const AdminWelcomePage: FC = () => {
                 description: 'Ajusta las configuraciones globales de la plataforma',
                 to: '/admin/settings',
                 icon: Settings,
-            }
-        ],[]
-    )
+            },
+        ],
+        [],
+    );
 
     return (
         <main className="mx-auto min-h-screen max-w-7xl px-4 py-10">
@@ -96,6 +97,6 @@ const AdminWelcomePage: FC = () => {
             </section>
         </main>
     );
-}
+};
 
 export default AdminWelcomePage;

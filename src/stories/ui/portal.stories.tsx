@@ -1,4 +1,4 @@
-import { Portal, Button } from '@shared/ui';
+import { Button, Portal } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 

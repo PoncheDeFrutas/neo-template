@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useMemo, useState } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+
 import { cn } from '@/shared/lib/cn';
-import { Spinner } from './Spinner';
+
 import { EmptyState } from './EmptyState';
+import { Spinner } from './Spinner';
 
 type Align = 'left' | 'center' | 'right';
 
@@ -97,7 +99,6 @@ export function Table<T = any>(props: TableProps<T>) {
     useEffect(() => {
         if (defaultSortKey) setInnerSortKey(defaultSortKey);
         if (defaultSortDir) setInnerSortDir(defaultSortDir);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [defaultSortKey, defaultSortDir]);
 
     const activeSortKey = sortKey ?? innerSortKey;

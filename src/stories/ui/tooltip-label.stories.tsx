@@ -1,6 +1,6 @@
 import { TooltipLabel } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Info, HelpCircle } from 'lucide-react';
+import { HelpCircle, Info } from 'lucide-react';
 
 type Size = 'sm' | 'md' | 'lg';
 type Variant = 'neutral' | 'success' | 'warning' | 'danger' | 'custom';

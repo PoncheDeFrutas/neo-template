@@ -1,8 +1,9 @@
+import ComingSoonPage from '@pages/coming-soon';
 import { lazy } from 'react';
 import type { RouteObject } from 'react-router-dom';
-import ProtectedRoute from '@/shared/router/protectedRoute';
+
 import ClientLayout from '@/app/layouts/clientLayout';
-import ComingSoonPage from '@pages/coming-soon';
+import ProtectedRoute from '@/shared/router/protectedRoute';
 
 const ClientWelcomePage = lazy(() => import('@pages/client/welcome'));
 

@@ -1,10 +1,11 @@
 import type { FC } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { useMemo } from 'react';
-import { Navbar, Button } from '@/shared/ui';
-import { ThemeToggle } from '@/features/theme-toggle';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import { useAuth } from '@/features/auth';
 import { useAuthStore } from '@/features/auth/model/store';
+import { ThemeToggle } from '@/features/theme-toggle';
+import { Button, Navbar } from '@/shared/ui';
 
 /**
  * Default header component for the application.

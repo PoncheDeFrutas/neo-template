@@ -1,5 +1,6 @@
-import { forwardRef, useId } from 'react';
 import type { InputHTMLAttributes, ReactNode } from 'react';
+import { forwardRef, useId } from 'react';
+
 import { cn } from '@/shared/lib/cn';
 
 type Size = 'sm' | 'md' | 'lg';

@@ -1,4 +1,4 @@
-import { ErrorState, Button } from '@shared/ui';
+import { Button, ErrorState } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 type StoryArgs = {

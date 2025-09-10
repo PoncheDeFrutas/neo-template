@@ -1,5 +1,6 @@
+import type { HTMLAttributes, ImgHTMLAttributes } from 'react';
 import { forwardRef, useMemo, useState } from 'react';
-import type { ImgHTMLAttributes, HTMLAttributes } from 'react';
+
 import { cn } from '@/shared/lib/cn';
 
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';

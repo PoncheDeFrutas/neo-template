@@ -1,6 +1,7 @@
 import { useTheme } from '@app/providers/ThemeProvider';
 import { Moon, Sun } from 'lucide-react';
 import type { FC } from 'react';
+
 import { Button } from '@/shared/ui';
 
 /**

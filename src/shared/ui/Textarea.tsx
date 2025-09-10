@@ -1,5 +1,6 @@
+import type { MutableRefObject, ReactNode, TextareaHTMLAttributes } from 'react';
 import { forwardRef, useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
-import type { ReactNode, TextareaHTMLAttributes, MutableRefObject } from 'react';
+
 import { cn } from '@/shared/lib/cn';
 
 type Size = 'sm' | 'md' | 'lg';
@@ -87,7 +88,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, r
     useLayoutEffect(() => {
         if (!autoResize) return;
         adjustHeight();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [autoResize]);
 
     useEffect(() => {

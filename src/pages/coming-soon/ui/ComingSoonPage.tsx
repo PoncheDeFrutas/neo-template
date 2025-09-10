@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { Button, Card, EmptyState } from '@/shared/ui';
 
 type Props = {

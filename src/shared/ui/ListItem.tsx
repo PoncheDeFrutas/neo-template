@@ -1,4 +1,5 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, HTMLAttributes, ReactNode } from 'react';
+
 import { cn } from '@/shared/lib/cn';
 
 type BaseDivAttrs = Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'media'>;

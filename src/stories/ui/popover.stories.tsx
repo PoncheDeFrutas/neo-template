@@ -1,6 +1,6 @@
 import { Button, Popover } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { MoreHorizontal, Settings, LogOut, User } from 'lucide-react';
+import { LogOut, MoreHorizontal, Settings, User } from 'lucide-react';
 import { useState } from 'react';
 
 type Side = 'top' | 'right' | 'bottom' | 'left';

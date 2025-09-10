@@ -1,6 +1,6 @@
-import { ListItem, Avatar, Button } from '@shared/ui';
+import { Avatar, Button, ListItem } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { MoreHorizontal, Mail, Phone, Trash2, Edit3 } from 'lucide-react';
+import { Edit3, Mail, MoreHorizontal, Phone, Trash2 } from 'lucide-react';
 
 type Size = 'sm' | 'md' | 'lg';
 type Align = 'center' | 'start';

@@ -1,7 +1,8 @@
 import { Breadcrumbs } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { File, Folder, Home } from 'lucide-react';
+
 import type { BreadcrumbItem } from '@/shared/ui/Breadcrumbs';
-import { Home, Folder, File } from 'lucide-react';
 
 type StoryArgs = {
     items: BreadcrumbItem[];

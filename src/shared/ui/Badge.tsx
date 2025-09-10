@@ -1,5 +1,6 @@
-import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
+import { forwardRef } from 'react';
+
 import { cn } from '@/shared/lib/cn';
 
 type Variant = 'neutral' | 'success' | 'warning' | 'danger' | 'custom';

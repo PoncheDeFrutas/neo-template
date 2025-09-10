@@ -1,5 +1,6 @@
+import type { CSSProperties, HTMLAttributes } from 'react';
 import { forwardRef } from 'react';
-import type { HTMLAttributes, CSSProperties } from 'react';
+
 import { cn } from '@/shared/lib/cn';
 
 type Shape = 'text' | 'rect' | 'circle';

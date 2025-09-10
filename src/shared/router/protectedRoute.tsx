@@ -1,6 +1,6 @@
 import { useAuth } from '@features/auth';
 import { useAuthStore } from '@features/auth/model/store';
-import { useEffect, type FC } from 'react';
+import { type FC, useEffect } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 interface ProtectedRouteProps {
     requiredRoles: string[];

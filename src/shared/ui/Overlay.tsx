@@ -1,5 +1,7 @@
 import type { HTMLAttributes } from 'react';
+
 import { cn } from '@/shared/lib/cn';
+
 import { Portal } from './Portal';
 
 export type OverlayProps = {

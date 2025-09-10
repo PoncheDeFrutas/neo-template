@@ -1,7 +1,6 @@
-import { create } from 'zustand';
-import { useMemo } from 'react';
 import { jwtDecode, type JwtPayload } from 'jwt-decode';
-import { decode } from 'zod';
+import { useMemo } from 'react';
+import { create } from 'zustand';
 
 /**
  * Represents a decoded JWT token containing user authentication and authorization information.
@@ -163,7 +162,7 @@ export const useAuthStore = create<AuthState>((set) => {
         if (import.meta.env.DEV) {
             // Log minimal decoded info for debugging only in dev
             // Avoid logging the raw token
-            // eslint-disable-next-line no-console
+
             console.log('[auth] Decoded token', {
                 id: userId,
                 email,
@@ -206,7 +205,6 @@ export const useAuthStore = create<AuthState>((set) => {
             scheduleLogout(user.exp, logout);
         }
         if (import.meta.env.DEV) {
-            // eslint-disable-next-line no-console
             console.log('[auth] Restored session from token', {
                 id: userId,
                 email,

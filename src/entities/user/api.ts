@@ -1,4 +1,5 @@
 import api from '@shared/api/axios';
+
 import { mapUserFromApi, mapUserToApi } from './adapter';
 import type { User, UserApi } from './types';
 

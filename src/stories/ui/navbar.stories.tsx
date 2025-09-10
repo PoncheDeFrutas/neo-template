@@ -1,6 +1,6 @@
-import { Navbar, Button, Badge } from '@shared/ui';
+import { Badge, Button, Navbar } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Home, LayoutGrid, ShoppingBag, Settings } from 'lucide-react';
+import { Home, LayoutGrid, Settings, ShoppingBag } from 'lucide-react';
 
 type Align = 'left' | 'center' | 'between';
 type Size = 'sm' | 'md' | 'lg';

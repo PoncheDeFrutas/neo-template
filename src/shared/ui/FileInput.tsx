@@ -1,4 +1,3 @@
-import { forwardRef, useId, useMemo, useRef, useState } from 'react';
 import type {
     ChangeEvent,
     DragEvent,
@@ -7,6 +6,8 @@ import type {
     MutableRefObject,
     ReactNode,
 } from 'react';
+import { forwardRef, useId, useMemo, useRef, useState } from 'react';
+
 import { cn } from '@/shared/lib/cn';
 
 type Size = 'sm' | 'md' | 'lg';

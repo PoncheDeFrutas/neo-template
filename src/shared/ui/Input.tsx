@@ -1,7 +1,8 @@
-import { forwardRef, useId, useRef, useState } from 'react';
+import { ChevronDown, ChevronUp, Eye, EyeOff } from 'lucide-react';
 import type { InputHTMLAttributes, MutableRefObject, ReactNode } from 'react';
+import { forwardRef, useId, useRef, useState } from 'react';
+
 import { cn } from '@/shared/lib/cn';
-import { Eye, EyeOff, ChevronUp, ChevronDown } from 'lucide-react';
 
 type Size = 'sm' | 'md' | 'lg';
 

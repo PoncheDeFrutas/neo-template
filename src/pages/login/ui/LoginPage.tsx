@@ -1,12 +1,11 @@
-import { useState, type FC, type FormEvent } from 'react';
+import { Lock, Mail } from 'lucide-react';
+import { type FC, type FormEvent, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Mail, Lock } from 'lucide-react';
 
-import { Button, Card, Input } from '@/shared/ui';
 import { AuthService } from '@/features/auth';
 import { useAuthStore } from '@/features/auth/model/store';
-
 import { ROLE_ID_BY_KEY } from '@/features/register';
+import { Button, Card, Input } from '@/shared/ui';
 
 const LoginPage: FC = () => {
     const navigate = useNavigate();

@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
-import { useEffect, useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { useEffect, useState } from 'react';
 import {
     toast,
     ToastContainer,

@@ -1,6 +1,6 @@
 import { IconWithText } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Clock, MapPin, Info, Check } from 'lucide-react';
+import { Check, Clock, Info, MapPin } from 'lucide-react';
 
 type Size = 'xs' | 'sm' | 'md';
 type IconName = 'clock' | 'map-pin' | 'info' | 'check';

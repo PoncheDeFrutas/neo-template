@@ -1,6 +1,6 @@
 import { Input } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Mail, Lock, Phone, Search, Hash } from 'lucide-react';
+import { Hash, Lock, Mail, Phone, Search } from 'lucide-react';
 import { useState } from 'react';
 
 type Size = 'sm' | 'md' | 'lg';

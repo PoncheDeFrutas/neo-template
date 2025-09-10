@@ -1,6 +1,7 @@
 import type { FC } from 'react';
-import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
 import { Suspense } from 'react';
+import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
+
 import { PageLoader } from '@/shared/ui';
 
 /**

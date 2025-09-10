@@ -1,7 +1,9 @@
+import type { HTMLAttributes, ReactNode } from 'react';
 import { useEffect, useId, useRef, useState } from 'react';
-import type { ReactNode, HTMLAttributes } from 'react';
-import { Portal } from './Portal';
+
 import { cn } from '@/shared/lib/cn';
+
+import { Portal } from './Portal';
 
 type Side = 'top' | 'right' | 'bottom' | 'left';
 type Align = 'start' | 'center' | 'end';

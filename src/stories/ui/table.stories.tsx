@@ -1,4 +1,4 @@
-import { Table, Badge, Pagination } from '@shared/ui';
+import { Badge, Pagination, Table } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 

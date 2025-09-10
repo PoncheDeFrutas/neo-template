@@ -1,9 +1,11 @@
 import type { FC } from 'react';
-import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
 import { Suspense } from 'react';
+import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
+
 import { PageLoader } from '@/shared/ui';
-import DefaultHeader from './components/defaultHeader';
+
 import DefaultFooter from './components/defaultFooter';
+import DefaultHeader from './components/defaultHeader';
 
 /**
  * Default layout component that provides the main structure for pages.

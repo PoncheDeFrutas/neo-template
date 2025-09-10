@@ -1,7 +1,8 @@
+import { Home, Info, LayoutGrid } from 'lucide-react';
 import type { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { Button, Card } from '@/shared/ui';
-import { Home, LayoutGrid, Info } from 'lucide-react';
 
 const NotFoundPage: FC = () => {
     const navigate = useNavigate();

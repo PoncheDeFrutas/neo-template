@@ -1,7 +1,9 @@
 import type { HTMLAttributes, ReactNode } from 'react';
+
 import { cn } from '@/shared/lib/cn';
-import { Tooltip } from './Tooltip';
+
 import { Badge } from './Badge';
+import { Tooltip } from './Tooltip';
 
 export type TooltipLabelProps = Omit<HTMLAttributes<HTMLSpanElement>, 'children'> & {
     text: ReactNode;

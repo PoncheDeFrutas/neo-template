@@ -1,5 +1,6 @@
-import { useEffect, useId, useMemo, useState } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
+import { useEffect, useId, useMemo, useState } from 'react';
+
 import { cn } from '@/shared/lib/cn';
 
 export type TabItem = {

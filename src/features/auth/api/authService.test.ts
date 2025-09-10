@@ -1,6 +1,7 @@
-import { describe, it, expect, vi, afterEach } from 'vitest';
-import { AuthService } from './authService';
 import api from '@shared/api/axios';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
+import { AuthService } from './authService';
 
 vi.mock('@shared/api/axios', () => ({
     default: { post: vi.fn() },

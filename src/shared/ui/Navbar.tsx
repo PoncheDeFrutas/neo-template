@@ -1,9 +1,11 @@
-import { memo, useState } from 'react';
-import type { HTMLAttributes, MouseEvent, ReactNode } from 'react';
-import { cn } from '@/shared/lib/cn';
-import { Drawer } from './Drawer';
-import { Button } from './Button';
 import { Menu } from 'lucide-react';
+import type { HTMLAttributes, MouseEvent, ReactNode } from 'react';
+import { memo, useState } from 'react';
+
+import { cn } from '@/shared/lib/cn';
+
+import { Button } from './Button';
+import { Drawer } from './Drawer';
 
 export type NavItem = {
     label: ReactNode;

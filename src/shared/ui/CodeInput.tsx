@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+
 import { cn } from '@/shared/lib/cn';
 
 type Props = {
@@ -44,7 +45,7 @@ export function CodeInput({
     const focusAt = (idx: number) => inputsRef.current[idx]?.focus();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
-        let v = e.target.value.replace(/\D/g, ''); // digits only
+        const v = e.target.value.replace(/\D/g, ''); // digits only
         if (!v) {
             setDigit(idx, ' ');
             return;

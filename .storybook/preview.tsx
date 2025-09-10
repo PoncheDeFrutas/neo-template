@@ -1,8 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
+import '../src/index.css';
+
 import type { Preview } from '@storybook/react-vite';
 import type { FC, ReactNode } from 'react';
 import React, { useEffect } from 'react';
-import '../src/index.css';
 
 type ThemeMode = 'light' | 'dark' | 'system';
 

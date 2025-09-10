@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { useMemo } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+
 import { Button, Card, EmptyState } from '@/shared/ui';
 
 const DEFAULT_CONTACT = 'admin@example.com';

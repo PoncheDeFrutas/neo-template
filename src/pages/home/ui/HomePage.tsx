@@ -1,7 +1,8 @@
+import { Bike, Clock, MapPin, Shield, ShoppingBag, Store, Truck, Weight } from 'lucide-react';
 import type { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Card, Badge, Divider, IconWithText } from '@/shared/ui';
-import { MapPin, ShoppingBag, Store, Bike, Shield, Truck, Clock, Weight } from 'lucide-react';
+
+import { Badge, Button, Card, Divider, IconWithText } from '@/shared/ui';
 
 const HomePage: FC = () => {
     const navigate = useNavigate();

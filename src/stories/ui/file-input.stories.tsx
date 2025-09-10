@@ -1,6 +1,6 @@
 import { FileInput } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Upload, UploadCloud, Paperclip } from 'lucide-react';
+import { Paperclip, Upload, UploadCloud } from 'lucide-react';
 import { useState } from 'react';
 
 type Size = 'sm' | 'md' | 'lg';

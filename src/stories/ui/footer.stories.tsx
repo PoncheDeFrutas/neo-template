@@ -1,6 +1,6 @@
 import { Footer } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Github, Twitter, Instagram } from 'lucide-react';
+import { Github, Instagram, Twitter } from 'lucide-react';
 
 type StoryArgs = {
     brand: string;

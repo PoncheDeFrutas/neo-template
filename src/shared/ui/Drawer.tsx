@@ -1,9 +1,11 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { X } from 'lucide-react';
 import type { HTMLAttributes, ReactNode } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
+
 import { cn } from '@/shared/lib/cn';
+
 import { Overlay } from './Overlay';
 import { Portal } from './Portal';
-import { X } from 'lucide-react';
 
 type Size = 'sm' | 'md' | 'lg';
 type Side = 'right' | 'left' | 'top' | 'bottom';

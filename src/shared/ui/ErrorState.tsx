@@ -1,4 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
+
 import { cn } from '@/shared/lib/cn';
 
 export type ErrorStateProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {

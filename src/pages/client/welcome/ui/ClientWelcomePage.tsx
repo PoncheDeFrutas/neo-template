@@ -1,18 +1,19 @@
+import {
+    CreditCard,
+    History,
+    Layers3,
+    Settings,
+    ShoppingCart,
+    Store,
+    Truck,
+    User,
+} from 'lucide-react';
 import type { FC } from 'react';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, Button } from '@/shared/ui';
+
 import { useAuth } from '@/features/auth';
-import {
-    Store,
-    ShoppingCart,
-    CreditCard,
-    Truck,
-    History,
-    User,
-    Settings,
-    Layers3,
-} from 'lucide-react';
+import { Button, Card } from '@/shared/ui';
 
 type Action = {
     label: string;

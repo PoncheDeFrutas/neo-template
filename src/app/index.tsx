@@ -1,5 +1,6 @@
-import { RouterProvider } from 'react-router-dom';
 import router from '@app/providers/router';
+import { RouterProvider } from 'react-router-dom';
+
 import { Toaster } from '@/shared/ui';
 
 /**

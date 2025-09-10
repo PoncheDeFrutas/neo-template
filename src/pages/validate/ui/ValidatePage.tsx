@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+
+import { ValidationService } from '@/features/auth/api/validationService';
+import { useAuthStore } from '@/features/auth/model/store';
 import { Button, Card, Input, showToast } from '@/shared/ui';
 import CodeInput from '@/shared/ui/CodeInput';
-import { ValidationService } from '@/features/auth/api/validationService';
 import { showErrorToast } from '@/shared/ui/Toast';
-import { useAuthStore } from '@/features/auth/model/store';
 
 export default function ValidatePage() {
     const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import { Card, Button } from '@shared/ui';
+import { Button, Card } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ArrowRight } from 'lucide-react';
 

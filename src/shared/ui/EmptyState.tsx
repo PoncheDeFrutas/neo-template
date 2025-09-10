@@ -1,4 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
+
 import { cn } from '@/shared/lib/cn';
 
 export type EmptyStateProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {

@@ -1,4 +1,4 @@
-import { Progress, CircularProgress } from '@shared/ui';
+import { CircularProgress, Progress } from '@shared/ui';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 type Height = 'xs' | 'sm' | 'md';

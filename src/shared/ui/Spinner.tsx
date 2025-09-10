@@ -1,4 +1,5 @@
 import type { HTMLAttributes } from 'react';
+
 import { cn } from '@/shared/lib/cn';
 
 export type SpinnerProps = {

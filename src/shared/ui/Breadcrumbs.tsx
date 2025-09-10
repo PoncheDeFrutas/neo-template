@@ -1,4 +1,5 @@
-import type { HTMLAttributes, ReactNode, MouseEventHandler } from 'react';
+import type { HTMLAttributes, MouseEventHandler, ReactNode } from 'react';
+
 import { cn } from '@/shared/lib/cn';
 
 export type BreadcrumbItem = {

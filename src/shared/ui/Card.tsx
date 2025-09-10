@@ -1,4 +1,3 @@
-import { forwardRef } from 'react';
 import type {
     AnchorHTMLAttributes,
     HTMLAttributes,
@@ -6,6 +5,8 @@ import type {
     ReactNode,
     Ref,
 } from 'react';
+import { forwardRef } from 'react';
+
 import { cn } from '@/shared/lib/cn';
 
 type Variant = 'surface' | 'elevated' | 'outline' | 'ghost';

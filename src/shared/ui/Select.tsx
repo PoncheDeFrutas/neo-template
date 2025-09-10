@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { forwardRef, useEffect, useId, useMemo, useRef, useState } from 'react';
-import type { ReactNode, SelectHTMLAttributes } from 'react';
-import { cn } from '@/shared/lib/cn';
 import { ChevronDown, X } from 'lucide-react';
+import type { ReactNode, SelectHTMLAttributes } from 'react';
+import { forwardRef, useEffect, useId, useMemo, useRef, useState } from 'react';
+
+import { cn } from '@/shared/lib/cn';
 
 type Size = 'sm' | 'md' | 'lg';
 type Variant = 'outline' | 'filled' | 'ghost';

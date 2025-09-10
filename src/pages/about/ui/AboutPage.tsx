@@ -1,19 +1,20 @@
-import type { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Badge, Button, Card, Divider, IconWithText } from '@/shared/ui';
 import {
-    Package,
-    Smartphone,
-    Globe,
-    Users,
-    Store,
-    Bike,
-    Shield,
-    ListChecks,
     Beaker,
+    Bike,
     CheckCircle2,
     Clock,
+    Globe,
+    ListChecks,
+    Package,
+    Shield,
+    Smartphone,
+    Store,
+    Users,
 } from 'lucide-react';
+import type { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { Badge, Button, Card, Divider, IconWithText } from '@/shared/ui';
 
 const AboutPage: FC = () => {
     const navigate = useNavigate();

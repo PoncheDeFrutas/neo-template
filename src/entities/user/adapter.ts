@@ -1,5 +1,6 @@
 import { validateSchema } from '@shared/lib/validation';
-import { UserApiSchema, type User, type UserApi } from './types';
+
+import { type User, type UserApi, UserApiSchema } from './types';
 
 export function mapUserFromApi(dto: unknown): User {
     const parsed = validateSchema(UserApiSchema, dto);
