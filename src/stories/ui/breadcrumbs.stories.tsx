@@ -104,18 +104,43 @@ export const Basic: Story = {
             { label: 'Data', current: true },
         ],
     },
-    parameters: { docs: { description: { story: 'Standard breadcrumb with links and current page.' } } },
+    parameters: {
+        docs: { description: { story: 'Standard breadcrumb with links and current page.' } },
+    },
 };
 
 export const WithIcons: Story = {
     args: {
         items: [
-            { label: (<><Home size={14} /> Home</>), href: '/' },
-            { label: (<><Folder size={14} /> Projects</>), href: '/projects' },
-            { label: (<><File size={14} /> Design System</>), current: true },
+            {
+                label: (
+                    <>
+                        <Home size={14} /> Home
+                    </>
+                ),
+                href: '/',
+            },
+            {
+                label: (
+                    <>
+                        <Folder size={14} /> Projects
+                    </>
+                ),
+                href: '/projects',
+            },
+            {
+                label: (
+                    <>
+                        <File size={14} /> Design System
+                    </>
+                ),
+                current: true,
+            },
         ],
     },
-    parameters: { docs: { description: { story: 'Labels accept React nodes; icons can be included.' } } },
+    parameters: {
+        docs: { description: { story: 'Labels accept React nodes; icons can be included.' } },
+    },
 };
 
 export const WithClickHandlers: Story = {
@@ -126,7 +151,9 @@ export const WithClickHandlers: Story = {
             { label: 'Current Page', current: true },
         ],
     },
-    parameters: { docs: { description: { story: 'Using onClick without href for custom navigation.' } } },
+    parameters: {
+        docs: { description: { story: 'Using onClick without href for custom navigation.' } },
+    },
 };
 
 export const Truncation: Story = {
@@ -134,7 +161,10 @@ export const Truncation: Story = {
         items: [
             { label: 'Home', href: '/' },
             { label: 'Very long category name that will likely truncate', href: '/category' },
-            { label: 'Extremely verbose product title that should not fit entirely', current: true },
+            {
+                label: 'Extremely verbose product title that should not fit entirely',
+                current: true,
+            },
         ],
     },
     render: (args) => (
@@ -142,5 +172,7 @@ export const Truncation: Story = {
             <Breadcrumbs {...args} />
         </div>
     ),
-    parameters: { docs: { description: { story: 'Breadcrumb labels truncate within constrained widths.' } } },
+    parameters: {
+        docs: { description: { story: 'Breadcrumb labels truncate within constrained widths.' } },
+    },
 };

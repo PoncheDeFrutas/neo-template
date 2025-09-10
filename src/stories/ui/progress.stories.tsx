@@ -77,10 +77,21 @@ Notes
     tags: ['autodocs'],
     argTypes: {
         // Linear controls
-        value: { control: { type: 'number', min: 0, max: 100, step: 1 }, description: 'Determinate value (0..100)' },
+        value: {
+            control: { type: 'number', min: 0, max: 100, step: 1 },
+            description: 'Determinate value (0..100)',
+        },
         indeterminate: { control: 'boolean', description: 'Indeterminate animation' },
-        rounded: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg', 'full'], description: 'Corner radius' },
-        height: { control: { type: 'inline-radio' }, options: ['xs', 'sm', 'md'], description: 'Bar height' },
+        rounded: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg', 'full'],
+            description: 'Corner radius',
+        },
+        height: {
+            control: { type: 'inline-radio' },
+            options: ['xs', 'sm', 'md'],
+            description: 'Bar height',
+        },
         className: { control: 'text', description: 'Container classes' },
         trackClassName: { control: 'text', description: 'Track classes' },
         barClassName: { control: 'text', description: 'Bar classes' },
@@ -182,4 +193,3 @@ export const CircularCustomStyles: CStory = {
         />
     ),
 };
-

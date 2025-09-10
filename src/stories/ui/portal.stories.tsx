@@ -45,7 +45,10 @@ Notes
     tags: ['autodocs'],
     argTypes: {
         content: { control: 'text', description: 'Inner content string for demo' },
-        blurBackground: { control: 'boolean', description: 'Add a subtle background blur (demo only)' },
+        blurBackground: {
+            control: 'boolean',
+            description: 'Add a subtle background blur (demo only)',
+        },
     },
 } satisfies Meta<any>;
 
@@ -55,7 +58,9 @@ type Story = StoryObj<StoryArgs>;
 
 export const Playground: Story = {
     args: { content: 'Portalled content', blurBackground: true },
-    parameters: { docs: { description: { story: 'Interactive demo: opens a portalled floating panel.' } } },
+    parameters: {
+        docs: { description: { story: 'Interactive demo: opens a portalled floating panel.' } },
+    },
     render: (args) => {
         const [open, setOpen] = useState(false);
         return (
@@ -82,7 +87,9 @@ export const Playground: Story = {
                             <div
                                 className={[
                                     'absolute inset-0 transition',
-                                    args.blurBackground ? 'backdrop-blur-[2px] backdrop-saturate-150' : '',
+                                    args.blurBackground
+                                        ? 'backdrop-blur-[2px] backdrop-saturate-150'
+                                        : '',
                                 ].join(' ')}
                             />
                             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md border border-border bg-surface shadow-lg p-4 min-w-56 text-sm">
@@ -131,4 +138,3 @@ export const InsideClippedContainer: Story = {
         );
     },
 };
-

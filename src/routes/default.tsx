@@ -7,6 +7,8 @@ const AboutPage = lazy(() => import('@pages/about'));
 const UiPage = lazy(() => import('@pages/ui'));
 const LoginPage = lazy(() => import('@pages/login'));
 const RegisterPage = lazy(() => import('@pages/registers'));
+const ValidatePage = lazy(() => import('@pages/validate'));
+const PendingVerificationPage = lazy(() => import('@pages/pending-verification'));
 
 const defaultRoutes: RouteObject[] = [
     {
@@ -32,6 +34,14 @@ const defaultRoutes: RouteObject[] = [
             {
                 path: 'register',
                 element: <RegisterPage />,
+            },
+            {
+                path: 'validate',
+                element: <ValidatePage />,
+            },
+            {
+                path: 'pending-verification',
+                element: <PendingVerificationPage />,
             },
         ],
     },

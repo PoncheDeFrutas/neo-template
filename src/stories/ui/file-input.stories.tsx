@@ -76,7 +76,11 @@ Notes
         hint: { control: 'text', description: 'Helper text' },
         error: { control: 'text', description: 'Error message (leave empty for none)' },
         success: { control: 'text', description: 'Success message (string only)' },
-        size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'], description: 'Control size' },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg'],
+            description: 'Control size',
+        },
         fullWidth: { control: 'boolean', description: 'Full width' },
         dropzone: { control: 'boolean', description: 'Use dropzone style' },
         multiple: { control: 'boolean', description: 'Allow multiple files' },
@@ -121,7 +125,7 @@ export const Playground: Story = {
     parameters: { docs: { description: { story: 'Interactive control center.' } } },
     render: (args) => {
         const [files, setFiles] = useState<File[]>([]);
-        const left = args.withLeftIcon ? (args.dropzone ? <UploadCloud /> : <Upload />) : undefined;
+        const left = args.withLeftIcon ? args.dropzone ? <UploadCloud /> : <Upload /> : undefined;
         const right = args.withRightIcon ? <Paperclip /> : undefined;
         const error = args.error ? args.error : undefined;
         const success = args.success ? args.success : undefined;
@@ -167,7 +171,9 @@ export const Dropzone: Story = {
         fullWidth: true,
         withLeftIcon: true,
     },
-    parameters: { docs: { description: { story: 'Dropzone variant with drag-and-drop support.' } } },
+    parameters: {
+        docs: { description: { story: 'Dropzone variant with drag-and-drop support.' } },
+    },
 };
 
 export const Sizes: Story = {
@@ -183,7 +189,9 @@ export const Sizes: Story = {
 };
 
 export const States: Story = {
-    parameters: { docs: { description: { story: 'Disabled, required, error and success examples.' } } },
+    parameters: {
+        docs: { description: { story: 'Disabled, required, error and success examples.' } },
+    },
     render: () => (
         <div style={{ display: 'grid', gap: 16, maxWidth: 520 }}>
             <FileInput label="Disabled" disabled />
@@ -195,6 +203,12 @@ export const States: Story = {
 };
 
 export const MultipleAndAccept: Story = {
-    args: { label: 'Upload images', multiple: true, accept: 'image/*', dropzone: false, showSelected: true },
+    args: {
+        label: 'Upload images',
+        multiple: true,
+        accept: 'image/*',
+        dropzone: false,
+        showSelected: true,
+    },
     parameters: { docs: { description: { story: 'Multiple selection and accept filter.' } } },
 };

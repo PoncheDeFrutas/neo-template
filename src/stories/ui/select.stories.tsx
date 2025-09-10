@@ -81,17 +81,28 @@ Notes
         error: { control: 'text', description: 'Error message' },
         success: { control: 'text', description: 'Success message' },
         placeholder: { control: 'text', description: 'Placeholder (single select only)' },
-        size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'], description: 'Control size' },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg'],
+            description: 'Control size',
+        },
         fullWidth: { control: 'boolean', description: 'Full width' },
         leftIcon: { control: 'boolean', description: 'Show example left icon' },
         rightIcon: { control: 'boolean', description: 'Show example right icon' },
         containerClassName: { control: 'text', description: 'Container classes' },
         selectClassName: { control: 'text', description: 'Select classes' },
-        variant: { control: { type: 'inline-radio' }, options: ['outline', 'filled', 'ghost'], description: 'Visual style' },
+        variant: {
+            control: { type: 'inline-radio' },
+            options: ['outline', 'filled', 'ghost'],
+            description: 'Visual style',
+        },
         disabled: { control: 'boolean', description: 'Disabled state' },
         required: { control: 'boolean', description: 'Required state' },
         multiple: { control: 'boolean', description: 'Enable multiple selection' },
-        useChildren: { control: 'boolean', description: 'Render options via children instead of options prop' },
+        useChildren: {
+            control: 'boolean',
+            description: 'Render options via children instead of options prop',
+        },
     },
 } satisfies Meta<any>;
 
@@ -189,9 +200,7 @@ export const WithIcons: Story = {
 export const Multiple: Story = {
     args: { label: 'Multiple', placeholder: 'Choose...', fullWidth: false, variant: 'outline' },
     parameters: { docs: { description: { story: 'Enable multiple selection (chevron hidden).' } } },
-    render: (args) => (
-        <Select {...(args as any)} multiple options={options} />
-    ),
+    render: (args) => <Select {...(args as any)} multiple options={options} />,
 };
 
 export const WithChildren: Story = {
@@ -207,7 +216,9 @@ export const WithChildren: Story = {
 };
 
 export const States: Story = {
-    parameters: { docs: { description: { story: 'Disabled, required, error and success messages.' } } },
+    parameters: {
+        docs: { description: { story: 'Disabled, required, error and success messages.' } },
+    },
     render: () => (
         <div style={{ display: 'grid', gap: 12, maxWidth: 420 }}>
             <Select label="Disabled" disabled options={options} />
@@ -217,4 +228,3 @@ export const States: Story = {
         </div>
     ),
 };
-

@@ -66,10 +66,24 @@ Notes
     },
     tags: ['autodocs'],
     argTypes: {
-        side: { control: { type: 'inline-radio' }, options: ['top', 'right', 'bottom', 'left'], description: 'Panel side' },
-        align: { control: { type: 'inline-radio' }, options: ['start', 'center', 'end'], description: 'Panel alignment' },
-        sideOffset: { control: { type: 'number', min: 0, max: 30, step: 1 }, description: 'Gap between trigger and panel' },
-        alignOffset: { control: { type: 'number', min: -40, max: 40, step: 1 }, description: 'Shift along alignment axis' },
+        side: {
+            control: { type: 'inline-radio' },
+            options: ['top', 'right', 'bottom', 'left'],
+            description: 'Panel side',
+        },
+        align: {
+            control: { type: 'inline-radio' },
+            options: ['start', 'center', 'end'],
+            description: 'Panel alignment',
+        },
+        sideOffset: {
+            control: { type: 'number', min: 0, max: 30, step: 1 },
+            description: 'Gap between trigger and panel',
+        },
+        alignOffset: {
+            control: { type: 'number', min: -40, max: 40, step: 1 },
+            description: 'Shift along alignment axis',
+        },
         closeOnOutsideClick: { control: 'boolean', description: 'Close when clicking outside' },
         disabled: { control: 'boolean', description: 'Disable opening' },
         panelClassName: { control: 'text', description: 'Panel classes' },
@@ -86,9 +100,15 @@ function PanelContent({ withActions }: { withActions: boolean }) {
     if (!withActions) return <div className="text-sm text-muted-foreground">Basic content</div>;
     return (
         <div className="grid gap-1">
-            <Button size="sm" variant="ghost" leftIcon={<User size={14} />}>Profile</Button>
-            <Button size="sm" variant="ghost" leftIcon={<Settings size={14} />}>Settings</Button>
-            <Button size="sm" variant="destructive" leftIcon={<LogOut size={14} />}>Sign out</Button>
+            <Button size="sm" variant="ghost" leftIcon={<User size={14} />}>
+                Profile
+            </Button>
+            <Button size="sm" variant="ghost" leftIcon={<Settings size={14} />}>
+                Settings
+            </Button>
+            <Button size="sm" variant="destructive" leftIcon={<LogOut size={14} />}>
+                Sign out
+            </Button>
         </div>
     );
 }
@@ -105,7 +125,11 @@ export const Playground: Story = {
         label: 'Open popover',
         withActions: true,
     },
-    parameters: { docs: { description: { story: 'Interactive control center. Click the trigger to toggle.' } } },
+    parameters: {
+        docs: {
+            description: { story: 'Interactive control center. Click the trigger to toggle.' },
+        },
+    },
     render: (args) => (
         <Popover
             side={args.side}
@@ -117,19 +141,37 @@ export const Playground: Story = {
             panel={<PanelContent withActions={args.withActions} />}
             panelClassName={args.panelClassName}
         >
-            <Button variant="outline" leftIcon={<MoreHorizontal size={16} />}>{args.label}</Button>
+            <Button variant="outline" leftIcon={<MoreHorizontal size={16} />}>
+                {args.label}
+            </Button>
         </Popover>
     ),
 };
 
 export const Sides: Story = {
-    args: { align: 'center', sideOffset: 8, alignOffset: 0, closeOnOutsideClick: true, disabled: false, withActions: false },
+    args: {
+        align: 'center',
+        sideOffset: 8,
+        alignOffset: 0,
+        closeOnOutsideClick: true,
+        disabled: false,
+        withActions: false,
+    },
     parameters: { docs: { description: { story: 'Position on each side of the trigger.' } } },
     render: (args) => (
         <div className="grid gap-4 grid-cols-2">
             {(['top', 'right', 'bottom', 'left'] as Side[]).map((s) => (
-                <div key={s} className="flex items-center justify-center p-6 border border-border-subtle rounded-md">
-                    <Popover side={s} align={args.align} sideOffset={args.sideOffset} alignOffset={args.alignOffset} panel={<PanelContent withActions={false} />}>
+                <div
+                    key={s}
+                    className="flex items-center justify-center p-6 border border-border-subtle rounded-md"
+                >
+                    <Popover
+                        side={s}
+                        align={args.align}
+                        sideOffset={args.sideOffset}
+                        alignOffset={args.alignOffset}
+                        panel={<PanelContent withActions={false} />}
+                    >
                         <Button variant="outline">{s}</Button>
                     </Popover>
                 </div>
@@ -139,13 +181,28 @@ export const Sides: Story = {
 };
 
 export const Alignments: Story = {
-    args: { side: 'bottom', sideOffset: 8, alignOffset: 0, closeOnOutsideClick: true, disabled: false },
+    args: {
+        side: 'bottom',
+        sideOffset: 8,
+        alignOffset: 0,
+        closeOnOutsideClick: true,
+        disabled: false,
+    },
     parameters: { docs: { description: { story: 'start, center, end alignments.' } } },
     render: (args) => (
         <div className="grid gap-4 grid-cols-3">
             {(['start', 'center', 'end'] as Align[]).map((a) => (
-                <div key={a} className="flex items-center justify-center p-6 border border-border-subtle rounded-md">
-                    <Popover side={args.side} align={a} sideOffset={args.sideOffset} alignOffset={args.alignOffset} panel={<PanelContent withActions={false} />}>
+                <div
+                    key={a}
+                    className="flex items-center justify-center p-6 border border-border-subtle rounded-md"
+                >
+                    <Popover
+                        side={args.side}
+                        align={a}
+                        sideOffset={args.sideOffset}
+                        alignOffset={args.alignOffset}
+                        panel={<PanelContent withActions={false} />}
+                    >
                         <Button variant="outline">{a}</Button>
                     </Popover>
                 </div>
@@ -159,10 +216,22 @@ export const Offsets: Story = {
     parameters: { docs: { description: { story: 'Adjust side and align offsets.' } } },
     render: (args) => (
         <div className="grid gap-4 grid-cols-2">
-            <Popover side={args.side} align={args.align} sideOffset={0} alignOffset={0} panel={<PanelContent withActions={false} />}>
+            <Popover
+                side={args.side}
+                align={args.align}
+                sideOffset={0}
+                alignOffset={0}
+                panel={<PanelContent withActions={false} />}
+            >
                 <Button variant="outline">Offset 0</Button>
             </Popover>
-            <Popover side={args.side} align={args.align} sideOffset={16} alignOffset={12} panel={<PanelContent withActions={false} />}>
+            <Popover
+                side={args.side}
+                align={args.align}
+                sideOffset={16}
+                alignOffset={12}
+                panel={<PanelContent withActions={false} />}
+            >
                 <Button variant="outline">Offset 16/12</Button>
             </Popover>
         </div>
@@ -170,8 +239,17 @@ export const Offsets: Story = {
 };
 
 export const Controlled: Story = {
-    args: { side: 'bottom', align: 'center', sideOffset: 8, alignOffset: 0, closeOnOutsideClick: true, disabled: false },
-    parameters: { docs: { description: { story: 'Controlled open state via open/onOpenChange.' } } },
+    args: {
+        side: 'bottom',
+        align: 'center',
+        sideOffset: 8,
+        alignOffset: 0,
+        closeOnOutsideClick: true,
+        disabled: false,
+    },
+    parameters: {
+        docs: { description: { story: 'Controlled open state via open/onOpenChange.' } },
+    },
     render: (args) => {
         const [open, setOpen] = useState(false);
         return (
@@ -202,12 +280,25 @@ export const Controlled: Story = {
 };
 
 export const Disabled: Story = {
-    args: { side: 'bottom', align: 'center', sideOffset: 8, alignOffset: 0, closeOnOutsideClick: true, disabled: true },
+    args: {
+        side: 'bottom',
+        align: 'center',
+        sideOffset: 8,
+        alignOffset: 0,
+        closeOnOutsideClick: true,
+        disabled: true,
+    },
     parameters: { docs: { description: { story: 'Disabled trigger does not open the popover.' } } },
     render: (args) => (
-        <Popover side={args.side} align={args.align} sideOffset={args.sideOffset} alignOffset={args.alignOffset} disabled panel={<PanelContent withActions={false} />}>
+        <Popover
+            side={args.side}
+            align={args.align}
+            sideOffset={args.sideOffset}
+            alignOffset={args.alignOffset}
+            disabled
+            panel={<PanelContent withActions={false} />}
+        >
             <Button variant="outline">Disabled</Button>
         </Popover>
     ),
 };
-

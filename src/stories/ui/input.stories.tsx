@@ -82,7 +82,11 @@ Notes
         hint: { control: 'text', description: 'Helper text' },
         error: { control: 'text', description: 'Error message (string)' },
         success: { control: 'text', description: 'Success message (string)' },
-        size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'], description: 'Size' },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg'],
+            description: 'Size',
+        },
         fullWidth: { control: 'boolean', description: 'Full width' },
         type: {
             control: { type: 'select' },
@@ -180,7 +184,13 @@ export const Playground: Story = {
 };
 
 export const Sizes: Story = {
-    args: { label: 'Label', placeholder: 'Placeholder', size: 'md', type: 'text', fullWidth: false },
+    args: {
+        label: 'Label',
+        placeholder: 'Placeholder',
+        size: 'md',
+        type: 'text',
+        fullWidth: false,
+    },
     parameters: { docs: { description: { story: 'sm, md, lg control sizes.' } } },
     render: (args) => (
         <div style={{ display: 'grid', gap: 16, maxWidth: 520 }}>
@@ -196,9 +206,19 @@ export const Types: Story = {
     render: () => (
         <div style={{ display: 'grid', gap: 16, maxWidth: 520 }}>
             <Input label="Text" placeholder="Text" type="text" />
-            <Input label="Email" placeholder="name@domain.com" type="email" leftIcon={<Mail size={16} />} />
+            <Input
+                label="Email"
+                placeholder="name@domain.com"
+                type="email"
+                leftIcon={<Mail size={16} />}
+            />
             <Input label="Password" placeholder="••••••••" type="password" passwordToggle />
-            <Input label="Phone" placeholder="(555) 123-4567" type="tel" leftIcon={<Phone size={16} />} />
+            <Input
+                label="Phone"
+                placeholder="(555) 123-4567"
+                type="tel"
+                leftIcon={<Phone size={16} />}
+            />
             <Input label="Number" placeholder="0" type="number" numberSpinButtons="custom" />
             <Input label="Date" type="date" />
         </div>
@@ -211,7 +231,12 @@ export const WithIcons: Story = {
         <div style={{ display: 'grid', gap: 16, maxWidth: 520 }}>
             <Input label="Search" placeholder="Search..." leftIcon={<Search size={16} />} />
             <Input label="Amount" placeholder="0.00" rightIcon={<Hash size={16} />} />
-            <Input label="Email" placeholder="name@domain.com" leftIcon={<Mail size={16} />} rightIcon={<Search size={16} />} />
+            <Input
+                label="Email"
+                placeholder="name@domain.com"
+                leftIcon={<Mail size={16} />}
+                rightIcon={<Search size={16} />}
+            />
         </div>
     ),
 };
@@ -233,7 +258,9 @@ export const NumberSpinButtons: Story = {
 };
 
 export const States: Story = {
-    parameters: { docs: { description: { story: 'Disabled, required, error and success states.' } } },
+    parameters: {
+        docs: { description: { story: 'Disabled, required, error and success states.' } },
+    },
     render: () => (
         <div style={{ display: 'grid', gap: 16, maxWidth: 520 }}>
             <Input label="Disabled" placeholder="Disabled" disabled />
@@ -245,7 +272,13 @@ export const States: Story = {
 };
 
 export const FullWidth: Story = {
-    args: { label: 'Full width', placeholder: 'Stretches to container', fullWidth: true, type: 'text', size: 'md' },
+    args: {
+        label: 'Full width',
+        placeholder: 'Stretches to container',
+        fullWidth: true,
+        type: 'text',
+        size: 'md',
+    },
     parameters: { docs: { description: { story: 'Input expands to the container width.' } } },
     render: (args) => (
         <div style={{ width: 360 }}>
@@ -253,4 +286,3 @@ export const FullWidth: Story = {
         </div>
     ),
 };
-

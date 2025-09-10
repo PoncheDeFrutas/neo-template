@@ -59,13 +59,28 @@ Notes
     },
     tags: ['autodocs'],
     argTypes: {
-        shape: { control: { type: 'inline-radio' }, options: ['text', 'rect', 'circle'], description: 'Skeleton shape' },
+        shape: {
+            control: { type: 'inline-radio' },
+            options: ['text', 'rect', 'circle'],
+            description: 'Skeleton shape',
+        },
         width: { control: 'text', description: 'Width (number px or CSS string)' },
         height: { control: 'text', description: 'Height (number px or CSS string)' },
-        rounded: { control: { type: 'inline-radio' }, options: ['none', 'sm', 'md', 'lg', 'xl', '2xl', 'full'], description: 'Corner radius (text/rect)' },
+        rounded: {
+            control: { type: 'inline-radio' },
+            options: ['none', 'sm', 'md', 'lg', 'xl', '2xl', 'full'],
+            description: 'Corner radius (text/rect)',
+        },
         lines: { control: { type: 'number', min: 1, max: 10, step: 1 }, description: 'Text lines' },
-        gap: { control: { type: 'number', min: 0, max: 24, step: 1 }, description: 'Gap between text lines (px)' },
-        animate: { control: { type: 'inline-radio' }, options: ['shimmer', 'pulse', 'none'], description: 'Animation style' },
+        gap: {
+            control: { type: 'number', min: 0, max: 24, step: 1 },
+            description: 'Gap between text lines (px)',
+        },
+        animate: {
+            control: { type: 'inline-radio' },
+            options: ['shimmer', 'pulse', 'none'],
+            description: 'Animation style',
+        },
         className: { control: 'text', description: 'Extra classes' },
     },
 } satisfies Meta<any>;
@@ -89,16 +104,34 @@ export const Playground: Story = {
     render: (args) => (
         <div style={{ display: 'grid', gap: 12, maxWidth: 520 }}>
             {args.shape === 'text' ? (
-                <Skeleton shape="text" lines={args.lines} gap={args.gap} rounded={args.rounded} width={args.width} height={args.height} animate={args.animate} className={args.className} />
+                <Skeleton
+                    shape="text"
+                    lines={args.lines}
+                    gap={args.gap}
+                    rounded={args.rounded}
+                    width={args.width}
+                    height={args.height}
+                    animate={args.animate}
+                    className={args.className}
+                />
             ) : (
-                <Skeleton shape={args.shape} width={args.width} height={args.height} rounded={args.rounded} animate={args.animate} className={args.className} />
+                <Skeleton
+                    shape={args.shape}
+                    width={args.width}
+                    height={args.height}
+                    rounded={args.rounded}
+                    animate={args.animate}
+                    className={args.className}
+                />
             )}
         </div>
     ),
 };
 
 export const TextLines: Story = {
-    parameters: { docs: { description: { story: 'Paragraph-like text skeleton with 3–5 lines.' } } },
+    parameters: {
+        docs: { description: { story: 'Paragraph-like text skeleton with 3–5 lines.' } },
+    },
     render: () => (
         <div style={{ display: 'grid', gap: 10, maxWidth: 520 }}>
             <Skeleton shape="text" lines={3} />
@@ -109,7 +142,9 @@ export const TextLines: Story = {
 };
 
 export const Rectangles: Story = {
-    parameters: { docs: { description: { story: 'Common rectangular placeholders (e.g., images, cards).' } } },
+    parameters: {
+        docs: { description: { story: 'Common rectangular placeholders (e.g., images, cards).' } },
+    },
     render: () => (
         <div style={{ display: 'grid', gap: 12 }}>
             <Skeleton shape="rect" width={320} height={180} rounded="lg" />
@@ -142,9 +177,18 @@ export const Animations: Story = {
 };
 
 export const CompositeLayout: Story = {
-    parameters: { docs: { description: { story: 'A typical card layout composed of skeletons.' } } },
+    parameters: {
+        docs: { description: { story: 'A typical card layout composed of skeletons.' } },
+    },
     render: () => (
-        <div style={{ width: 360, border: '1px solid var(--color-border-subtle)', borderRadius: 12, padding: 12 }}>
+        <div
+            style={{
+                width: 360,
+                border: '1px solid var(--color-border-subtle)',
+                borderRadius: 12,
+                padding: 12,
+            }}
+        >
             <Skeleton shape="rect" width="100%" height={160} rounded="lg" />
             <div style={{ marginTop: 12 }}>
                 <Skeleton shape="text" lines={2} />
@@ -158,4 +202,3 @@ export const CompositeLayout: Story = {
         </div>
     ),
 };
-

@@ -1,5 +1,6 @@
 import { RouterProvider } from 'react-router-dom';
 import router from '@app/providers/router';
+import { Toaster } from '@/shared/ui';
 
 /**
  * Main application component that provides routing functionality.
@@ -10,5 +11,10 @@ import router from '@app/providers/router';
  * @returns The main application component with router provider
  */
 export default function App() {
-    return <RouterProvider router={router} />;
+    return (
+        <>
+            <RouterProvider router={router} />
+            <Toaster />
+        </>
+    );
 }

@@ -60,10 +60,26 @@ Notes
         text: { control: 'text', description: 'Label text' },
         tooltip: { control: 'text', description: 'Tooltip content' },
         withIcon: { control: 'boolean', description: 'Show example leading icon' },
-        iconType: { control: { type: 'inline-radio' }, options: ['info', 'help'], description: 'Icon type' },
-        size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'], description: 'Badge size' },
-        variant: { control: { type: 'inline-radio' }, options: ['neutral', 'success', 'warning', 'danger', 'custom'], description: 'Badge variant' },
-        tone: { control: { type: 'inline-radio' }, options: ['soft', 'solid', 'outline'], description: 'Badge tone' },
+        iconType: {
+            control: { type: 'inline-radio' },
+            options: ['info', 'help'],
+            description: 'Icon type',
+        },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg'],
+            description: 'Badge size',
+        },
+        variant: {
+            control: { type: 'inline-radio' },
+            options: ['neutral', 'success', 'warning', 'danger', 'custom'],
+            description: 'Badge variant',
+        },
+        tone: {
+            control: { type: 'inline-radio' },
+            options: ['soft', 'solid', 'outline'],
+            description: 'Badge tone',
+        },
         badgeClassName: { control: 'text', description: 'Badge classes (for custom variant)' },
         tooltipClassName: { control: 'text', description: 'Tooltip panel classes' },
         className: { control: 'text', description: 'Wrapper classes' },
@@ -74,7 +90,8 @@ export default meta;
 
 type Story = StoryObj<StoryArgs>;
 
-const pickIcon = (type: 'info' | 'help') => (type === 'info' ? <Info size={12} /> : <HelpCircle size={12} />);
+const pickIcon = (type: 'info' | 'help') =>
+    type === 'info' ? <Info size={12} /> : <HelpCircle size={12} />;
 
 export const Playground: Story = {
     args: {
@@ -110,9 +127,24 @@ export const Sizes: Story = {
     parameters: { docs: { description: { story: 'sm, md, lg badge sizes.' } } },
     render: (args) => (
         <div className="flex items-center gap-3">
-            <TooltipLabel text={args.text} tooltip={args.tooltip} icon={pickIcon(args.iconType)} size="sm" />
-            <TooltipLabel text={args.text} tooltip={args.tooltip} icon={pickIcon(args.iconType)} size="md" />
-            <TooltipLabel text={args.text} tooltip={args.tooltip} icon={pickIcon(args.iconType)} size="lg" />
+            <TooltipLabel
+                text={args.text}
+                tooltip={args.tooltip}
+                icon={pickIcon(args.iconType)}
+                size="sm"
+            />
+            <TooltipLabel
+                text={args.text}
+                tooltip={args.tooltip}
+                icon={pickIcon(args.iconType)}
+                size="md"
+            />
+            <TooltipLabel
+                text={args.text}
+                tooltip={args.tooltip}
+                icon={pickIcon(args.iconType)}
+                size="lg"
+            />
         </div>
     ),
 };
@@ -157,6 +189,7 @@ export const Custom: Story = {
         badgeClassName: 'bg-primary text-primary-foreground',
         tooltipClassName: 'rounded-lg px-3 py-1.5 text-xs',
     },
-    parameters: { docs: { description: { story: 'Using variant="custom" and styled tooltip panel.' } } },
+    parameters: {
+        docs: { description: { story: 'Using variant="custom" and styled tooltip panel.' } },
+    },
 };
-

@@ -70,13 +70,20 @@ Notes
     argTypes: {
         label: { control: 'text', description: 'Label text' },
         description: { control: 'text', description: 'Helper description' },
-        size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'], description: 'Control size' },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg'],
+            description: 'Control size',
+        },
         disabled: { control: 'boolean', description: 'Disabled state' },
         required: { control: 'boolean', description: 'Required state' },
         containerClassName: { control: 'text', description: 'Classes for label wrapper' },
         hasError: { control: 'boolean', description: 'Boolean error state' },
         errorMessage: { control: 'text', description: 'Error message (overrides boolean)' },
-        initialChecked: { control: 'boolean', description: 'Initial checked state (playground only)' },
+        initialChecked: {
+            control: 'boolean',
+            description: 'Initial checked state (playground only)',
+        },
     },
 } satisfies Meta<StoryArgs>;
 

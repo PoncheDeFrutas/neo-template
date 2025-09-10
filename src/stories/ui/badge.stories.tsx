@@ -134,10 +134,18 @@ export const Variants: Story = {
     },
     render: (args) => (
         <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-            <Badge {...args} variant="neutral">Neutral</Badge>
-            <Badge {...args} variant="success">Success</Badge>
-            <Badge {...args} variant="warning">Warning</Badge>
-            <Badge {...args} variant="danger">Danger</Badge>
+            <Badge {...args} variant="neutral">
+                Neutral
+            </Badge>
+            <Badge {...args} variant="success">
+                Success
+            </Badge>
+            <Badge {...args} variant="warning">
+                Warning
+            </Badge>
+            <Badge {...args} variant="danger">
+                Danger
+            </Badge>
         </div>
     ),
 };
@@ -149,9 +157,15 @@ export const Tones: Story = {
     },
     render: (args) => (
         <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-            <Badge {...args} tone="soft">Soft</Badge>
-            <Badge {...args} tone="solid">Solid</Badge>
-            <Badge {...args} tone="outline">Outline</Badge>
+            <Badge {...args} tone="soft">
+                Soft
+            </Badge>
+            <Badge {...args} tone="solid">
+                Solid
+            </Badge>
+            <Badge {...args} tone="outline">
+                Outline
+            </Badge>
         </div>
     ),
 };
@@ -163,9 +177,15 @@ export const Sizes: Story = {
     },
     render: (args) => (
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-            <Badge {...args} size="sm">SM</Badge>
-            <Badge {...args} size="md">MD</Badge>
-            <Badge {...args} size="lg">LG</Badge>
+            <Badge {...args} size="sm">
+                SM
+            </Badge>
+            <Badge {...args} size="md">
+                MD
+            </Badge>
+            <Badge {...args} size="lg">
+                LG
+            </Badge>
         </div>
     ),
 };
@@ -177,8 +197,12 @@ export const WithIcons: Story = {
     },
     render: (args) => (
         <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-            <Badge {...args} leftIcon={<Check size={12} />}>Done</Badge>
-            <Badge {...args} variant="danger" tone="soft" rightIcon={<X size={12} />}>Error</Badge>
+            <Badge {...args} leftIcon={<Check size={12} />}>
+                Done
+            </Badge>
+            <Badge {...args} variant="danger" tone="soft" rightIcon={<X size={12} />}>
+                Error
+            </Badge>
         </div>
     ),
 };
@@ -194,8 +218,7 @@ export const Custom: Story = {
     parameters: {
         docs: {
             description: {
-                story:
-                    'When using variant="custom", built-in styles are disabled. Provide your own classes.',
+                story: 'When using variant="custom", built-in styles are disabled. Provide your own classes.',
             },
         },
     },

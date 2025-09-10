@@ -55,10 +55,19 @@ Notes
     },
     tags: ['autodocs'],
     argTypes: {
-        value: { control: { type: 'number', min: 0, max: 100, step: 1 }, description: 'Determinate value (0..100)' },
+        value: {
+            control: { type: 'number', min: 0, max: 100, step: 1 },
+            description: 'Determinate value (0..100)',
+        },
         indeterminate: { control: 'boolean', description: 'Indeterminate mode' },
-        size: { control: { type: 'number', min: 16, max: 128, step: 2 }, description: 'Diameter (px)' },
-        thickness: { control: { type: 'number', min: 2, max: 12, step: 1 }, description: 'Stroke width (px)' },
+        size: {
+            control: { type: 'number', min: 16, max: 128, step: 2 },
+            description: 'Diameter (px)',
+        },
+        thickness: {
+            control: { type: 'number', min: 2, max: 12, step: 1 },
+            description: 'Stroke width (px)',
+        },
         showTrack: { control: 'boolean', description: 'Show background circle' },
         showLabel: { control: 'boolean', description: 'Show percentage label (determinate)' },
         className: { control: 'text', description: 'Wrapper classes' },
@@ -137,8 +146,20 @@ export const CustomStyles: Story = {
     parameters: { docs: { description: { story: 'Customize colors via classes.' } } },
     render: () => (
         <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-            <Spinner indeterminate size={40} trackClassName="stroke-[var(--color-border)]" arcClassName="stroke-[var(--color-success)]" />
-            <Spinner value={80} size={48} showTrack={false} arcClassName="stroke-[var(--color-accent)]" showLabel labelClassName="text-accent" />
+            <Spinner
+                indeterminate
+                size={40}
+                trackClassName="stroke-[var(--color-border)]"
+                arcClassName="stroke-[var(--color-success)]"
+            />
+            <Spinner
+                value={80}
+                size={48}
+                showTrack={false}
+                arcClassName="stroke-[var(--color-accent)]"
+                showLabel
+                labelClassName="text-accent"
+            />
         </div>
     ),
 };

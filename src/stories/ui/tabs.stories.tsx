@@ -59,7 +59,11 @@ Notes
     },
     tags: ['autodocs'],
     argTypes: {
-        size: { control: { type: 'inline-radio' }, options: ['sm', 'md'], description: 'Trigger size' },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md'],
+            description: 'Trigger size',
+        },
         value: { control: 'text', description: 'Selected value (controlled)' },
         defaultValue: { control: 'text', description: 'Initial value (uncontrolled)' },
         withDisabledSecond: { control: 'boolean', description: 'Disable the second tab (demo)' },
@@ -75,14 +79,22 @@ type Story = StoryObj<StoryArgs>;
 
 function buildItems(disableSecond?: boolean) {
     return [
-        { value: 'account', label: 'Account', content: <div>Update your profile settings here.</div> },
+        {
+            value: 'account',
+            label: 'Account',
+            content: <div>Update your profile settings here.</div>,
+        },
         {
             value: 'password',
             label: 'Password',
             disabled: !!disableSecond,
             content: <div>Change your password and manage security options.</div>,
         },
-        { value: 'billing', label: 'Billing', content: <div>Manage billing information and invoices.</div> },
+        {
+            value: 'billing',
+            label: 'Billing',
+            content: <div>Manage billing information and invoices.</div>,
+        },
     ];
 }
 
@@ -148,4 +160,3 @@ export const Controlled: Story = {
         );
     },
 };
-

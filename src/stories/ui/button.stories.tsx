@@ -76,15 +76,27 @@ Notes
     },
     tags: ['autodocs'],
     argTypes: {
-        as: { control: { type: 'inline-radio' }, options: ['button', 'a'], description: 'Render mode' },
+        as: {
+            control: { type: 'inline-radio' },
+            options: ['button', 'a'],
+            description: 'Render mode',
+        },
         label: { control: 'text', description: 'Text label (or use children)' },
         variant: {
             control: { type: 'select' },
             options: ['primary', 'secondary', 'outline', 'ghost', 'link', 'destructive', 'custom'],
             description: 'Visual variant',
         },
-        size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg', 'icon'], description: 'Button size' },
-        shape: { control: { type: 'inline-radio' }, options: ['rounded', 'square', 'pill', 'circle'], description: 'Shape' },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg', 'icon'],
+            description: 'Button size',
+        },
+        shape: {
+            control: { type: 'inline-radio' },
+            options: ['rounded', 'square', 'pill', 'circle'],
+            description: 'Shape',
+        },
         fullWidth: { control: 'boolean', description: 'Full width' },
         loading: { control: 'boolean', description: 'Loading state' },
         disabled: { control: 'boolean', description: 'Disabled state' },
@@ -181,7 +193,11 @@ export const WithIcons: Story = {
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
             <Button {...(args as any)} leftIcon={<Mail size={16} />} />
             <Button {...(args as any)} rightIcon={<ArrowRight size={16} />} />
-            <Button {...(args as any)} leftIcon={<Mail size={16} />} rightIcon={<ArrowRight size={16} />} />
+            <Button
+                {...(args as any)}
+                leftIcon={<Mail size={16} />}
+                rightIcon={<ArrowRight size={16} />}
+            />
         </div>
     ),
 };
@@ -219,7 +235,10 @@ export const AsLink: Story = {
     },
     parameters: { docs: { description: { story: 'Rendered as an anchor with link variant.' } } },
     render: (args) => {
-        const props: any = { ...args, rel: args.target === '_blank' ? 'noreferrer noopener' : undefined };
+        const props: any = {
+            ...args,
+            rel: args.target === '_blank' ? 'noreferrer noopener' : undefined,
+        };
         return <Button {...props} rightIcon={<ExternalLink size={16} />} />;
     },
 };
@@ -233,6 +252,7 @@ export const Custom: Story = {
         shape: 'rounded',
         className: 'bg-primary text-primary-foreground hover:opacity-90',
     },
-    parameters: { docs: { description: { story: 'Provide your own classes when using variant="custom".' } } },
+    parameters: {
+        docs: { description: { story: 'Provide your own classes when using variant="custom".' } },
+    },
 };
-

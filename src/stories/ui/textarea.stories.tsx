@@ -66,11 +66,21 @@ Notes
         error: { control: 'text', description: 'Error message (string)' },
         success: { control: 'text', description: 'Success message (string)' },
         placeholder: { control: 'text', description: 'Placeholder text' },
-        size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'], description: 'Control size' },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg'],
+            description: 'Control size',
+        },
         fullWidth: { control: 'boolean', description: 'Full width' },
         autoResize: { control: 'boolean', description: 'Auto grow with content' },
-        rows: { control: { type: 'number', min: 1, max: 12, step: 1 }, description: 'Initial rows' },
-        maxLength: { control: { type: 'number', min: 10, max: 500, step: 10 }, description: 'Max characters (shows counter)' },
+        rows: {
+            control: { type: 'number', min: 1, max: 12, step: 1 },
+            description: 'Initial rows',
+        },
+        maxLength: {
+            control: { type: 'number', min: 10, max: 500, step: 10 },
+            description: 'Max characters (shows counter)',
+        },
         disabled: { control: 'boolean', description: 'Disabled state' },
         required: { control: 'boolean', description: 'Required state' },
         containerClassName: { control: 'text', description: 'Container classes' },
@@ -102,7 +112,8 @@ export const Playground: Story = {
     parameters: { docs: { description: { story: 'Interactive control center.' } } },
     render: (args) => {
         const [val, setVal] = useState('');
-        const max = typeof args.maxLength === 'number' && args.maxLength > 0 ? args.maxLength : undefined;
+        const max =
+            typeof args.maxLength === 'number' && args.maxLength > 0 ? args.maxLength : undefined;
         return (
             <Textarea
                 label={args.label}
@@ -127,7 +138,13 @@ export const Playground: Story = {
 };
 
 export const Sizes: Story = {
-    args: { label: 'Label', placeholder: 'Write here...', fullWidth: false, autoResize: false, rows: 3 },
+    args: {
+        label: 'Label',
+        placeholder: 'Write here...',
+        fullWidth: false,
+        autoResize: false,
+        rows: 3,
+    },
     parameters: { docs: { description: { story: 'sm, md, lg sizes.' } } },
     render: (args) => (
         <div style={{ display: 'grid', gap: 16, maxWidth: 520 }}>
@@ -141,27 +158,44 @@ export const Sizes: Story = {
 export const AutoResize: Story = {
     parameters: { docs: { description: { story: 'Auto grows as the user types.' } } },
     render: () => {
-        const [val, setVal] = useState('This textarea auto-resizes as you type.\nTry adding more lines to see it grow.');
+        const [val, setVal] = useState(
+            'This textarea auto-resizes as you type.\nTry adding more lines to see it grow.',
+        );
         return (
             <div style={{ maxWidth: 560 }}>
-                <Textarea label="Auto-resize" autoResize value={val} onChange={(e) => setVal(e.target.value)} />
+                <Textarea
+                    label="Auto-resize"
+                    autoResize
+                    value={val}
+                    onChange={(e) => setVal(e.target.value)}
+                />
             </div>
         );
     },
 };
 
 export const MaxLengthCounter: Story = {
-    parameters: { docs: { description: { story: 'Shows live character count when maxLength is set.' } } },
+    parameters: {
+        docs: { description: { story: 'Shows live character count when maxLength is set.' } },
+    },
     render: () => {
         const [val, setVal] = useState('');
         return (
-            <Textarea label="Comment" placeholder="Max 120 characters" maxLength={120} value={val} onChange={(e) => setVal(e.target.value)} />
+            <Textarea
+                label="Comment"
+                placeholder="Max 120 characters"
+                maxLength={120}
+                value={val}
+                onChange={(e) => setVal(e.target.value)}
+            />
         );
     },
 };
 
 export const States: Story = {
-    parameters: { docs: { description: { story: 'Disabled, required, error and success messages.' } } },
+    parameters: {
+        docs: { description: { story: 'Disabled, required, error and success messages.' } },
+    },
     render: () => (
         <div style={{ display: 'grid', gap: 16, maxWidth: 560 }}>
             <Textarea label="Disabled" placeholder="Disabled" disabled />
@@ -173,7 +207,14 @@ export const States: Story = {
 };
 
 export const FullWidth: Story = {
-    args: { label: 'Full width', placeholder: 'Stretches to container', fullWidth: true, autoResize: false, rows: 3, size: 'md' },
+    args: {
+        label: 'Full width',
+        placeholder: 'Stretches to container',
+        fullWidth: true,
+        autoResize: false,
+        rows: 3,
+        size: 'md',
+    },
     parameters: { docs: { description: { story: 'Textarea expands to the container width.' } } },
     render: (args) => (
         <div style={{ width: 360 }}>
@@ -181,4 +222,3 @@ export const FullWidth: Story = {
         </div>
     ),
 };
-

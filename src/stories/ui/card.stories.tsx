@@ -126,7 +126,11 @@ Notes
         },
         hoverable: { control: 'boolean', description: 'Hover lift effect' },
         clickable: { control: 'boolean', description: 'Pointer + focus ring' },
-        elevation: { control: { type: 'inline-radio' }, options: [0, 1, 2, 3], description: 'Shadow depth' },
+        elevation: {
+            control: { type: 'inline-radio' },
+            options: [0, 1, 2, 3],
+            description: 'Shadow depth',
+        },
         rounded: {
             control: { type: 'inline-radio' },
             options: ['md', 'lg', 'xl', '2xl'],
@@ -207,9 +211,17 @@ export const Variants: Story = {
         mediaPosition: 'top',
         variant: 'surface',
     },
-    parameters: { docs: { description: { story: 'Surface, elevated, outline and ghost variants.' } } },
+    parameters: {
+        docs: { description: { story: 'Surface, elevated, outline and ghost variants.' } },
+    },
     render: (args) => (
-        <div style={{ display: 'grid', gap: 16, gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+        <div
+            style={{
+                display: 'grid',
+                gap: 16,
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            }}
+        >
             <Card {...(args as any)} title="Surface" variant="surface" />
             <Card {...(args as any)} title="Elevated" variant="elevated" />
             <Card {...(args as any)} title="Outline" variant="outline" />
@@ -233,7 +245,13 @@ export const Padding: Story = {
     },
     parameters: { docs: { description: { story: 'none, sm, md, lg padding options.' } } },
     render: (args) => (
-        <div style={{ display: 'grid', gap: 16, gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+        <div
+            style={{
+                display: 'grid',
+                gap: 16,
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            }}
+        >
             <Card {...(args as any)} title="None" padding="none" />
             <Card {...(args as any)} title="Small" padding="sm" />
             <Card {...(args as any)} title="Medium" padding="md" />
@@ -257,7 +275,13 @@ export const Rounded: Story = {
     },
     parameters: { docs: { description: { story: 'md, lg, xl, 2xl radius options.' } } },
     render: (args) => (
-        <div style={{ display: 'grid', gap: 16, gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+        <div
+            style={{
+                display: 'grid',
+                gap: 16,
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            }}
+        >
             <Card {...(args as any)} title="md" rounded="md" />
             <Card {...(args as any)} title="lg" rounded="lg" />
             <Card {...(args as any)} title="xl" rounded="xl" />
@@ -281,7 +305,13 @@ export const HoverAndElevation: Story = {
     },
     parameters: { docs: { description: { story: 'Combine hoverable, clickable and elevation.' } } },
     render: (args) => (
-        <div style={{ display: 'grid', gap: 16, gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+        <div
+            style={{
+                display: 'grid',
+                gap: 16,
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            }}
+        >
             <Card {...(args as any)} title="Elevation 0" elevation={0} />
             <Card {...(args as any)} title="Elevation 1" elevation={1} />
             <Card {...(args as any)} title="Elevation 2" elevation={2} />
@@ -349,7 +379,9 @@ export const AsLink: Story = {
         rounded: 'xl',
         mediaPosition: 'top',
     },
-    parameters: { docs: { description: { story: 'Rendered as an anchor; shows focus ring and hover.' } } },
+    parameters: {
+        docs: { description: { story: 'Rendered as an anchor; shows focus ring and hover.' } },
+    },
     render: (args) => (
         <Card {...(args as any)} footer={<FooterActions />}>
             Open details <ArrowRight size={16} className="inline-block ml-1 align-middle" />

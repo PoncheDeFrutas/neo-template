@@ -48,8 +48,15 @@ Notes
     tags: ['autodocs'],
     argTypes: {
         content: { control: 'text', description: 'Tooltip content' },
-        side: { control: { type: 'inline-radio' }, options: ['top', 'right', 'bottom', 'left'], description: 'Placement side' },
-        delay: { control: { type: 'number', min: 0, max: 2000, step: 50 }, description: 'Show delay (ms)' },
+        side: {
+            control: { type: 'inline-radio' },
+            options: ['top', 'right', 'bottom', 'left'],
+            description: 'Placement side',
+        },
+        delay: {
+            control: { type: 'number', min: 0, max: 2000, step: 50 },
+            description: 'Show delay (ms)',
+        },
         disabled: { control: 'boolean', description: 'Disable tooltip' },
         className: { control: 'text', description: 'Panel classes' },
         label: { control: 'text', description: 'Trigger label' },
@@ -71,7 +78,13 @@ export const Playground: Story = {
     },
     parameters: { docs: { description: { story: 'Interactive control center.' } } },
     render: (args) => (
-        <Tooltip content={args.content} side={args.side} delay={args.delay} disabled={args.disabled} className={args.className}>
+        <Tooltip
+            content={args.content}
+            side={args.side}
+            delay={args.delay}
+            disabled={args.disabled}
+            className={args.className}
+        >
             <Button variant="outline">{args.label}</Button>
         </Tooltip>
     ),
@@ -83,7 +96,10 @@ export const Sides: Story = {
     render: (args) => (
         <div className="grid grid-cols-2 gap-6">
             {(['top', 'right', 'bottom', 'left'] as Side[]).map((side) => (
-                <div key={side} className="flex items-center justify-center p-6 border border-border-subtle rounded-md">
+                <div
+                    key={side}
+                    className="flex items-center justify-center p-6 border border-border-subtle rounded-md"
+                >
                     <Tooltip content={`${args.content} (${side})`} side={side} delay={args.delay}>
                         <Button variant="outline">{side}</Button>
                     </Tooltip>
@@ -100,16 +116,29 @@ export const Delay: Story = {
 
 export const Disabled: Story = {
     args: { content: 'This will not show', side: 'top', delay: 200, disabled: true },
-    parameters: { docs: { description: { story: 'Disabled tooltip does not render on hover/focus.' } } },
+    parameters: {
+        docs: { description: { story: 'Disabled tooltip does not render on hover/focus.' } },
+    },
 };
 
 export const CustomStyle: Story = {
-    args: { content: 'Custom styles', side: 'bottom', delay: 200, disabled: false, className: 'rounded-lg px-3 py-1.5 text-xs', label: 'Hover' },
+    args: {
+        content: 'Custom styles',
+        side: 'bottom',
+        delay: 200,
+        disabled: false,
+        className: 'rounded-lg px-3 py-1.5 text-xs',
+        label: 'Hover',
+    },
     parameters: { docs: { description: { story: 'Override panel styles via className.' } } },
     render: (args) => (
-        <Tooltip content={args.content} side={args.side} delay={args.delay} className="rounded-lg px-3 py-1.5 text-xs">
+        <Tooltip
+            content={args.content}
+            side={args.side}
+            delay={args.delay}
+            className="rounded-lg px-3 py-1.5 text-xs"
+        >
             <Button variant="outline">{args.label}</Button>
         </Tooltip>
     ),
 };
-

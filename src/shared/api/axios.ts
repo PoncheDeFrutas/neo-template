@@ -49,8 +49,17 @@ api.interceptors.request.use(
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        const status = error.response?.status;
-        if (status && (status === 401 || status === 403)) {
+        const status = error.response?.status as number | undefined;
+        const url = (error.config?.url as string | undefined) ?? '';
+        // Do not force logout/redirect for auth endpoints; let UI handle specific cases
+        const isAuthEndpoint =
+            typeof url === 'string' &&
+            (url.includes('/auth/login') ||
+                url.includes('/auth/register') ||
+                url.includes('/auth/validate') ||
+                url.includes('/auth/resend-validation'));
+
+        if (!isAuthEndpoint && status && (status === 401 || status === 403)) {
             const { logout } = useAuthStore.getState();
             logout();
             if (typeof window !== 'undefined') {

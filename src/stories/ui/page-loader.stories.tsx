@@ -38,7 +38,10 @@ Notes
     tags: ['autodocs'],
     argTypes: {
         label: { control: 'text', description: 'Aria label for the spinner' },
-        size: { control: { type: 'number', min: 16, max: 128, step: 2 }, description: 'Spinner size (px)' },
+        size: {
+            control: { type: 'number', min: 16, max: 128, step: 2 },
+            description: 'Spinner size (px)',
+        },
     },
 } satisfies Meta<any>;
 

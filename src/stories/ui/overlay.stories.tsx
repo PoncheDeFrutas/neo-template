@@ -111,7 +111,12 @@ export const BlurVsSolid: Story = {
                     </Button>
                 </div>
                 <Overlay open={openA} blur visible={args.visible} onClick={() => setOpenA(false)} />
-                <Overlay open={openB} blur={false} visible={args.visible} onClick={() => setOpenB(false)} />
+                <Overlay
+                    open={openB}
+                    blur={false}
+                    visible={args.visible}
+                    onClick={() => setOpenB(false)}
+                />
             </div>
         );
     },
@@ -137,4 +142,3 @@ export const CustomStyles: Story = {
         );
     },
 };
-

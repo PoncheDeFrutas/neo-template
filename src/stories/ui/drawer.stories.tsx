@@ -73,8 +73,16 @@ Notes
     },
     tags: ['autodocs'],
     argTypes: {
-        side: { control: { type: 'inline-radio' }, options: ['right', 'left', 'top', 'bottom'], description: 'Slide-in side' },
-        size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'], description: 'Panel size' },
+        side: {
+            control: { type: 'inline-radio' },
+            options: ['right', 'left', 'top', 'bottom'],
+            description: 'Slide-in side',
+        },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg'],
+            description: 'Panel size',
+        },
         title: { control: 'text', description: 'Header title' },
         description: { control: 'text', description: 'Header description' },
         withFooter: { control: 'boolean', description: 'Show example footer actions' },
@@ -153,7 +161,13 @@ export const Sides: Story = {
         return (
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                 {(['right', 'left', 'top', 'bottom'] as Side[]).map((s) => (
-                    <Button key={s} onClick={() => { setSide(s); setOpen(true); }}>
+                    <Button
+                        key={s}
+                        onClick={() => {
+                            setSide(s);
+                            setOpen(true);
+                        }}
+                    >
                         Open {s}
                     </Button>
                 ))}
@@ -183,7 +197,13 @@ export const Sizes: Story = {
         return (
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                 {(['sm', 'md', 'lg'] as Size[]).map((sz) => (
-                    <Button key={sz} onClick={() => { setSize(sz); setOpen(true); }}>
+                    <Button
+                        key={sz}
+                        onClick={() => {
+                            setSize(sz);
+                            setOpen(true);
+                        }}
+                    >
                         Open {sz}
                     </Button>
                 ))}

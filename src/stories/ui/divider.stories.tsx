@@ -171,7 +171,9 @@ export const DashedAndSolid: Story = {
 
 export const Vertical: Story = {
     args: { orientation: 'vertical', variant: 'subtle', thickness: 'sm', dashed: false },
-    parameters: { docs: { description: { story: 'Place between items in a horizontal flex row.' } } },
+    parameters: {
+        docs: { description: { story: 'Place between items in a horizontal flex row.' } },
+    },
     render: (args) => (
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, height: 24 }}>
             <span>Filters</span>
@@ -182,4 +184,3 @@ export const Vertical: Story = {
         </div>
     ),
 };
-

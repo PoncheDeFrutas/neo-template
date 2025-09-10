@@ -55,7 +55,11 @@ Notes
     tags: ['autodocs'],
     argTypes: {
         text: { control: 'text', description: 'Text content' },
-        size: { control: { type: 'inline-radio' }, options: ['xs', 'sm', 'md'], description: 'Text size' },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['xs', 'sm', 'md'],
+            description: 'Text size',
+        },
         gap: { control: { type: 'number', min: 0, max: 24, step: 1 }, description: 'Gap in px' },
         muted: { control: 'boolean', description: 'Muted text color' },
         className: { control: 'text', description: 'Wrapper classes' },
@@ -66,7 +70,10 @@ Notes
             options: ['clock', 'map-pin', 'info', 'check'],
             description: 'Example icon to render',
         },
-        iconSize: { control: { type: 'number', min: 10, max: 24, step: 1 }, description: 'Icon pixel size' },
+        iconSize: {
+            control: { type: 'number', min: 10, max: 24, step: 1 },
+            description: 'Icon pixel size',
+        },
     },
 } satisfies Meta<any>;
 
@@ -152,7 +159,14 @@ export const CustomGap: Story = {
 };
 
 export const Truncation: Story = {
-    args: { text: 'Very long metadata label that will be truncated', size: 'sm', gap: 6, muted: true, iconName: 'info', iconSize: 14 },
+    args: {
+        text: 'Very long metadata label that will be truncated',
+        size: 'sm',
+        gap: 6,
+        muted: true,
+        iconName: 'info',
+        iconSize: 14,
+    },
     parameters: { docs: { description: { story: 'Text truncates within narrow containers.' } } },
     render: (args) => (
         <div style={{ width: 160, border: '1px dashed var(--color-border-subtle)', padding: 8 }}>
@@ -169,7 +183,11 @@ export const Truncation: Story = {
 
 export const CustomStyling: Story = {
     args: { text: 'Success', size: 'sm', gap: 6, muted: false, iconName: 'check', iconSize: 14 },
-    parameters: { docs: { description: { story: 'Override styles with className/iconClassName/textClassName.' } } },
+    parameters: {
+        docs: {
+            description: { story: 'Override styles with className/iconClassName/textClassName.' },
+        },
+    },
     render: (args) => (
         <IconWithText
             icon={<Check size={14} />}

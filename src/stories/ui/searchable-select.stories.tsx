@@ -74,7 +74,11 @@ Notes
         error: { control: 'text', description: 'Error message' },
         success: { control: 'text', description: 'Success message' },
         placeholder: { control: 'text', description: 'Placeholder' },
-        size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'], description: 'Control size' },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg'],
+            description: 'Control size',
+        },
         fullWidth: { control: 'boolean', description: 'Full width' },
         disabled: { control: 'boolean', description: 'Disabled state' },
         clearable: { control: 'boolean', description: 'Show clear action' },
@@ -131,9 +135,30 @@ export const Sizes: Story = {
         const [v3, setV3] = useState<string | null>(null);
         return (
             <div style={{ display: 'grid', gap: 12, maxWidth: 420 }}>
-                <SearchableSelect size="sm" options={options} value={v1} onChange={setV1} clearable={args.clearable} searchable={args.searchable} />
-                <SearchableSelect size="md" options={options} value={v2} onChange={setV2} clearable={args.clearable} searchable={args.searchable} />
-                <SearchableSelect size="lg" options={options} value={v3} onChange={setV3} clearable={args.clearable} searchable={args.searchable} />
+                <SearchableSelect
+                    size="sm"
+                    options={options}
+                    value={v1}
+                    onChange={setV1}
+                    clearable={args.clearable}
+                    searchable={args.searchable}
+                />
+                <SearchableSelect
+                    size="md"
+                    options={options}
+                    value={v2}
+                    onChange={setV2}
+                    clearable={args.clearable}
+                    searchable={args.searchable}
+                />
+                <SearchableSelect
+                    size="lg"
+                    options={options}
+                    value={v3}
+                    onChange={setV3}
+                    clearable={args.clearable}
+                    searchable={args.searchable}
+                />
             </div>
         );
     },
@@ -147,9 +172,27 @@ export const DisabledAndStates: Story = {
         const [v3, setV3] = useState<string | null>(null);
         return (
             <div style={{ display: 'grid', gap: 12, maxWidth: 420 }}>
-                <SearchableSelect label="Disabled" options={options} value={v1} onChange={setV1} disabled />
-                <SearchableSelect label="Error" options={options} value={v2} onChange={setV2} error="Please choose an option" />
-                <SearchableSelect label="Success" options={options} value={v3} onChange={setV3} success="Looks good" />
+                <SearchableSelect
+                    label="Disabled"
+                    options={options}
+                    value={v1}
+                    onChange={setV1}
+                    disabled
+                />
+                <SearchableSelect
+                    label="Error"
+                    options={options}
+                    value={v2}
+                    onChange={setV2}
+                    error="Please choose an option"
+                />
+                <SearchableSelect
+                    label="Success"
+                    options={options}
+                    value={v3}
+                    onChange={setV3}
+                    success="Looks good"
+                />
             </div>
         );
     },
@@ -162,10 +205,23 @@ export const SearchVsNoSearch: Story = {
         const [b, setB] = useState<string | null>(null);
         return (
             <div style={{ display: 'grid', gap: 12, maxWidth: 420 }}>
-                <SearchableSelect label="Searchable" options={options} value={a} onChange={setA} searchable clearable />
-                <SearchableSelect label="No search" options={options} value={b} onChange={setB} searchable={false} clearable />
+                <SearchableSelect
+                    label="Searchable"
+                    options={options}
+                    value={a}
+                    onChange={setA}
+                    searchable
+                    clearable
+                />
+                <SearchableSelect
+                    label="No search"
+                    options={options}
+                    value={b}
+                    onChange={setB}
+                    searchable={false}
+                    clearable
+                />
             </div>
         );
     },
 };
-

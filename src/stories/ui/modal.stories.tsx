@@ -67,7 +67,11 @@ Notes
     },
     tags: ['autodocs'],
     argTypes: {
-        size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'], description: 'Dialog size' },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg'],
+            description: 'Dialog size',
+        },
         title: { control: 'text', description: 'Header title' },
         description: { control: 'text', description: 'Header description' },
         withFooter: { control: 'boolean', description: 'Show example footer actions' },
@@ -122,7 +126,11 @@ export const Playground: Story = {
                     blurOverlay={args.blurOverlay}
                     closeOnOverlay={args.closeOnOverlay}
                     className={args.className}
-                    footer={args.withFooter ? <FooterActions onClose={() => setOpen(false)} /> : undefined}
+                    footer={
+                        args.withFooter ? (
+                            <FooterActions onClose={() => setOpen(false)} />
+                        ) : undefined
+                    }
                 >
                     {args.content}
                 </Modal>
@@ -140,7 +148,13 @@ export const Sizes: Story = {
         return (
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                 {(['sm', 'md', 'lg'] as Size[]).map((sz) => (
-                    <Button key={sz} onClick={() => { setSize(sz); setOpen(true); }}>
+                    <Button
+                        key={sz}
+                        onClick={() => {
+                            setSize(sz);
+                            setOpen(true);
+                        }}
+                    >
                         Open {sz}
                     </Button>
                 ))}
@@ -187,7 +201,9 @@ export const WithFooter: Story = {
 
 export const LongContent: Story = {
     args: { size: 'md', blurOverlay: true, closeOnOverlay: true },
-    parameters: { docs: { description: { story: 'Scrollable content area when content is long.' } } },
+    parameters: {
+        docs: { description: { story: 'Scrollable content area when content is long.' } },
+    },
     render: (args) => {
         const [open, setOpen] = useState(false);
         const para =
@@ -217,7 +233,9 @@ export const LongContent: Story = {
 
 export const OverlayBehavior: Story = {
     args: { size: 'md', blurOverlay: true, closeOnOverlay: false },
-    parameters: { docs: { description: { story: 'Toggle overlay blur and click-to-close behavior.' } } },
+    parameters: {
+        docs: { description: { story: 'Toggle overlay blur and click-to-close behavior.' } },
+    },
     render: (args) => {
         const [open, setOpen] = useState(false);
         return (
@@ -240,4 +258,3 @@ export const OverlayBehavior: Story = {
         );
     },
 };
-

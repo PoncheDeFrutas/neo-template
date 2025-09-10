@@ -64,9 +64,19 @@ Notes
     argTypes: {
         page: { control: 'number', description: 'Current page (1-based)' },
         pageCount: { control: 'number', description: 'Total pages' },
-        siblingCount: { control: { type: 'number', min: 0, max: 3, step: 1 }, description: 'Adjacent pages around current' },
-        boundaryCount: { control: { type: 'number', min: 0, max: 3, step: 1 }, description: 'Pages shown at start/end' },
-        size: { control: { type: 'inline-radio' }, options: ['sm', 'md'], description: 'Control size' },
+        siblingCount: {
+            control: { type: 'number', min: 0, max: 3, step: 1 },
+            description: 'Adjacent pages around current',
+        },
+        boundaryCount: {
+            control: { type: 'number', min: 0, max: 3, step: 1 },
+            description: 'Pages shown at start/end',
+        },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md'],
+            description: 'Control size',
+        },
         showFirstLast: { control: 'boolean', description: 'Show first/last buttons' },
         showPrevNext: { control: 'boolean', description: 'Show previous/next buttons' },
         className: { control: 'text', description: 'Container classes' },
@@ -108,7 +118,14 @@ export const Playground: Story = {
 };
 
 export const Sizes: Story = {
-    args: { pageCount: 15, page: 7, siblingCount: 1, boundaryCount: 1, showFirstLast: true, showPrevNext: true },
+    args: {
+        pageCount: 15,
+        page: 7,
+        siblingCount: 1,
+        boundaryCount: 1,
+        showFirstLast: true,
+        showPrevNext: true,
+    },
     parameters: { docs: { description: { story: 'sm and md sizes.' } } },
     render: (args) => {
         const [p1, setP1] = useState(args.page);
@@ -137,7 +154,15 @@ export const Sizes: Story = {
 };
 
 export const ManyPages: Story = {
-    args: { page: 50, pageCount: 200, siblingCount: 1, boundaryCount: 1, size: 'md', showFirstLast: true, showPrevNext: true },
+    args: {
+        page: 50,
+        pageCount: 200,
+        siblingCount: 1,
+        boundaryCount: 1,
+        size: 'md',
+        showFirstLast: true,
+        showPrevNext: true,
+    },
     parameters: { docs: { description: { story: 'Large datasets with ellipsis on both sides.' } } },
     render: (args) => {
         const [page, setPage] = useState(args.page);
@@ -157,7 +182,15 @@ export const ManyPages: Story = {
 };
 
 export const WithoutEdgeButtons: Story = {
-    args: { page: 5, pageCount: 20, siblingCount: 2, boundaryCount: 1, size: 'md', showFirstLast: false, showPrevNext: true },
+    args: {
+        page: 5,
+        pageCount: 20,
+        siblingCount: 2,
+        boundaryCount: 1,
+        size: 'md',
+        showFirstLast: false,
+        showPrevNext: true,
+    },
     parameters: { docs: { description: { story: 'Hide first/last buttons; keep prev/next.' } } },
     render: (args) => {
         const [page, setPage] = useState(args.page);
@@ -177,22 +210,48 @@ export const WithoutEdgeButtons: Story = {
 };
 
 export const EdgeCases: Story = {
-    parameters: { docs: { description: { story: 'Single page and first/last page disabled states.' } } },
+    parameters: {
+        docs: { description: { story: 'Single page and first/last page disabled states.' } },
+    },
     render: () => {
         const [p2, setP2] = useState(1);
         const [p3, setP3] = useState(10);
         return (
             <div style={{ display: 'grid', gap: 12 }}>
                 <div>
-                    <div style={{ fontSize: 12, marginBottom: 6, color: 'var(--color-muted-foreground)' }}>Single page</div>
+                    <div
+                        style={{
+                            fontSize: 12,
+                            marginBottom: 6,
+                            color: 'var(--color-muted-foreground)',
+                        }}
+                    >
+                        Single page
+                    </div>
                     <Pagination page={1} pageCount={1} onChange={() => {}} />
                 </div>
                 <div>
-                    <div style={{ fontSize: 12, marginBottom: 6, color: 'var(--color-muted-foreground)' }}>At first page</div>
+                    <div
+                        style={{
+                            fontSize: 12,
+                            marginBottom: 6,
+                            color: 'var(--color-muted-foreground)',
+                        }}
+                    >
+                        At first page
+                    </div>
                     <Pagination page={p2} pageCount={10} onChange={setP2} />
                 </div>
                 <div>
-                    <div style={{ fontSize: 12, marginBottom: 6, color: 'var(--color-muted-foreground)' }}>At last page</div>
+                    <div
+                        style={{
+                            fontSize: 12,
+                            marginBottom: 6,
+                            color: 'var(--color-muted-foreground)',
+                        }}
+                    >
+                        At last page
+                    </div>
                     <Pagination page={p3} pageCount={10} onChange={setP3} />
                 </div>
             </div>

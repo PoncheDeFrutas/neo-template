@@ -86,14 +86,34 @@ Notes
         subtitle: { control: 'text', description: 'Secondary text' },
         meta: { control: 'text', description: 'Right-aligned meta text' },
         withMedia: { control: 'boolean', description: 'Show media on the left' },
-        mediaType: { control: { type: 'inline-radio' }, options: ['avatar', 'icon'], description: 'Media type' },
+        mediaType: {
+            control: { type: 'inline-radio' },
+            options: ['avatar', 'icon'],
+            description: 'Media type',
+        },
         avatarName: { control: 'text', description: 'Avatar name (for initials)' },
         avatarSrc: { control: 'text', description: 'Avatar image URL' },
-        rounded: { control: { type: 'inline-radio' }, options: ['none', 'md', 'lg', 'full'], description: 'Container radius' },
-        size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'], description: 'Density' },
-        align: { control: { type: 'inline-radio' }, options: ['center', 'start'], description: 'Vertical alignment' },
+        rounded: {
+            control: { type: 'inline-radio' },
+            options: ['none', 'md', 'lg', 'full'],
+            description: 'Container radius',
+        },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg'],
+            description: 'Density',
+        },
+        align: {
+            control: { type: 'inline-radio' },
+            options: ['center', 'start'],
+            description: 'Vertical alignment',
+        },
         hoverable: { control: 'boolean', description: 'Hover background on interactive items' },
-        as: { control: { type: 'inline-radio' }, options: ['div', 'a', 'button'], description: 'Rendered element' },
+        as: {
+            control: { type: 'inline-radio' },
+            options: ['div', 'a', 'button'],
+            description: 'Rendered element',
+        },
         href: { control: 'text', description: 'Link URL (when as="a")' },
         disabled: { control: 'boolean', description: 'Disabled (when as="button")' },
         withActions: { control: 'boolean', description: 'Show example actions on the right' },
@@ -114,8 +134,12 @@ function actionsNode(show: boolean) {
     if (!show) return undefined;
     return (
         <>
-            <Button size="sm" variant="ghost" leftIcon={<Mail size={14} />}>Email</Button>
-            <Button size="sm" variant="outline" leftIcon={<Phone size={14} />}>Call</Button>
+            <Button size="sm" variant="ghost" leftIcon={<Mail size={14} />}>
+                Email
+            </Button>
+            <Button size="sm" variant="outline" leftIcon={<Phone size={14} />}>
+                Call
+            </Button>
         </>
     );
 }
@@ -164,7 +188,15 @@ export const Playground: Story = {
 };
 
 export const Sizes: Story = {
-    args: { title: 'Title', subtitle: 'Subtitle', withMedia: true, mediaType: 'avatar', rounded: 'md', align: 'center', hoverable: true },
+    args: {
+        title: 'Title',
+        subtitle: 'Subtitle',
+        withMedia: true,
+        mediaType: 'avatar',
+        rounded: 'md',
+        align: 'center',
+        hoverable: true,
+    },
     parameters: { docs: { description: { story: 'sm, md, lg density.' } } },
     render: (args) => (
         <div style={{ display: 'grid', gap: 12, maxWidth: 520 }}>
@@ -176,7 +208,15 @@ export const Sizes: Story = {
 };
 
 export const Alignments: Story = {
-    args: { title: 'Two-line item', subtitle: 'Secondary line', withMedia: true, mediaType: 'avatar', size: 'md', rounded: 'md', hoverable: true },
+    args: {
+        title: 'Two-line item',
+        subtitle: 'Secondary line',
+        withMedia: true,
+        mediaType: 'avatar',
+        size: 'md',
+        rounded: 'md',
+        hoverable: true,
+    },
     parameters: { docs: { description: { story: 'Center vs start vertical alignment.' } } },
     render: (args) => (
         <div style={{ display: 'grid', gap: 12, maxWidth: 520 }}>
@@ -187,7 +227,15 @@ export const Alignments: Story = {
 };
 
 export const Rounded: Story = {
-    args: { title: 'Rounded item', subtitle: 'Visual radius', withMedia: true, mediaType: 'avatar', size: 'md', align: 'center', hoverable: true },
+    args: {
+        title: 'Rounded item',
+        subtitle: 'Visual radius',
+        withMedia: true,
+        mediaType: 'avatar',
+        size: 'md',
+        align: 'center',
+        hoverable: true,
+    },
     parameters: { docs: { description: { story: 'none, md, lg, full.' } } },
     render: (args) => (
         <div style={{ display: 'grid', gap: 12, maxWidth: 520 }}>
@@ -210,10 +258,18 @@ export const WithMetaAndActions: Story = {
                 meta="Online"
                 actions={
                     <>
-                        <Button size="sm" variant="ghost" leftIcon={<Mail size={14} />}>Email</Button>
-                        <Button size="sm" variant="outline" leftIcon={<Phone size={14} />}>Call</Button>
-                        <Button size="sm" variant="ghost" leftIcon={<Edit3 size={14} />}>Edit</Button>
-                        <Button size="sm" variant="destructive" leftIcon={<Trash2 size={14} />}>Remove</Button>
+                        <Button size="sm" variant="ghost" leftIcon={<Mail size={14} />}>
+                            Email
+                        </Button>
+                        <Button size="sm" variant="outline" leftIcon={<Phone size={14} />}>
+                            Call
+                        </Button>
+                        <Button size="sm" variant="ghost" leftIcon={<Edit3 size={14} />}>
+                            Edit
+                        </Button>
+                        <Button size="sm" variant="destructive" leftIcon={<Trash2 size={14} />}>
+                            Remove
+                        </Button>
                     </>
                 }
             />
@@ -264,4 +320,3 @@ export const ListExample: Story = {
         </div>
     ),
 };
-

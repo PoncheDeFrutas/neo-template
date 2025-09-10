@@ -14,7 +14,7 @@ export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 't
     rightIcon?: ReactNode;
     size?: Size;
     fullWidth?: boolean;
-    type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'date' | 'file';
+    type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'date' | 'time' | 'file';
     passwordToggle?: boolean;
     numberSpinButtons?: 'native' | 'hidden' | 'custom';
     containerClassName?: string;

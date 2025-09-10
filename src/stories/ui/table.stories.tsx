@@ -24,9 +24,18 @@ const sampleUsers: User[] = Array.from({ length: 48 }).map((_, i) => ({
 }));
 
 const statusBadge = (s: User['status']) => {
-    if (s === 'Active') return <Badge variant="success" tone="soft">Active</Badge>;
+    if (s === 'Active')
+        return (
+            <Badge variant="success" tone="soft">
+                Active
+            </Badge>
+        );
     if (s === 'Invited') return <Badge variant="neutral">Invited</Badge>;
-    return <Badge variant="danger" tone="soft">Suspended</Badge>;
+    return (
+        <Badge variant="danger" tone="soft">
+            Suspended
+        </Badge>
+    );
 };
 
 const columns = [
@@ -175,7 +184,9 @@ export const GlobalFilter: Story = {
 };
 
 export const PaginationIntegration: Story = {
-    parameters: { docs: { description: { story: 'Table paged client-side, controlled via Pagination.' } } },
+    parameters: {
+        docs: { description: { story: 'Table paged client-side, controlled via Pagination.' } },
+    },
     render: () => {
         const [page, setPage] = useState(1);
         const [pageSize, setPageSize] = useState(10);

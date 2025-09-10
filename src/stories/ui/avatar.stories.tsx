@@ -78,7 +78,6 @@ type Story = StoryObj<StoryArgs>;
 
 const sampleImage = 'https://i.pravatar.cc/160?img=5';
 
-
 export const Playground: Story = {
     args: {
         name: 'Jane Cooper',
@@ -175,8 +174,7 @@ export const ErrorFallback: Story = {
     parameters: {
         docs: {
             description: {
-                story:
-                    'If the image fails to load, Avatar falls back to initials computed from name or alt.',
+                story: 'If the image fails to load, Avatar falls back to initials computed from name or alt.',
             },
         },
     },

@@ -56,7 +56,11 @@ Notes
     tags: ['autodocs'],
     argTypes: {
         label: { control: 'text', description: 'Label text' },
-        size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'], description: 'Control size' },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg'],
+            description: 'Control size',
+        },
         disabled: { control: 'boolean', description: 'Disabled state' },
         required: { control: 'boolean', description: 'Required state' },
         name: { control: 'text', description: 'Input name' },
@@ -123,7 +127,13 @@ export const Controlled: Story = {
     parameters: { docs: { description: { story: 'Controlled usage with state.' } } },
     render: () => {
         const [on, setOn] = useState(true);
-        return <Switch name="wifi" label="Wi‑Fi" checked={on} onChange={(e) => setOn(e.target.checked)} />;
+        return (
+            <Switch
+                name="wifi"
+                label="Wi‑Fi"
+                checked={on}
+                onChange={(e) => setOn(e.target.checked)}
+            />
+        );
     },
 };
-

@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Tooltip } from '@/shared/ui';
 import { ArrowLeft } from 'lucide-react';
-import { RegisterForm } from '@/features/register';
 
 export default function RegisterPage() {
     const navigate = useNavigate();
@@ -48,7 +47,6 @@ export default function RegisterPage() {
                             />
                         </div>
 
-                        <RegisterForm />
                     </Card>
                 </div>
             </div>

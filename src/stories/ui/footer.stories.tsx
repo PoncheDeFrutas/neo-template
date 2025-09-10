@@ -122,13 +122,25 @@ export const Playground: Story = {
             bottomRight={
                 args.withSocial ? (
                     <>
-                        <a href="#" aria-label="GitHub" className="text-muted-foreground hover:text-text">
+                        <a
+                            href="#"
+                            aria-label="GitHub"
+                            className="text-muted-foreground hover:text-text"
+                        >
                             <Github size={16} />
                         </a>
-                        <a href="#" aria-label="Twitter" className="text-muted-foreground hover:text-text">
+                        <a
+                            href="#"
+                            aria-label="Twitter"
+                            className="text-muted-foreground hover:text-text"
+                        >
                             <Twitter size={16} />
                         </a>
-                        <a href="#" aria-label="Instagram" className="text-muted-foreground hover:text-text">
+                        <a
+                            href="#"
+                            aria-label="Instagram"
+                            className="text-muted-foreground hover:text-text"
+                        >
                             <Instagram size={16} />
                         </a>
                     </>

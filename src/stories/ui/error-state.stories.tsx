@@ -70,9 +70,11 @@ export const Playground: Story = {
         <ErrorState
             title={args.title}
             description={args.description}
-            action={args.withAction ? (
-                <Button variant="destructive">{args.actionLabel || 'Retry'}</Button>
-            ) : undefined}
+            action={
+                args.withAction ? (
+                    <Button variant="destructive">{args.actionLabel || 'Retry'}</Button>
+                ) : undefined
+            }
             className={args.className}
         />
     ),
@@ -97,7 +99,11 @@ export const WithAction: Story = {
         <ErrorState
             title={args.title}
             description={args.description}
-            action={args.withAction ? <Button variant="destructive">{args.actionLabel}</Button> : undefined}
+            action={
+                args.withAction ? (
+                    <Button variant="destructive">{args.actionLabel}</Button>
+                ) : undefined
+            }
         />
     ),
     parameters: { docs: { description: { story: 'Includes a destructive Retry/Reload action.' } } },
@@ -112,4 +118,3 @@ export const CustomStyling: Story = {
     },
     parameters: { docs: { description: { story: 'Override container styles via className.' } } },
 };
-

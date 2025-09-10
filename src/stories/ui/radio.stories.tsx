@@ -68,12 +68,19 @@ Notes
         label: { control: 'text', description: 'Label text' },
         description: { control: 'text', description: 'Helper description' },
         error: { control: 'text', description: 'Error message (string)' },
-        size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'], description: 'Control size' },
+        size: {
+            control: { type: 'inline-radio' },
+            options: ['sm', 'md', 'lg'],
+            description: 'Control size',
+        },
         disabled: { control: 'boolean', description: 'Disabled state' },
         required: { control: 'boolean', description: 'Required state' },
         name: { control: 'text', description: 'Group name' },
         containerClassName: { control: 'text', description: 'Classes for label wrapper' },
-        initialChecked: { control: 'boolean', description: 'Initial checked state (playground only)' },
+        initialChecked: {
+            control: 'boolean',
+            description: 'Initial checked state (playground only)',
+        },
     },
 } satisfies Meta<any>;
 
@@ -156,11 +163,25 @@ export const Group: Story = {
         const name = 'group-example';
         return (
             <div style={{ display: 'grid', gap: 8 }}>
-                <Radio name={name} label="Option A" checked={value === 'a'} onChange={() => setValue('a')} />
-                <Radio name={name} label="Option B" checked={value === 'b'} onChange={() => setValue('b')} />
-                <Radio name={name} label="Option C" checked={value === 'c'} onChange={() => setValue('c')} />
+                <Radio
+                    name={name}
+                    label="Option A"
+                    checked={value === 'a'}
+                    onChange={() => setValue('a')}
+                />
+                <Radio
+                    name={name}
+                    label="Option B"
+                    checked={value === 'b'}
+                    onChange={() => setValue('b')}
+                />
+                <Radio
+                    name={name}
+                    label="Option C"
+                    checked={value === 'c'}
+                    onChange={() => setValue('c')}
+                />
             </div>
         );
     },
 };
-
